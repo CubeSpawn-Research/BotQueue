@@ -9,3 +9,5 @@ ssl-cert.int
 ssl-cert.key
 vendor/
 composer.phar
+/node_modules
+.env
