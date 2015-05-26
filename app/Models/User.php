@@ -43,7 +43,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		'last_notification',
 		'email',
 		'created_at',
-		'updated_at'
+		'updated_at',
+		'activities' #todo-laravel Convert this into the url
 	];
 
 	/**
@@ -66,4 +67,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $this->updated_at;
 	}
 
+	public function activities()
+	{
+		return $this->hasMany('App\Models\Activity');
+	}
 }
