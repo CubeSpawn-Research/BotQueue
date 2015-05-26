@@ -144,7 +144,7 @@ return [
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
-
+		'App\Providers\MigrationServiceProvider'
 	],
 
 	/*
@@ -193,6 +193,7 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
 
+		'Migrate'   => 'App\Facades\Migrate'
 	],
 
 ];

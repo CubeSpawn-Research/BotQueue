@@ -119,8 +119,7 @@ CREATE TABLE IF NOT EXISTS `job_clock` (
   PRIMARY KEY (`id`),
   KEY `job_id` (`job_id`),
   KEY `bot_id` (`bot_id`),
-  KEY `queue_id` (`queue_id`),
-  FOREIGN KEY (`user_id`) REFERENCES users(`id`) ON DELETE CASCADE
+  KEY `queue_id` (`queue_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 CREATE TABLE IF NOT EXISTS `jobs` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,

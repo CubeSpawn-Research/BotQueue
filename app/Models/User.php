@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace App\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -22,13 +22,48 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'email', 'password'];
+	protected $fillable = [
+		'username',
+		'email',
+		'dashboard_style',
+		'thingiverse_token'
+	];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
 	 *
 	 * @var array
 	 */
-	protected $hidden = ['password', 'remember_token'];
+	protected $hidden = [
+		'id',
+		'password',
+		'is_admin',
+		'thingiverse_token',
+		'dashboard_style',
+		'last_notification',
+		'email',
+		'created_at',
+		'updated_at'
+	];
+
+	/**
+	 * The attributes to add to the model's JSON form.
+	 *
+	 * @var array
+	 */
+	protected $appends = [
+		'registered',
+		'last_seen'
+	];
+
+	public function getRegisteredAttribute()
+	{
+		return $this->created_at;
+	}
+
+	public function getLastSeenAttribute()
+	{
+		return $this->updated_at;
+	}
 
 }
