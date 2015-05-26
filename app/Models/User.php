@@ -44,7 +44,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		'email',
 		'created_at',
 		'updated_at',
-		'activities' #todo-laravel Convert this into the url
+		'activities', #todo-laravel Convert this into the url
+		'queues', #todo-laravel Convert this into the url
 	];
 
 	/**
@@ -70,5 +71,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	public function activities()
 	{
 		return $this->hasMany('App\Models\Activity');
+	}
+
+	public function queues()
+	{
+		return $this->hasMany('App\Models\Queue');
 	}
 }
