@@ -12,6 +12,9 @@ class AuthController extends Controller {
 		return view('auth.login');
 	}
 
-
+	public function loginPost()
+	{
+		dd("yay?");
+	}
 
 }

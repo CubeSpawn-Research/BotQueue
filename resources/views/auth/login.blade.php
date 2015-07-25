@@ -3,6 +3,7 @@
 @section('title', 'Login')
 
 @section('content')
+<div id="page_signin">
     <div id="signin" class="span6 center">
         <div class="title">Sign in:</div>
 
@@ -21,6 +22,11 @@
 	        ->checked(true)
 	    !!}
 
+	    {!! Form::submit('Sign into your account')
+	        ->inputClass('btn btn-primary btn-large')
+	    !!}
+
 	    {!! Form::close() !!}
     </div>
+</div>
 @stop

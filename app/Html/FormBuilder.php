@@ -58,7 +58,9 @@ class FormBuilder {
 
 		$attributes = $this->html->attributes($attributes);
 
-		return '<form'.$attributes.'><fieldset>';
+		return
+			'<form'.$attributes.'><fieldset>'.
+			$this->hidden('_token', $this->session->getToken());
 	}
 
 	public function close() {
@@ -70,6 +72,17 @@ class FormBuilder {
 		$builder = new FieldBuilder($this->html, $name, $type);
 		$builder->value($value);
 		return $builder;
+	}
+
+	public function hidden($name, $value) {
+		$builder = new HiddenBuilder($this->html, $name);
+		$builder->value($value);
+		return $builder;
+	}
+
+	public function submit($text)
+	{
+		return new SubmitBuilder($this->html, $text);
 	}
 
 	public function text($name, $value = null)

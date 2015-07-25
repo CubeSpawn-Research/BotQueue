@@ -56,7 +56,7 @@ class CheckBoxBuilder extends FieldBuilder
 			'<div class="control-group">'.
 				'<div class="controls">'.
 					'<label class="checkbox">'.
-						'<input '.$this->html->attributes($this->getAttributes()).'>'.
+						'<input '.$this->html->attributes($this->getAttributes()).'/>'.
 						'<strong>'.$this->label.'</strong>'.
 					'</label>'.
 					$this->helpText().

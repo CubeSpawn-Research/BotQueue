@@ -36,13 +36,15 @@ class FieldBuilder {
 	protected $help;
 	protected $error;
 	protected $type;
+	protected $class;
 
 	public function __construct(HtmlBuilder $html, $name, $type)
 	{
-		$this->html = $html;
-		$this->name = $name;
-		$this->id   = $name;
-		$this->type = $type;
+		$this->html  = $html;
+		$this->name  = $name;
+		$this->id    = $name;
+		$this->type  = $type;
+		$this->class = 'input-xlarge';
 	}
 
 	public function id($id)
@@ -86,7 +88,7 @@ class FieldBuilder {
 			'<div class="control-group">'
 				.$this->labelField().
 				'<div class="controls">'.
-					'<input '.$this->html->attributes($this->getAttributes()).'>'.
+					'<input '.$this->html->attributes($this->getAttributes()).'/>'.
 				'</div>'.
 				$this->errorText().
 				$this->helpText().
@@ -122,9 +124,15 @@ class FieldBuilder {
 	{
 		return [
 			'type' => $this->type,
-			'class' => 'input-xlarge',
+			'class' => $this->class,
 			'name' => $this->name,
-			'value' => $this->value
+			'value' => $this->value,
 		];
+	}
+
+	public function inputClass($class)
+	{
+		$this->class = $class;
+		return $this;
 	}
 }
