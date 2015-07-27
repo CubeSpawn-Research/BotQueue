@@ -21,6 +21,7 @@ namespace App\Html;
 
 
 use Illuminate\Html\HtmlBuilder;
+use Illuminate\Support\Facades\Validator;
 
 class FieldBuilder {
 
@@ -77,6 +78,11 @@ class FieldBuilder {
 		return $this;
 	}
 
+	public function hasError()
+	{
+		return $this->error !== null;
+	}
+
 	public function __toString()
 	{
 		return $this->render();
@@ -85,13 +91,14 @@ class FieldBuilder {
 	public function render()
 	{
 		return
-			'<div class="control-group">'
+			'<div class="control-group'.
+			($this->hasError() ? ' error' : '').'">'
 				.$this->labelField().
 				'<div class="controls">'.
 					'<input '.$this->html->attributes($this->getAttributes()).'/>'.
+					$this->errorText().
+					$this->helpText().
 				'</div>'.
-				$this->errorText().
-				$this->helpText().
 			'</div>';
 	}
 
@@ -105,7 +112,7 @@ class FieldBuilder {
 
 	protected function errorText()
 	{
-		if($this->error)
+		if($this->hasError())
 			return '<span class="help-inline">'.$this->error.'</span>';
 		return '';
 	}

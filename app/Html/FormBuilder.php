@@ -23,6 +23,8 @@ use Illuminate\Html\HtmlBuilder;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Session\Store;
 use Illuminate\Support\Traits\Macroable;
+use Illuminate\Support\MessageBag;
+use Illuminate\Support\ViewErrorBag;
 
 class FormBuilder {
 	use Macroable;
@@ -39,6 +41,10 @@ class FormBuilder {
 	 * @var Store
 	 */
 	private $session;
+	/**
+	 * @var MessageBag
+	 */
+	private $errors;
 
 	public function __construct(HtmlBuilder $html, UrlGenerator $url, Store $session)
 	{
@@ -46,6 +52,7 @@ class FormBuilder {
 		$this->html = $html;
 		$this->url = $url;
 		$this->session = $session;
+		$this->errors = $session->get('errors', new ViewErrorBag)->default;
 	}
 
 	public function open() {
@@ -70,13 +77,16 @@ class FormBuilder {
 	public function input($type, $name, $value = null)
 	{
 		$builder = new FieldBuilder($this->html, $name, $type);
-		$builder->value($value);
+		$builder->value($this->old($name, $value));
+		if($this->errors->has($name))
+			$builder->error($this->errors->first($name));
 		return $builder;
+
 	}
 
 	public function hidden($name, $value) {
 		$builder = new HiddenBuilder($this->html, $name);
-		$builder->value($value);
+		$builder->value($this->old($name, $value));
 		return $builder;
 	}
 
@@ -98,5 +108,27 @@ class FormBuilder {
 	public function checkbox($name, $checked = false)
 	{
 		return new CheckBoxBuilder($this->html, $name, $checked);
+	}
+
+	private function old($name, $value)
+	{
+		if($value != null)
+			return $value;
+
+		if(isset($this->session))
+			return $this->session->getOldInput($this->transformKey($name));
+
+		return null;
+	}
+
+	/**
+	 * Transform key from array to dot syntax.
+	 *
+	 * @param  string  $key
+	 * @return string
+	 */
+	protected function transformKey($key)
+	{
+		return str_replace(array('.', '[]', '[', ']'), array('_', '', '.', ''), $key);
 	}
 }

@@ -11,3 +11,4 @@ vendor/
 composer.phar
 /node_modules
 .env*
+storage/*

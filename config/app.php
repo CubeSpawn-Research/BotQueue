@@ -141,6 +141,7 @@ return [
 		 * Application Service Providers...
 		 */
 		'App\Providers\AppServiceProvider',
+		'App\Providers\AuthServiceProvider',
 		'App\Providers\AreaServiceProvider',
 		'App\Providers\BladeServiceProvider',
 		'App\Providers\BusServiceProvider',

@@ -53,7 +53,8 @@ class CheckBoxBuilder extends FieldBuilder
 
 	public function render() {
 		return
-			'<div class="control-group">'.
+			'<div class="control-group'.
+			($this->hasError() ? ' error' : '').'">'.
 				'<div class="controls">'.
 					'<label class="checkbox">'.
 						'<input '.$this->html->attributes($this->getAttributes()).'/>'.
