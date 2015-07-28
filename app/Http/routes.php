@@ -17,3 +17,4 @@ Route::get('/', 'HomeController@index');
 
 Route::get('login', 'AuthController@getLogin');
 Route::post('login', 'AuthController@postLogin');
+Route::get('logout', 'AuthController@logout');

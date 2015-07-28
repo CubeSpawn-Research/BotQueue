@@ -1,3 +1,11 @@
+@if(!Auth::check())
+	<a href="https://github.com/Hoektronics/BotQueue">
+		<img style="position: absolute; top: 40px; right: 0; border: 0;"
+		     src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67"
+		     alt="Fork me on GitHub"
+		     data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
+	</a>
+@endif
 
 <section id="navbar">
     <div class="navbar navbar-fixed-top">
@@ -30,25 +38,29 @@
                         <li class="{{ Area::active('slicers') }}"><a href="/slicers">Slicers</a></li>
                         <li class="{{ Area::active('stats') }}"><a href="/stats">Stats</a></li>
                         <li class="{{ Area::active('help') }}"><a href="/help">Help</a></li>
-                        <? if (User::isAdmin()): ?>
-                        <li class="{{ Area::active('admin') }} dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b
-                                        class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/admin">Admin Panel</a></li>
-                                <li><a href="/bots/live">Live view</a></li>
-                            </ul>
-                        </li>
-                        <? endif ?>
                     </ul>
                     <ul class="nav pull-right">
                         <li class="divider-vertical"></li>
-                        <li>
-                            <a href="/login"
-                               style="padding-left: 17px; background: transparent url('/img/lock_icon.png') no-repeat 0 center;">Log
-                                in</a>
-                        </li>
-                        <li><a href="/register">Sign up</a></li>
+	                    @if(Auth::check())
+		                    <li class="dropdown">
+			                    <a href="#" class="dropdown-toggle"
+			                       data-toggle="dropdown">Hello, {{ Auth::user()->username }}
+				                    <b class="caret"></b>
+			                    </a>
+			                    <ul class="dropdown-menu">
+				                    <li><a href="/preferences">Preferences</a></li>
+				                    <li class="divider"></li>
+				                    <li><a href="/logout">Log Out</a></li>
+			                    </ul>
+		                    </li>
+	                    @else
+	                        <li>
+	                            <a href="/login"
+	                               style="padding-left: 17px; background: transparent url('/img/lock_icon.png') no-repeat 0 center;">Log
+	                                in</a>
+	                        </li>
+	                        <li><a href="/register">Sign up</a></li>
+	                    @endif
                     </ul>
                 </div>
             </div>

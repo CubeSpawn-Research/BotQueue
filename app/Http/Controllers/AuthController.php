@@ -47,4 +47,10 @@ class AuthController extends Controller {
 		return "I'm sorry, but I couldn't log you in";
 	}
 
+	public function logout()
+	{
+		$this->auth->logout();
+		return redirect('/');
+	}
+
 }
