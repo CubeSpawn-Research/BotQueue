@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\LoginRequest;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 
@@ -25,16 +26,11 @@ class AuthController extends Controller {
 		return view('auth.login');
 	}
 
-	public function postLogin(Request $request)
+	public function postLogin(LoginRequest $request)
 	{
-		$this->validate($request, [
-			'username' => 'required',
-			'password' => 'required'
-		]);
-
 		$credentials = $request->only('username', 'password');
 
-		if ($this->auth->attempt($credentials, $request->has('remember')))
+		if ($this->auth->attempt($credentials, $request->has('remember_me')))
 		{
 			return redirect()->intended('/');
 		}
