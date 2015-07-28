@@ -1,11 +1,11 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
+use App\Models\User;
 use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Http\Request;
 
 class AuthController extends Controller {
 
@@ -19,6 +19,26 @@ class AuthController extends Controller {
 	public function __construct(Guard $guard)
 	{
 	    $this->auth = $guard;
+		$this->middleware('guest', ['except' => ['logout']]);
+	}
+
+	public function getRegister()
+	{
+		return view('auth.register');
+	}
+
+	public function postRegister(RegisterRequest $request)
+	{
+		$credentials = $request->only('username', 'email', 'password');
+		$user = User::create([
+			'username' => $credentials['username'],
+			'email'    => $credentials['email'],
+			'password' => $credentials['password']
+		                     ]);
+
+		$this->auth->login($user, true);
+
+		return redirect('/');
 	}
 
 	public function getLogin()

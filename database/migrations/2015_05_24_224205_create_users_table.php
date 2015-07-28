@@ -78,7 +78,7 @@ class CreateUsersTable extends Migration {
 			$table->boolean('is_admin')->change();
 		});
 
-		// Separate
+		// Separate because we need pass_hash to become password first
 		Schema::table('users', function(Blueprint $table) {
 			$table->string('password', 60)->change();
 		});

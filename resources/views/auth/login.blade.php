@@ -1,7 +1,5 @@
 @extends('app')
 
-@section('title', 'Login')
-
 @section('content')
 <div id="page_signin">
     <div id="signin" class="span6 center">
