@@ -1,4 +1,4 @@
-<?php namespace App\Http\Requests;
+<?php namespace App\Http\Requests\Auth;
 
 use App\Http\Requests\Request;
 

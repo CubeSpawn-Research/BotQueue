@@ -16,8 +16,9 @@
 	along with BotQueue.  If not, see <http://www.gnu.org/licenses/>.
   */
 
+namespace App\Http\Requests\Auth;
 
-namespace App\Http\Requests;
+use App\Http\Requests\Request;
 
 class LoginRequest extends Request
 {
