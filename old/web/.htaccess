@@ -46,18 +46,18 @@ RewriteRule ^ajax/queue/update_sort$  dispatcher.php?mode=ajax&controller=queue&
 RewriteRule ^ajax/bot/slice_config_select$  dispatcher.php?mode=ajax&controller=bot_edit&view=slice_config_select [NC,L]
 
 #random stuff
-RewriteRule ^$					dispatcher.php?controller=main&view=home [NC,L]
-RewriteRule ^home$					dispatcher.php?controller=user&view=home [NC,L]
+#RewriteRule ^$					dispatcher.php?controller=main&view=home [NC,L]
+#RewriteRule ^home$					dispatcher.php?controller=user&view=home [NC,L]
 RewriteRule ^about$					dispatcher.php?controller=main&view=about [NC,L]
 RewriteRule ^activity(/page:([0-9]+))?$					dispatcher.php?controller=main&view=activity&page=$2 [NC,L]
 
 #user login action
-RewriteRule ^login$					dispatcher.php?controller=user&view=loginandregister [NC,L]
-RewriteRule ^login/([A-Za-z0-9+/=]+)$	dispatcher.php?controller=user&view=loginandregister&payload=$1 [NC,L]
-RewriteRule ^token/([A-Za-z0-9+/=]+)$	dispatcher.php?controller=user&view=loginandregister&token=$1 [NC,L]
-RewriteRule ^logout$					dispatcher.php?controller=auth&view=logout [NC,L]
+#RewriteRule ^login$					dispatcher.php?controller=user&view=loginandregister [NC,L]
+#RewriteRule ^login/([A-Za-z0-9+/=]+)$	dispatcher.php?controller=user&view=loginandregister&payload=$1 [NC,L]
+#RewriteRule ^token/([A-Za-z0-9+/=]+)$	dispatcher.php?controller=user&view=loginandregister&token=$1 [NC,L]
+#RewriteRule ^logout$					dispatcher.php?controller=auth&view=logout [NC,L]
 RewriteRule ^forgotpass$				dispatcher.php?controller=auth&view=forgotpass [NC,L]
-RewriteRule ^register$				dispatcher.php?controller=user&view=loginandregister [NC,L]
+#RewriteRule ^register$				dispatcher.php?controller=user&view=loginandregister [NC,L]
 RewriteRule ^preferences$				dispatcher.php?controller=user&view=preferences [NC,L]
 
 #admin area
