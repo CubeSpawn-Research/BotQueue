@@ -46,8 +46,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		'email',
 		'created_at',
 		'updated_at',
-		'activities', #todo-laravel Convert this into the url
-		'queues', #todo-laravel Convert this into the url
+		'activities', #todo Convert this into the url
+		'queues', #todo Convert this into the url
+	];
+
+	protected $casts = [
+		'is_admin' => 'boolean'
 	];
 
 	/**
@@ -83,5 +87,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	public function queues()
 	{
 		return $this->hasMany('App\Models\Queue');
+	}
+
+	public function bots()
+	{
+		return $this->hasMany('App\Models\Bot');
 	}
 }

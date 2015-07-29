@@ -1,6 +1,8 @@
 <?php namespace App\Providers;
 
+use App\Models\Bot;
 use Illuminate\Support\ServiceProvider;
+use App\Models\Observers\BotObserver;
 
 class AppServiceProvider extends ServiceProvider {
 
@@ -11,7 +13,7 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		//
+		Bot::observe(new BotObserver);
 	}
 
 	/**
