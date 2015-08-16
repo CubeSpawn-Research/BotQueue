@@ -17,7 +17,7 @@
   */
 
 
-namespace App\Html;
+namespace App\Html\Forms;
 
 use Illuminate\Html\HtmlBuilder;
 use Illuminate\Routing\UrlGenerator;

@@ -23,7 +23,26 @@ Route::get('login', 'AuthController@getLogin');
 Route::post('login', 'AuthController@postLogin');
 Route::get('logout', 'AuthController@logout');
 
-Route::get('bot/register', 'BotController@getRegister');
-Route::post('bot/register', 'BotController@postRegister');
+Route::group([
+    'as' => 'bot:',
+    'namespace' => 'Bot',
+    'prefix' => 'bot'
+], function () {
+    Route::get('register', ['as' => 'register', 'uses' => 'EditController@getRegister']);
+    Route::post('register', 'EditController@postRegister');
+});
+
+Route::group([
+    'as' => 'bot:',
+    'namespace' => 'Bot',
+    'prefix' => 'bot/{bot}'
+], function () {
+    Route::group([
+        'as' => 'edit:',
+        'prefix' => 'edit'
+    ], function () {
+        Route::get('queues', ['as' => 'queues', 'uses' => 'EditController@getQueues']);
+    });
+});
 
 Route::get('about', 'InfoController@about');
