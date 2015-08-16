@@ -22,39 +22,38 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
-class BladeServiceProvider extends ServiceProvider {
+class BladeServiceProvider extends ServiceProvider
+{
 
-	/**
-	 * Bootstrap the application services.
-	 *
-	 * @return void
-	 */
-	public function boot()
-	{
-		// e.g.
-		// @ifSection('breadcrumbs')
-		//     <div class="breadcrumbs">
-		//         @yield('breadcrumbs')
-		//     </div>
-		// @else
-		//     (Optional default value)
-		// @endif
-		Blade::extend(function($view, $compiler)
-		{
-			$pattern = $compiler->createMatcher('ifSection');
+    /**
+     * Bootstrap the application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        // e.g.
+        // @ifSection('breadcrumbs')
+        //     <div class="breadcrumbs">
+        //         @yield('breadcrumbs')
+        //     </div>
+        // @else
+        //     (Optional default value)
+        // @endif
 
-			return preg_replace($pattern, '$1<?php if (isset($__env->getSections()[$2])): ?>', $view);
-		});
-	}
+        Blade::directive('ifSection', function ($section) {
+            return "<?php if (issset($__env->getSections()[$section]))";
+        });
+    }
 
-	/**
-	 * Register the application services.
-	 *
-	 * @return void
-	 */
-	public function register()
-	{
-		//
-	}
+    /**
+     * Register the application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
 
 }
