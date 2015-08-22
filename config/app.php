@@ -141,7 +141,11 @@ return [
         'App\Providers\EventServiceProvider',
         'App\Providers\RouteServiceProvider',
         'App\Providers\MigrationServiceProvider',
-        'App\Providers\HtmlServiceProvider'
+        'App\Providers\HtmlServiceProvider',
+        /*
+         * Helper service provider
+         */
+        'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider'
     ],
     /*
     |--------------------------------------------------------------------------
