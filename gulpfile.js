@@ -13,6 +13,6 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix.sass([
-        'botqueue.scss'
+        'signin.scss'
     ], 'public/css')
 });

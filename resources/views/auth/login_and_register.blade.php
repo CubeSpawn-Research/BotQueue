@@ -16,3 +16,7 @@
 @section('end-js')
     <script src='https://www.google.com/recaptcha/api.js'></script>
 @stop
+
+@section('css')
+    <link href='/css/signin.css' rel="stylesheet"/>
+@stop

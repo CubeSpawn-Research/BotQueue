@@ -16,7 +16,7 @@
     <!-- Le styles -->
     <link href="/bootstrap/2.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="/bootstrap/2.3.0/css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="/css/botqueue.css" rel="stylesheet">
+    @yield('css')
 
     <!-- Le jquery -->
     <script src="/js/jquery-1.11.0.min.js"></script>
