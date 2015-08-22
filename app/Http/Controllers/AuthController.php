@@ -22,9 +22,9 @@ class AuthController extends Controller {
 		$this->middleware('guest', ['except' => ['logout']]);
 	}
 
-	public function getRegister()
+	public function getLoginAndRegister()
 	{
-		return view('auth.register');
+		return view('auth.login_and_register');
 	}
 
 	public function postRegister(RegisterRequest $request)
@@ -39,11 +39,6 @@ class AuthController extends Controller {
 		$this->auth->login($user, true);
 
 		return redirect('/');
-	}
-
-	public function getLogin()
-	{
-		return view('auth.login');
 	}
 
 	public function postLogin(LoginRequest $request)

@@ -2,11 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    @ifSection('title')
-        <title>@yield('title') - BotQueue</title>
-    @else
-        <title>BotQueue</title>
-    @endif
+    <title>BotQueue</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Zach Hoeken / Justin Nesselrotte">
@@ -20,7 +16,7 @@
     <!-- Le styles -->
     <link href="/bootstrap/2.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="/bootstrap/2.3.0/css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="/css/botqueue.css?version=3" rel="stylesheet">
+    <link href="/css/botqueue.css" rel="stylesheet">
 
     <!-- Le jquery -->
     <script src="/js/jquery-1.11.0.min.js"></script>
@@ -91,6 +87,6 @@
 
 <script src="/js/botqueue.js"></script>
 <script src="/bootstrap/2.3.0/js/bootstrap.js"></script>
-<script src='https://www.google.com/recaptcha/api.js'></script>
+@yield('end-js')
 </body>
 </html>

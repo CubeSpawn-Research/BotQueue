@@ -1,33 +1,23 @@
-@extends('app')
+{!! Form::open('register') !!}
 
-@section('content')
-<div id="page_signin">
-	<div id="signin" class="span6 center">
-		<div class="title">Register:</div>
+{!! Form::text('username')
+    ->label('Username')
+!!}
 
-		{!! Form::open() !!}
+{!! Form::text('email')
+    ->label('Email address')
+!!}
 
-		{!! Form::text('username')
-			->label('Username')
-		!!}
+{!! Form::password('password')
+    ->label('Password')
+!!}
 
-		{!! Form::text('email')
-			->label('Email address')
-		!!}
+{!! Form::password('password_confirmation')
+    ->label('Password Confirmation')
+!!}
 
-		{!! Form::password('password')
-			->label('Password')
-		!!}
+{!! Form::submit('Create your account')
+    ->inputClass('btn btn-success btn-large')
+!!}
 
-		{!! Form::password('password_confirmation')
-			->label('Password Confirmation')
-		!!}
-
-		{!! Form::submit('Create your account')
-			->inputClass('btn btn-success btn-large')
-		!!}
-
-		{!! Form::close() !!}
-	</div>
-</div>
-@stop
+{!! Form::close() !!}

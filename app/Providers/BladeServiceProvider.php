@@ -42,7 +42,7 @@ class BladeServiceProvider extends ServiceProvider
         // @endif
 
         Blade::directive('ifSection', function ($section) {
-            return "<?php if (issset($__env->getSections()[$section]))";
+            return '<?php if (isset($__env->getSections()['.$section.'])): ?>';
         });
     }
 

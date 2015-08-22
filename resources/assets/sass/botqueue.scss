@@ -1,0 +1,58 @@
+.signin {
+  .title {
+    width: auto;
+    letter-spacing: -1px;
+    margin: 0;
+    border: 1px solid #dddddd;
+    background: #f7f7f7 url("/img/darkgrain.png");
+    padding: 15px 30px;
+    font-size: 22px;
+    color: #444444;
+    -moz-border-radius-topleft: 6px;
+    -moz-border-radius-topright: 6px;
+  }
+
+  form {
+    margin: 0;
+  }
+
+  fieldset {
+    width: auto;
+    margin: 0;
+    padding: 30px 0 0 0;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-top: none;
+    -moz-border-radius-bottomleft: 6px;
+    -moz-border-radius-bottomright: 6px;
+  }
+
+  .form-actions {
+    margin-bottom: 0;
+  }
+
+  .control-group, .clearfix.error {
+    width: auto !important;
+    padding-top: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+  }
+
+  label {
+    font-weight: bold;
+  }
+
+  div.input label {
+    font-weight: normal !important;
+  }
+
+  label.remember_me {
+    display: inline;
+  }
+
+  p.reset {
+    margin: 15px 0 0 0;
+  }
+}

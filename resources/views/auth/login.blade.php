@@ -1,30 +1,20 @@
-@extends('app')
+{!! Form::open('login') !!}
 
-@section('content')
-<div id="page_signin">
-    <div id="signin" class="span6 center">
-        <div class="title">Sign in:</div>
+{!! Form::text('username')
+    ->label('Username')
+!!}
 
-	    {!! Form::open() !!}
+{!! Form::password('password')
+    ->label('Password')
+!!}
 
-	    {!! Form::text('username')
-	        ->label('Username')
-	    !!}
+{!! Form::checkbox('remember_me')
+    ->label("Remember me on this computer.")
+    ->checked(true)
+!!}
 
-	    {!! Form::password('password')
-	        ->label('Password')
-	    !!}
+{!! Form::submit('Sign into your account')
+    ->inputClass('btn btn-primary btn-large')
+!!}
 
-	    {!! Form::checkbox('remember_me')
-	        ->label("Remember me on this computer.")
-	        ->checked(true)
-	    !!}
-
-	    {!! Form::submit('Sign into your account')
-	        ->inputClass('btn btn-primary btn-large')
-	    !!}
-
-	    {!! Form::close() !!}
-    </div>
-</div>
-@stop
+{!! Form::close() !!}

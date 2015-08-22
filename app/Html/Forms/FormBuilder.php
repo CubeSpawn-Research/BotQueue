@@ -55,13 +55,17 @@ class FormBuilder {
 		$this->errors = $session->get('errors', new ViewErrorBag)->default;
 	}
 
-	public function open() {
+	public function open($route = null) {
 		$attributes = [
 			'class'   => 'form-horizontal',
 			'method'  => 'POST',
 			'action'  => $this->url->current(),
 			'enctype' => "multipart/form-data"
 		];
+
+		if(!is_null($route)) {
+			$attributes['action'] = $route;
+		}
 
 		$attributes = $this->html->attributes($attributes);
 

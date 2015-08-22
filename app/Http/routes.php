@@ -11,15 +11,13 @@
 |
 */
 
-use Illuminate\Support\Facades\Route;
-
 Route::get('/', 'HomeController@index');
 Route::get('home', 'HomeController@index');
 
 // Registration and login
-Route::get('register', 'AuthController@getRegister');
+Route::get('register', 'AuthController@getLoginAndRegister');
 Route::post('register', 'AuthController@postRegister');
-Route::get('login', 'AuthController@getLogin');
+Route::get('login', 'AuthController@getLoginAndRegister');
 Route::post('login', 'AuthController@postLogin');
 Route::get('logout', 'AuthController@logout');
 
