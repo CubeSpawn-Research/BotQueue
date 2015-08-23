@@ -113,6 +113,11 @@ class FormBuilder {
 		return $this->input('text', $name, $value);
 	}
 
+    public function number($name, $value = null)
+    {
+        return $this->input('number', $name, $value);
+    }
+
 	public function password($name, $value = null)
 	{
 		return $this->input('password', $name, $value);

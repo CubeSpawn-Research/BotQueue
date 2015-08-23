@@ -20,21 +20,21 @@
 namespace App\Models\Observers;
 
 
-use App\Models\Bot;
+use App\Models\Queue;
 use Auth;
 
-class BotObserver
+class QueueObserver
 {
 
 	/**
-	 * @param Bot $bot
+	 * @param Queue $queue
 	 * @return bool
 	 */
-	public function creating($bot)
+	public function creating($queue)
 	{
-		// The user must be logged in to create a bot
+		// The user must be logged in to create a queue
 		if(Auth::check()) {
-			$bot->user()->associate(Auth::user());
+			$queue->user()->associate(Auth::user());
 			return true;
 		}
 		return false;
