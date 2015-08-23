@@ -5,10 +5,12 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Bot\RegisterRequest;
 use App\Models\Bot;
+use Html\Wizards\Wizard;
 use Illuminate\Http\Request;
 
 class EditController extends Controller
 {
+
     public function getRegister()
     {
         return view('bot.edit.register');
@@ -20,12 +22,11 @@ class EditController extends Controller
 
         $bot = Bot::create($fields);
 
-        return redirect()->route('bot:edit:queues', compact($bot));
+        return redirect()->route('bot:edit:queues', [$bot]);
     }
 
     public function getQueues(Bot $bot)
     {
-        dd($bot);
         return view('bot.edit.queues');
     }
 }

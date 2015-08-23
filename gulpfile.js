@@ -13,6 +13,7 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix.sass([
-        'signin.scss'
+        'signin.scss',
+	'dragula.scss'
     ], 'public/css')
 });
