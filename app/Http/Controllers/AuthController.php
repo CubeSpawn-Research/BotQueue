@@ -51,7 +51,7 @@ class AuthController extends Controller {
 		}
 
 		return redirect('/login')
-			->withInput($request->only('username', 'remember'))
+			->withInput($request->except('password'))
 			->withErrors([
 				             'username' => $this->getFailedLoginMessage(),
 			             ]);

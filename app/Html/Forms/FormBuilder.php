@@ -45,14 +45,19 @@ class FormBuilder {
 	 * @var MessageBag
 	 */
 	private $errors;
+    /**
+     * @var string
+     */
+    private $action;
 
-	public function __construct(HtmlBuilder $html, UrlGenerator $url, Store $session)
+    public function __construct(HtmlBuilder $html, UrlGenerator $url, Store $session)
 	{
 
 		$this->html = $html;
 		$this->url = $url;
 		$this->session = $session;
 		$this->errors = $session->get('errors', new ViewErrorBag)->default;
+        $this->action = null;
 	}
 
 	public function open($route = null) {
@@ -67,14 +72,18 @@ class FormBuilder {
 			$attributes['action'] = $route;
 		}
 
-		$attributes = $this->html->attributes($attributes);
+        $this->action = $attributes['action'];
+
+        $attributes = $this->html->attributes($attributes);
 
 		return
 			'<form'.$attributes.'><fieldset>'.
-			$this->hidden('_token', $this->session->getToken());
+			$this->hidden('_token', $this->session->getToken()).
+            $this->hidden('_form_key', $this->action);
 	}
 
 	public function close() {
+        $this->action = null;
 		return '</fieldset></form>';
 	}
 
@@ -82,7 +91,7 @@ class FormBuilder {
 	{
 		$builder = new FieldBuilder($this->html, $name, $type);
 		$builder->value($this->old($name, $value));
-		if($this->errors->has($name))
+		if($this->hasError($name))
 			$builder->error($this->errors->first($name));
 		return $builder;
 
@@ -114,7 +123,7 @@ class FormBuilder {
 		return new CheckBoxBuilder($this->html, $name, $checked);
 	}
 
-	private function old($name, $value)
+	private function old($name, $value = null)
 	{
 		if($value != null)
 			return $value;
@@ -135,4 +144,15 @@ class FormBuilder {
 	{
 		return str_replace(array('.', '[]', '[', ']'), array('_', '', '.', ''), $key);
 	}
+
+    /**
+     * @param $name
+     * @return bool
+     */
+    protected function hasError($name)
+    {
+        if($this->old('_form_key') === $this->action)
+            return $this->errors->has($name);
+        return false;
+    }
 }
