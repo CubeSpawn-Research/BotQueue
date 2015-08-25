@@ -37,10 +37,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 * @var array
 	 */
 	protected $hidden = [
-		'id',
 		'password',
-		'is_admin',
 		'thingiverse_token',
+        'remember_token',
 		'dashboard_style',
 		'last_notification',
 		'email',
