@@ -49,6 +49,10 @@ class Form {
      * @var string
      */
     private $action;
+    /**
+     * @var bool
+     */
+    private $current_form_was_submitted;
 
     public function __construct(HtmlBuilder $html, UrlGenerator $url, Store $session)
 	{
@@ -56,18 +60,21 @@ class Form {
 		$this->html = $html;
 		$this->url = $url;
 		$this->session = $session;
-		$this->errors = $session->get('errors', new ViewErrorBag)->default;
+		$this->errors = $session->get('errors', new ViewErrorBag);
         $this->action = null;
+        $this->current_form_was_submitted = false;
 	}
 
 	public function open($route = null) {
         $this->action = (is_null($route) ? $this->url->current() : $route);
+        $this->current_form_was_submitted = $this->old('_form_key') === $this->action;
 
         return new FormBuilder($this, $this->action, $this->html, $this->session);
 	}
 
 	public function close() {
         $this->action = null;
+        $this->current_form_was_submitted = false;
 		return '</fieldset></form>';
 	}
 
@@ -116,8 +123,10 @@ class Form {
 		if($value != null)
 			return $value;
 
-		if(isset($this->session))
-			return $this->session->getOldInput($this->transformKey($name));
+		if(isset($this->session)) {
+            if($this->current_form_was_submitted || $name == '_form_key')
+			    return $this->session->getOldInput($this->transformKey($name));
+        }
 
 		return null;
 	}
@@ -139,7 +148,7 @@ class Form {
      */
     protected function hasError($name)
     {
-        if($this->old('_form_key') === $this->action)
+        if($this->current_form_was_submitted)
             return $this->errors->has($name);
         return false;
     }
