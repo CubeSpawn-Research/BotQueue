@@ -29,4 +29,9 @@ class EditController extends Controller
     {
         return view('bot.edit.queues');
     }
+
+    public function postQueues(Request $request)
+    {
+        dd($request);
+    }
 }

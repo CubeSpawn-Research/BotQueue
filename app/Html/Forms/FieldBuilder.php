@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Validator;
 class FieldBuilder {
 
 	/**
-	 * @var FormBuilder
+	 * @var Form
 	 */
 	protected $html;
 
@@ -38,6 +38,7 @@ class FieldBuilder {
 	protected $error;
 	protected $type;
 	protected $class;
+    protected $attrs;
 
 	public function __construct(HtmlBuilder $html, $name, $type)
 	{
@@ -46,6 +47,7 @@ class FieldBuilder {
 		$this->id    = $name;
 		$this->type  = $type;
 		$this->class = 'input-xlarge';
+        $this->attrs = [];
 	}
 
 	public function id($id)
@@ -129,12 +131,14 @@ class FieldBuilder {
 	 */
 	protected function getAttributes()
 	{
-		return [
+		return array_merge([
 			'type' => $this->type,
 			'class' => $this->class,
 			'name' => $this->name,
 			'value' => $this->value,
-		];
+		],
+            $this->attrs
+        );
 	}
 
 	public function inputClass($class)
@@ -142,4 +146,10 @@ class FieldBuilder {
 		$this->class = $class;
 		return $this;
 	}
+
+    public function disabled()
+    {
+        $this->attrs['disabled'] = true;
+        return $this;
+    }
 }

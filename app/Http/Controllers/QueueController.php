@@ -17,8 +17,6 @@ class QueueController extends Controller
     public function postCreate(CreateRequest $request)
     {
         $fields = $request->only('name', 'delay');
-        if(empty($fields['delay']))
-            $fields['delay'] = 0;
 
         Queue::create($fields);
 

@@ -40,6 +40,7 @@ Route::group([
         'prefix' => 'edit'
     ], function () {
         Route::get('queues', ['as' => 'queues', 'uses' => 'EditController@getQueues']);
+        Route::post('queues', 'EditController@postQueues');
     });
 });
 

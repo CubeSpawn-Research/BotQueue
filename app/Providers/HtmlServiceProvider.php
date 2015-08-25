@@ -19,7 +19,7 @@
 
 namespace App\Providers;
 
-use App\Html\Forms\FormBuilder;
+use App\Html\Forms\Form;
 use Illuminate\Html\HtmlServiceProvider as IlluminateHtmlServiceProvider;
 
 class HtmlServiceProvider extends IlluminateHtmlServiceProvider
@@ -27,7 +27,7 @@ class HtmlServiceProvider extends IlluminateHtmlServiceProvider
     protected function registerFormBuilder()
     {
         $this->app->bindShared('form', function ($app) {
-            $form = new FormBuilder($app['html'], $app['url'], $app['session.store']);
+            $form = new Form($app['html'], $app['url'], $app['session.store']);
 
             return $form;
         });

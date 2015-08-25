@@ -19,145 +19,90 @@
 
 namespace App\Html\Forms;
 
+
 use Illuminate\Html\HtmlBuilder;
-use Illuminate\Routing\UrlGenerator;
 use Illuminate\Session\Store;
-use Illuminate\Support\Traits\Macroable;
-use Illuminate\Support\MessageBag;
-use Illuminate\Support\ViewErrorBag;
 
-class FormBuilder {
-	use Macroable;
-
-	/**
-	 * @var HtmlBuilder
-	 */
-	private $html;
-	/**
-	 * @var UrlGenerator
-	 */
-	private $url;
-	/**
-	 * @var Store
-	 */
-	private $session;
-	/**
-	 * @var MessageBag
-	 */
-	private $errors;
+class FormBuilder
+{
     /**
-     * @var string
+     * @var Form $form
+     */
+    private $form;
+    /**
+     * @var string $action
      */
     private $action;
+    /**
+     * @var HtmlBuilder $html
+     */
+    private $html;
+    /**
+     * @var Store $session
+     */
+    private $session;
+    /**
+     * @var array
+     */
+    private $attributes;
 
-    public function __construct(HtmlBuilder $html, UrlGenerator $url, Store $session)
-	{
-
-		$this->html = $html;
-		$this->url = $url;
-		$this->session = $session;
-		$this->errors = $session->get('errors', new ViewErrorBag)->default;
-        $this->action = null;
-	}
-
-	public function open($route = null) {
-		$attributes = [
-			'class'   => 'form-horizontal',
-			'method'  => 'POST',
-			'action'  => $this->url->current(),
-			'enctype' => "multipart/form-data"
-		];
-
-		if(!is_null($route)) {
-			$attributes['action'] = $route;
-		}
-
-        $this->action = $attributes['action'];
-
-        $attributes = $this->html->attributes($attributes);
-
-		return
-			'<form'.$attributes.'><fieldset>'.
-			$this->hidden('_token', $this->session->getToken()).
-            $this->hidden('_form_key', $this->action);
-	}
-
-	public function close() {
-        $this->action = null;
-		return '</fieldset></form>';
-	}
-
-	public function input($type, $name, $value = null)
-	{
-		$builder = new FieldBuilder($this->html, $name, $type);
-		$builder->value($this->old($name, $value));
-		if($this->hasError($name))
-			$builder->error($this->errors->first($name));
-		return $builder;
-
-	}
-
-	public function hidden($name, $value) {
-		$builder = new HiddenBuilder($this->html, $name);
-		$builder->value($this->old($name, $value));
-		return $builder;
-	}
-
-	public function submit($text)
-	{
-		return new SubmitBuilder($this->html, $text);
-	}
-
-	public function text($name, $value = null)
-	{
-		return $this->input('text', $name, $value);
-	}
-
-    public function number($name, $value = null)
+    public function __construct(Form $form,
+                                $action,
+                                HtmlBuilder $html,
+                                Store $session)
     {
-        return $this->input('number', $name, $value);
+        $this->form = $form;
+        $this->action = $action;
+        $this->html = $html;
+        $this->session = $session;
+        $this->attributes = [
+            'class'   => 'form-horizontal',
+            'method'  => 'POST',
+            'action'  => $action,
+            'enctype' => "multipart/form-data"
+        ];
     }
 
-	public function password($name, $value = null)
-	{
-		return $this->input('password', $name, $value);
-	}
+    public function formClass($class)
+    {
+        $this->attributes['class'] = $class;
+        return $this;
+    }
 
-	public function checkbox($name, $checked = false)
-	{
-		return new CheckBoxBuilder($this->html, $name, $checked);
-	}
+    public function id($id)
+    {
+        $this->attributes['id'] = $id;
+        return $this;
+    }
 
-	private function old($name, $value = null)
-	{
-		if($value != null)
-			return $value;
-
-		if(isset($this->session))
-			return $this->session->getOldInput($this->transformKey($name));
-
-		return null;
-	}
-
-	/**
-	 * Transform key from array to dot syntax.
-	 *
-	 * @param  string  $key
-	 * @return string
-	 */
-	protected function transformKey($key)
-	{
-		return str_replace(array('.', '[]', '[', ']'), array('_', '', '.', ''), $key);
+    public function __toString()
+    {
+        return $this->render();
 	}
 
     /**
-     * @param $name
-     * @return bool
+     * @return string
      */
-    protected function hasError($name)
+    private function render()
     {
-        if($this->old('_form_key') === $this->action)
-            return $this->errors->has($name);
-        return false;
+        $html_attributes = $this->html->attributes($this->attributes);
+        $result =  '<form'.$html_attributes.'><fieldset>';
+
+        foreach($this->fields() as $field) {
+            $result .= $field;
+        }
+
+        return $result;
+    }
+
+    /**
+     * return FieldBuilder
+     */
+    private function fields()
+    {
+        return [
+            $this->form->hidden('_token', $this->session->getToken()),
+            $this->form->hidden('_form_key', $this->action)
+        ];
     }
 }
