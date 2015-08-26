@@ -3,8 +3,10 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\Bot\QueueRequest;
 use App\Http\Requests\Bot\RegisterRequest;
 use App\Models\Bot;
+use Auth;
 use Html\Wizards\Wizard;
 use Illuminate\Http\Request;
 
@@ -27,11 +29,18 @@ class EditController extends Controller
 
     public function getQueues(Bot $bot)
     {
-        return view('bot.edit.queues');
+        $queues = $bot->queues;
+        $ignored = Auth::user()->queues->diff($queues);
+
+        return view('bot.edit.queues', compact('queues', 'ignored'));
     }
 
-    public function postQueues(Request $request)
+    public function postQueues(Bot $bot, QueueRequest $request)
     {
-        dd($request);
+        $queues = $request->get('queues');
+
+        $bot->queues()->sync($queues);
+
+        return redirect('/');
     }
 }

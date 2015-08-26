@@ -8,12 +8,16 @@
      !!}
 
     <div id="left" class="dragula-container">
-
+        @foreach($queues as $queue)
+            {!! Form::input('hidden', 'queues[]', $queue->id)
+                ->label($queue->name)
+             !!}
+        @endforeach
     </div>
 
     <div id="right" class="dragula-container">
-        @foreach(Auth::user()->queues as $queue)
-            {!! Form::input('hidden', 'ignored[]', $queue->name)
+        @foreach($ignored as $queue)
+            {!! Form::input('hidden', 'ignored[]', $queue->id)
                 ->label($queue->name)
              !!}
         @endforeach
@@ -32,11 +36,14 @@
             dragula([document.getElementById("left"), document.getElementById("right")])
                     .on('drop', function(el, container) {
                         var input = $(el).find("input");
+                        var label = $(el).find("label");
                         if(container.id === "left") {
                             input.attr('name', 'queues[]');
+                            label.attr('for', 'queues[]');
                         }
                         if(container.id === "right") {
                             input.attr('name', 'ignored[]');
+                            label.attr('for', 'ignored[]');
                         }
                         console.log(input);
                         console.log(input.attr('name'));

@@ -1,5 +1,6 @@
 <?php namespace App\Models;
 
+use Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class Queue extends Model {
@@ -45,5 +46,19 @@ class Queue extends Model {
 	public function setUserAttribute($value) {
 		$this->attributes['user_id'] = $value->id;
 	}
+
+    public function bots()
+    {
+        return $this->belongsToMany('App\Models\Bot')->withTimestamps();
+    }
+
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeMine($query)
+    {
+        $query->where('user_id', Auth::user()->id);
+    }
 
 }

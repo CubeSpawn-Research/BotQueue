@@ -26,4 +26,9 @@ class Bot extends Model {
 		return $this->belongsTo('App\Models\User');
 	}
 
+    public function queues()
+    {
+        return $this->belongsToMany('App\Models\Queue')->withTimestamps();
+    }
+
 }
