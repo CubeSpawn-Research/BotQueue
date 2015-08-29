@@ -47,9 +47,10 @@ Route::group([
 Route::get('queues', 'QueueController@index');
 Route::get('queue/create', ['as' => 'queue:create', 'uses' => 'QueueController@getCreate']);
 Route::post('queue/create', 'QueueController@postCreate');
-Route::get('queue/{queue}/edit', 'QueueController@getEdit');
+Route::get('queue/{queue}', ['as' => 'queue', 'uses' => 'QueueController@view']);
+Route::get('queue/{queue}/edit', ['as' => 'queue:edit', 'uses' => 'QueueController@getEdit']);
 Route::post('queue/{queue}/edit', 'QueueController@postEdit');
-Route::get('queue/{queue}/delete', 'QueueController@getDelete');
+Route::get('queue/{queue}/delete', ['as' => 'queue:delete', 'uses' => 'QueueController@getDelete']);
 Route::post('queue/{queue}/delete', 'QueueController@postDelete');
 
 Route::get('about', 'InfoController@about');

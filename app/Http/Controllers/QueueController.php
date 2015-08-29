@@ -25,11 +25,9 @@ class QueueController extends Controller
     {
         $fields = $request->only('name', 'delay');
 
-        Queue::create($fields);
+        $queue = Queue::create($fields);
 
-        // todo-laravel Redirect to the queue's page
-
-        return redirect('/');
+        return redirect()->route('queue', [$queue]);
     }
 
     public function getEdit(Queue $queue)
@@ -42,9 +40,7 @@ class QueueController extends Controller
         $fields = $request->only('name', 'delay');
         $queue->update($fields);
 
-        // todo-laravel Redirect to the queue's page
-
-        return redirect('/');
+        return redirect()->route('queue', [$queue]);
     }
 
     public function getDelete(Queue $queue)
@@ -64,5 +60,10 @@ class QueueController extends Controller
         $queues = Auth::user()->queues()->paginate(20);
 
         return view('queue.index', compact('queues'));
+    }
+
+    public function view(Queue $queue)
+    {
+        dd($queue);
     }
 }
