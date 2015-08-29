@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('title', 'Edit Queue: '.$queue->name)
+@section('title', 'Edit Queue: '. e($queue->name))
 
 @section('content')
     {!! Form::model($queue) !!}

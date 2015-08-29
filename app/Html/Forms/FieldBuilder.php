@@ -52,31 +52,31 @@ class FieldBuilder {
 
 	public function id($id)
 	{
-		$this->id = $id;
+		$this->id = e($id);
 		return $this;
 	}
 
 	public function value($value)
 	{
-		$this->value = $value;
+		$this->value = e($value);
 		return $this;
 	}
 
 	public function label($label)
 	{
-		$this->label = $label;
+		$this->label = e($label);
 		return $this;
 	}
 
 	public function help($help)
 	{
-		$this->help = $help;
+		$this->help = e($help);
 		return $this;
 	}
 
 	public function error($error)
 	{
-		$this->error = $error;
+		$this->error = e($error);
 		return $this;
 	}
 
