@@ -19,6 +19,9 @@
 
 namespace App\Providers;
 
+use App\Html\BootstrapPresenter;
+use Illuminate\Contracts\Pagination\Paginator as PaginatorContract;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -43,6 +46,10 @@ class BladeServiceProvider extends ServiceProvider
 
         Blade::directive('ifSection', function ($section) {
             return '<?php if (isset($__env->getSections()['.$section.'])): ?>';
+        });
+
+        Paginator::presenter(function(PaginatorContract $paginator) {
+            return new BootstrapPresenter($paginator);
         });
     }
 
