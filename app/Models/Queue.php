@@ -47,6 +47,13 @@ class Queue extends Model {
 		$this->attributes['user_id'] = $value->id;
 	}
 
+    public function setDelayAttribute($value)
+    {
+        if($value == "")
+            $value = 0;
+        $this->attributes['delay'] = $value;
+    }
+
     public function bots()
     {
         return $this->belongsToMany('App\Models\Bot')->withTimestamps();

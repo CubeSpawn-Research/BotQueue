@@ -32,9 +32,6 @@ class QueueObserver
 	 */
 	public function creating($queue)
 	{
-		if($queue->delay == '') {
-            $queue->delay = 0;
-        }
 		// The user must be logged in to create a queue
 		if(Auth::check()) {
 			$queue->user()->associate(Auth::user());
