@@ -47,5 +47,7 @@ Route::group([
 Route::get('queues', 'QueueController@index');
 Route::get('queue/create', ['as' => 'queue:create', 'uses' => 'QueueController@getCreate']);
 Route::post('queue/create', 'QueueController@postCreate');
+Route::get('queue/{queue}/edit', 'QueueController@getEdit');
+Route::post('queue/{queue}/edit', 'QueueController@postEdit');
 
 Route::get('about', 'InfoController@about');

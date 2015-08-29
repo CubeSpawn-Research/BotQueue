@@ -1,9 +1,9 @@
 @extends('app')
 
-@section('title', 'Register a New Queue')
+@section('title', 'Edit Queue: '.$queue->name)
 
 @section('content')
-    {!! Form::open() !!}
+    {!! Form::model($queue) !!}
 
     {!! Form::text('name')
     ->label('Name')
@@ -15,7 +15,7 @@
     ->help('What is the delay between starting prints in seconds?')
     !!}
 
-    {!! Form::submit('Create Queue') !!}
+    {!! Form::submit('Update Queue') !!}
 
     {!! Form::close() !!}
 @stop

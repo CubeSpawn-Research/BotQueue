@@ -32,6 +32,21 @@ class QueueController extends Controller
         return redirect('/');
     }
 
+    public function getEdit(Queue $queue)
+    {
+        return view('queue.edit', compact('queue'));
+    }
+
+    public function postEdit(CreateRequest $request, Queue $queue)
+    {
+        $fields = $request->only('name', 'delay');
+        $queue->update($fields);
+
+        // todo-laravel Redirect to the queue's page
+
+        return redirect('/');
+    }
+
     public function index()
     {
         $queues = Auth::user()->queues()->paginate(20);

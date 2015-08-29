@@ -53,6 +53,7 @@ class Form {
      * @var bool
      */
     private $current_form_was_submitted;
+    private $model;
 
     public function __construct(HtmlBuilder $html, UrlGenerator $url, Store $session)
 	{
@@ -62,6 +63,7 @@ class Form {
 		$this->session = $session;
 		$this->errors = $session->get('errors', new ViewErrorBag);
         $this->action = null;
+        $this->model  = null;
         $this->current_form_was_submitted = false;
 	}
 
@@ -72,9 +74,16 @@ class Form {
         return new FormBuilder($this, $this->action, $this->html, $this->session);
 	}
 
+    public function model($model, $route = null)
+    {
+        $this->model = $model;
+        return $this->open($route);
+    }
+
 	public function close() {
         $this->action = null;
         $this->current_form_was_submitted = false;
+        $this->model = null;
 		return '</fieldset></form>';
 	}
 
@@ -120,15 +129,19 @@ class Form {
 
 	private function old($name, $value = null)
 	{
-		if($value != null)
-			return $value;
+        if($value != null)
+            return $value;
 
 		if(isset($this->session)) {
             if($this->current_form_was_submitted || $name == '_form_key')
 			    return $this->session->getOldInput($this->transformKey($name));
         }
 
-		return null;
+        if(!is_null($this->model)) {
+            return $this->model->$name;
+        }
+
+        return null;
 	}
 
 	/**
