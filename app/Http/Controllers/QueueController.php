@@ -64,6 +64,6 @@ class QueueController extends Controller
 
     public function view(Queue $queue)
     {
-        dd($queue);
+        return view('queue.view', compact('queue'));
     }
 }
