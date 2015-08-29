@@ -4,7 +4,7 @@
 
 @section('content')
     @foreach($queues as $queue)
-        <a href="{{ url('queue', [$queue]) }}">{{ $queue->name }}</a><br>
+        <a href="{{ route('queue', [$queue]) }}">{{ $queue->name }}</a><br>
     @endforeach
 
     {!! $queues->render() !!}
