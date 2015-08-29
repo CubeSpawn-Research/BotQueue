@@ -49,5 +49,7 @@ Route::get('queue/create', ['as' => 'queue:create', 'uses' => 'QueueController@g
 Route::post('queue/create', 'QueueController@postCreate');
 Route::get('queue/{queue}/edit', 'QueueController@getEdit');
 Route::post('queue/{queue}/edit', 'QueueController@postEdit');
+Route::get('queue/{queue}/delete', 'QueueController@getDelete');
+Route::post('queue/{queue}/delete', 'QueueController@postDelete');
 
 Route::get('about', 'InfoController@about');

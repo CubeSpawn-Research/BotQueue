@@ -47,6 +47,18 @@ class QueueController extends Controller
         return redirect('/');
     }
 
+    public function getDelete(Queue $queue)
+    {
+        return view('queue.delete', compact('queue'));
+    }
+
+    public function postDelete(Queue $queue)
+    {
+        $queue->delete();
+
+        return redirect('/');
+    }
+
     public function index()
     {
         $queues = Auth::user()->queues()->paginate(20);
