@@ -9,16 +9,16 @@ class QueuePolicy
 {
     public function edit(User $user, Queue $queue)
     {
-        return false;
+        return $user == $queue->user;
     }
 
     public function delete(User $user, Queue $queue)
     {
-        return false;
+        return $user == $queue->user;
     }
 
     public function modify(User $user, Queue $queue)
     {
-        return $this->edit($user, $queue) || $this->edit($user, $queue);
+        return $this->edit($user, $queue) || $this->delete($user, $queue);
     }
 }
