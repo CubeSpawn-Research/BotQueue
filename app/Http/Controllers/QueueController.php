@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Queue\CreateRequest;
+use App\Http\Requests\Queue\DeleteRequest;
+use App\Http\Requests\Queue\EditRequest;
 use App\Models\Queue;
 
 use App\Http\Requests;
@@ -32,10 +34,12 @@ class QueueController extends Controller
 
     public function getEdit(Queue $queue)
     {
+        $this->authorize('edit', $queue);
+
         return view('queue.edit', compact('queue'));
     }
 
-    public function postEdit(CreateRequest $request, Queue $queue)
+    public function postEdit(EditRequest $request, Queue $queue)
     {
         $fields = $request->only('name', 'delay');
         $queue->update($fields);
@@ -45,10 +49,12 @@ class QueueController extends Controller
 
     public function getDelete(Queue $queue)
     {
+        $this->authorize('delete', $queue);
+
         return view('queue.delete', compact('queue'));
     }
 
-    public function postDelete(Queue $queue)
+    public function postDelete(DeleteRequest $request, Queue $queue)
     {
         $queue->delete();
 
