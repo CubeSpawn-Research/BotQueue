@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        //'App\Models\Queue' => 'App\Policies\QueuePolicy',
+        \App\Models\Queue::class => \App\Policies\QueuePolicy::class,
     ];
 
 	/**
