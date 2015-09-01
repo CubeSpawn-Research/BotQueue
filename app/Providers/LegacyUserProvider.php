@@ -102,7 +102,6 @@ class LegacyUserProvider implements UserProvider
 	{
 		$plain = $credentials['password'];
 
-		error_log("Legacy password update?");
 		if($this->isLegacyPassword($user, $plain)) {
 			// Update the old password to the new one
 			$this->updateLegacyPassword($user, $plain);
@@ -110,7 +109,6 @@ class LegacyUserProvider implements UserProvider
 		}
 		else
 		{
-			error_log("Not a legacy password");
 			return $this->hasher->check($plain, $user->getAuthPassword());
 		}
 	}
@@ -134,6 +132,5 @@ class LegacyUserProvider implements UserProvider
 	{
 		$user->password = $this->hasher->make($plain);
 		$user->save();
-		error_log("updated");
 	}
 }
