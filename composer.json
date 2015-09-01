@@ -15,7 +15,7 @@
 	],
 	"type": "project",
 	"require": {
-		"laravel/framework": "5.1.*",
+		"laravel/framework": "5.1.11",
 		"doctrine/dbal": "^2.6@dev",
 		"illuminate/html": "^5.0@dev",
 		"barryvdh/laravel-ide-helper": "^2.1@dev"
