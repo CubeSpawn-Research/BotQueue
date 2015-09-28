@@ -3,26 +3,23 @@
 @section('title', 'Edit your queues')
 
 @section('content')
-    {!! Form::open()
-        ->formClass('dragula-wrapper')
-     !!}
+    {!! Form::open() !!}
 
-    <div id="left" class="dragula-container">
-        @foreach($queues as $queue)
-            {!! Form::input('hidden', 'queues[]', $queue->id)
-                ->label($queue->name)
-             !!}
-        @endforeach
+    <div class="dragula-wrapper" style="min-width: 32em; min-height: 4em">
+        <div id="left" class="dragula-container">
+            @foreach($queues as $queue)
+                {!! Form::dragula('queues[]', $queue->id)
+                    ->label($queue->name) !!}
+            @endforeach
+        </div>
+
+        <div id="right" class="dragula-container">
+            @foreach($ignored as $queue)
+                {!! Form::dragula('ignored[]', $queue->id)
+                    ->label($queue->name) !!}
+            @endforeach
+        </div>
     </div>
-
-    <div id="right" class="dragula-container">
-        @foreach($ignored as $queue)
-            {!! Form::input('hidden', 'ignored[]', $queue->id)
-                ->label($queue->name)
-             !!}
-        @endforeach
-    </div>
-
 
     {!! Form::submit('Update Queues') !!}
 
@@ -37,6 +34,7 @@
                     .on('drop', function(el, container) {
                         var input = $(el).find("input");
                         var label = $(el).find("label");
+
                         if(container.id === "left") {
                             input.attr('name', 'queues[]');
                             label.attr('for', 'queues[]');
@@ -45,8 +43,6 @@
                             input.attr('name', 'ignored[]');
                             label.attr('for', 'ignored[]');
                         }
-                        console.log(input);
-                        console.log(input.attr('name'));
                     });
         });
     </script>

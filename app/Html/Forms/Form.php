@@ -102,6 +102,12 @@ class Form {
 		return $builder;
 	}
 
+	public function dragula($name, $value)
+	{
+		$builder = new DragulaBuilder($this->html, $name, $value);
+        return $builder;
+	}
+
 	public function submit($text)
 	{
 		return new SubmitBuilder($this->html, $text);

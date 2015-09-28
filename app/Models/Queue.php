@@ -65,7 +65,7 @@ class Queue extends Model {
      */
     public function scopeMine($query)
     {
-        $query->where('user_id', Auth::user()->id);
+        return $query->where('user_id', Auth::user()->id);
     }
 
 }
