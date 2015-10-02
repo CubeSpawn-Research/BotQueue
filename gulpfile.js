@@ -11,9 +11,10 @@ var elixir = require('laravel-elixir');
  |
  */
 
-elixir(function(mix) {
+elixir(function (mix) {
     mix.sass([
         'signin.scss',
-	'dragula.scss'
+        'dragula.scss',
+        'botqueue.scss'
     ], 'public/css')
 });
