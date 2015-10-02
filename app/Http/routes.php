@@ -24,6 +24,9 @@ Route::post('login', 'AuthController@postLogin');
 
 Route::get('logout', 'AuthController@logout');
 
+// Upload pages
+Route::get('upload', 'UploadController@getIndex');
+
 // Bot pages
 Route::get('bot/register', ['as' => 'bot:register', 'uses' => 'Bot\EditController@getRegister']);
 Route::post('bot/register', 'Bot\EditController@postRegister');
