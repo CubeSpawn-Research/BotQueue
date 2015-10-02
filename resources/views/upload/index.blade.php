@@ -36,7 +36,3 @@
         </div>
     </div>
 @stop
-
-@section('css')
-    <link href="/css/botqueue.css" rel="stylesheet"/>
-@stop
