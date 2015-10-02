@@ -110,7 +110,10 @@ class Form {
 
     public function upload($name)
     {
-        return new UploadBuilder($this->html, $name);
+        $builder = new UploadBuilder($this->html, $name);
+        if($this->hasError($name))
+            $builder->error($this->errors->first($name));
+        return $builder;
 	}
 
 	public function submit($text)
