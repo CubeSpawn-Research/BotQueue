@@ -108,6 +108,11 @@ class Form {
         return $builder;
 	}
 
+    public function upload($name)
+    {
+        return new UploadBuilder($this->html, $name);
+	}
+
 	public function submit($text)
 	{
 		return new SubmitBuilder($this->html, $text);
