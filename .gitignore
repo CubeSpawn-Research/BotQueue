@@ -11,6 +11,5 @@ vendor/
 composer.phar
 /node_modules
 .env*
-storage/*
 .phpstorm.meta.php
 _ide_helper.php
