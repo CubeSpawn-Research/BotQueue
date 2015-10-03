@@ -28,11 +28,15 @@
 
             <h2>Option 2: Use a URL</h2>
 
-            {{--@include('upload.url')--}}
+            @include('upload.url')
             <ul class="muted">
                 <li>The URL should point to an acceptable filetype.</li>
                 <li>thingiverse.com/thing:#### format URLs will work too.</li>
             </ul>
         </div>
     </div>
+@stop
+
+@section('css')
+    <link href="/css/botqueue.css" rel="stylesheet"/>
 @stop

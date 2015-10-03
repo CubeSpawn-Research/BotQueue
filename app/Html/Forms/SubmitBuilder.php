@@ -25,8 +25,9 @@ use Illuminate\Html\HtmlBuilder;
 class SubmitBuilder extends FieldBuilder
 {
 	private $submitText;
+    private $inline;
 
-	/**
+    /**
 	 * SubmitBuilder constructor.
 	 * @param HtmlBuilder $html
 	 * @param $text
@@ -38,13 +39,19 @@ class SubmitBuilder extends FieldBuilder
 		$this->inputClass('btn btn-primary');
 	}
 
+	public function inline() {
+        $this->inline = true;
+        return $this;
+    }
+
 	public function render()
 	{
+        if($this->inline)
+            return $this->button();
+
 		return
 			'<div class="form-actions">'.
-				'<button '.$this->html->attributes($this->getAttributes()).'>'.
-					$this->submitText.
-				'</button>'.
+				$this->button().
 			'</div>';
 	}
 
@@ -54,5 +61,13 @@ class SubmitBuilder extends FieldBuilder
 			'class' => $this->class,
 		];
 	}
+
+    private function button()
+    {
+        return
+            '<button '.$this->html->attributes($this->getAttributes()).'>'.
+                $this->submitText.
+            '</button>';
+    }
 
 }

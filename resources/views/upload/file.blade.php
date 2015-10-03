@@ -4,6 +4,6 @@
 
     {!! Form::upload('file') !!}
 
-    {!! Form::submit('Upload File') !!}
+    {!! Form::submit('Upload File')->inline() !!}
 
 {!! Form::close() !!}
