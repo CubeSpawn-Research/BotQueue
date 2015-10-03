@@ -1,4 +1,4 @@
-{!! Form::open('upload')
+{!! Form::open('upload/file')
     ->formClass('form-inline')
     !!}
 

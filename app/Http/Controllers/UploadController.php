@@ -2,15 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\Upload\FileRequest;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Models\File\LocalFile;
 
 class UploadController extends Controller
 {
     public function getIndex()
     {
         return view('upload.index');
+    }
+
+    public function postFile(FileRequest $request)
+    {
+        $uploaded = $request->file('file');
+
+        $file = LocalFile::make($uploaded, $uploaded->getClientOriginalName());
+        dd($file);
     }
 }

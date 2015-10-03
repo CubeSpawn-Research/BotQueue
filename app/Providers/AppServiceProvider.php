@@ -1,6 +1,8 @@
 <?php namespace App\Providers;
 
 use App\Models\Bot;
+use App\Models\File\LocalFile;
+use App\Models\Observers\LocalFileObserver;
 use App\Models\Observers\QueueObserver;
 use App\Models\Queue;
 use Illuminate\Support\ServiceProvider;
@@ -29,6 +31,7 @@ class AppServiceProvider extends ServiceProvider {
 
 		Bot::observe(new BotObserver);
 		Queue::observe(new QueueObserver);
+		LocalFile::observe(new LocalFileObserver);
 	}
 
 	/**
