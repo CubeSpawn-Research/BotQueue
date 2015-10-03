@@ -49,3 +49,6 @@ Route::get('queue/{queue}/delete', ['as' => 'queue:delete', 'uses' => 'QueueCont
 Route::post('queue/{queue}/delete', 'QueueController@postDelete');
 
 Route::get('queue/{queue}', ['as' => 'queue', 'uses' => 'QueueController@view']);
+
+// Job pages
+Route::get('job/create/file/{file}', ['as' => 'job.create.file', 'uses' => 'JobController@getCreateFile']);

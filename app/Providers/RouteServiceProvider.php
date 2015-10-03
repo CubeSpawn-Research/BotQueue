@@ -1,5 +1,8 @@
 <?php namespace App\Providers;
 
+use App\Models\Bot;
+use App\Models\File\LocalFile;
+use App\Models\Queue;
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -25,8 +28,9 @@ class RouteServiceProvider extends ServiceProvider
     {
         parent::boot($router);
 
-        $router->model('bot', 'App\Models\Bot');
-        $router->model('queue', 'App\models\Queue');
+        $router->model('bot', Bot::class);
+        $router->model('queue', Queue::class);
+        $router->model('file', LocalFile::class);
     }
 
     /**

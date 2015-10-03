@@ -21,7 +21,8 @@ class UploadController extends Controller
         $uploaded = $request->file('file');
 
         $file = LocalFile::make($uploaded, $uploaded->getClientOriginalName());
-        dd($file);
+
+        return redirect()->route('job.create.file', [$file]);
     }
 
     public function postUrl(UrlRequest $request)
@@ -33,6 +34,7 @@ class UploadController extends Controller
         copy($url, $tmp_file);
 
         $file = LocalFile::make($tmp_file, $name);
-        dd($file);
+
+        return redirect()->route('job.create.file', [$file]);
     }
 }
