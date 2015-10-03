@@ -33,7 +33,9 @@ class UploadController extends Controller
 
         copy($url, $tmp_file);
 
-        $file = LocalFile::make($tmp_file, $name);
+        $file = LocalFile::make($tmp_file, $name, [
+            'source_url' => $url
+        ]);
 
         return redirect()->route('job.create.file', [$file]);
     }

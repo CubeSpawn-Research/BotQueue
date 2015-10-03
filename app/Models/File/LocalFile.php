@@ -11,10 +11,11 @@ class LocalFile extends FileInterface
         'path',
         'hash',
         'size',
-        'type'
+        'type',
+        'source_url'
     ];
 
-    public static function make($tmp_file, $name)
+    public static function make($tmp_file, $name, $attributes = [])
     {
         $uri = self::makeDirectoryPath().$name;
         $path = self::fullPath($uri);
@@ -27,12 +28,14 @@ class LocalFile extends FileInterface
 
         // Create a local file model for that file.
         // Return that model
-        return LocalFile::create([
+        $attributes = array_merge([
             'path' => $uri,
             'hash' => md5_file($path),
             'size' => filesize($path),
             'type' => null // todo Change this to an actual type
-        ]);
+        ], $attributes);
+
+        return LocalFile::create($attributes);
     }
 
     private static function fullPath($path)
