@@ -14,7 +14,9 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class FileInterface extends Model
 {
-    public abstract static function make($tmp_file, $name);
+    public static function make($tmp_file, $name) {
+        return static::make($tmp_file, $name);
+    }
 
     public static function makeDirectoryPath()
     {
