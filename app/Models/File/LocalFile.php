@@ -2,6 +2,7 @@
 
 namespace App\Models\File;
 
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class LocalFile extends FileInterface
@@ -18,11 +19,11 @@ class LocalFile extends FileInterface
         $uri = self::makeDirectoryPath().$name;
         $path = self::fullPath($uri);
 
-        if($tmp_file instanceof UploadedFile) {
-            $tmp_file->move(dirname($path), $name);
-        } else {
-            move_uploaded_file($tmp_file, $path);
+        if(!($tmp_file instanceof File)) {
+            $tmp_file = new File($tmp_file, $name);
         }
+
+        $tmp_file->move(dirname($path), $name);
 
         // Create a local file model for that file.
         // Return that model
