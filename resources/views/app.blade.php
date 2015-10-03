@@ -85,7 +85,6 @@
 
 </div>
 
-<script src="/js/botqueue.js"></script>
 <script src="/bootstrap/2.3.0/js/bootstrap.js"></script>
 @yield('end-js')
 </body>
