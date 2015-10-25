@@ -7,8 +7,6 @@ use App\Http\Requests\Bot\QueueRequest;
 use App\Http\Requests\Bot\RegisterRequest;
 use App\Models\Bot;
 use Auth;
-use Html\Wizards\Wizard;
-use Illuminate\Http\Request;
 
 class EditController extends Controller
 {

@@ -26,25 +26,26 @@ use Illuminate\Support\Traits\Macroable;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\ViewErrorBag;
 
-class Form {
-	use Macroable;
+class Form
+{
+    use Macroable;
 
-	/**
-	 * @var HtmlBuilder
-	 */
-	private $html;
-	/**
-	 * @var UrlGenerator
-	 */
-	private $url;
-	/**
-	 * @var Store
-	 */
-	private $session;
-	/**
-	 * @var MessageBag
-	 */
-	private $errors;
+    /**
+     * @var HtmlBuilder
+     */
+    private $html;
+    /**
+     * @var UrlGenerator
+     */
+    private $url;
+    /**
+     * @var Store
+     */
+    private $session;
+    /**
+     * @var MessageBag
+     */
+    private $errors;
     /**
      * @var string
      */
@@ -56,23 +57,24 @@ class Form {
     private $model;
 
     public function __construct(HtmlBuilder $html, UrlGenerator $url, Store $session)
-	{
+    {
 
-		$this->html = $html;
-		$this->url = $url;
-		$this->session = $session;
-		$this->errors = $session->get('errors', new ViewErrorBag);
+        $this->html = $html;
+        $this->url = $url;
+        $this->session = $session;
+        $this->errors = $session->get('errors', new ViewErrorBag);
         $this->action = null;
-        $this->model  = null;
+        $this->model = null;
         $this->current_form_was_submitted = false;
-	}
+    }
 
-	public function open($route = null) {
+    public function open($route = null)
+    {
         $this->action = (is_null($route) ? $this->url->current() : $route);
         $this->current_form_was_submitted = $this->old('_form_key') === $this->action;
 
         return new FormBuilder($this, $this->action, $this->html, $this->session);
-	}
+    }
 
     public function model($model, $route = null)
     {
@@ -80,94 +82,113 @@ class Form {
         return $this->open($route);
     }
 
-	public function close() {
+    public function close()
+    {
         $this->action = null;
         $this->current_form_was_submitted = false;
         $this->model = null;
-		return '</fieldset></form>';
-	}
+        return '</fieldset></form>';
+    }
 
-	public function input($type, $name, $value = null)
-	{
-		$builder = new FieldBuilder($this->html, $name, $type);
-		$builder->value($this->old($name, $value));
-		if($this->hasError($name))
-			$builder->error($this->errors->first($name));
-		return $builder;
-	}
-
-	public function hidden($name, $value) {
-		$builder = new HiddenBuilder($this->html, $name);
-		$builder->value($this->old($name, $value));
-		return $builder;
-	}
-
-	public function dragula($name, $value)
-	{
-		$builder = new DragulaBuilder($this->html, $name, $value);
+    public function input($type, $name, $value = null)
+    {
+        $builder = new FieldBuilder($this->html, $name, $type);
+        $builder->value($this->old($name, $value));
+        if ($this->hasError($name))
+            $builder->error($this->errors->first($name));
         return $builder;
-	}
+    }
+
+    public function display($name, $value = null)
+    {
+        $builder = new DisplayFieldBuilder($this->html, $name, $value);
+        if (!is_null($value))
+            $builder->value($value);
+        return $builder;
+    }
+
+    public function hidden($name, $value)
+    {
+        $builder = new HiddenBuilder($this->html, $name);
+        $builder->value($this->old($name, $value));
+        return $builder;
+    }
+
+    public function dragula($name, $value)
+    {
+        $builder = new DragulaBuilder($this->html, $name, $value);
+        return $builder;
+    }
 
     public function upload($name)
     {
         $builder = new UploadBuilder($this->html, $name);
-        if($this->hasError($name))
+        if ($this->hasError($name))
             $builder->error($this->errors->first($name));
+        return $builder;
+    }
+
+    public function select($name)
+    {
+        $builder = new SelectBuilder($this->html, $name);
+        $builder->value($this->old($name));
+        if($this->hasError($name))
+            $builder->eror($this->errors->first($name));
         return $builder;
 	}
 
-	public function submit($text)
-	{
-		return new SubmitBuilder($this->html, $text);
-	}
+    public function submit($text = 'Submit')
+    {
+        return new SubmitBuilder($this->html, $text);
+    }
 
-	public function text($name, $value = null)
-	{
-		return $this->input('text', $name, $value);
-	}
+    public function text($name, $value = null)
+    {
+        return $this->input('text', $name, $value);
+    }
 
     public function number($name, $value = null)
     {
         return $this->input('number', $name, $value);
     }
 
-	public function password($name, $value = null)
-	{
-		return $this->input('password', $name, $value);
-	}
+    public function password($name, $value = null)
+    {
+        return $this->input('password', $name, $value);
+    }
 
-	public function checkbox($name, $checked = false)
-	{
-		return new CheckBoxBuilder($this->html, $name, $checked);
-	}
+    public function checkbox($name, $checked = false)
+    {
+        return new CheckBoxBuilder($this->html, $name, $checked);
+    }
 
-	private function old($name, $value = null)
-	{
-        if($value != null)
+    private function old($name, $value = null)
+    {
+        if ($value != null)
             return $value;
 
-		if(isset($this->session)) {
-            if($this->current_form_was_submitted || $name == '_form_key')
-			    return $this->session->getOldInput($this->transformKey($name));
+        if (isset($this->session)) {
+            if ($this->current_form_was_submitted || $name == '_form_key')
+                return $this->session->getOldInput($this->transformKey($name));
         }
 
-        if(!is_null($this->model)) {
+        if (!is_null($this->model)) {
             return $this->model->$name;
         }
 
         return null;
-	}
+    }
 
-	/**
-	 * Transform key from array to dot syntax.
-	 *
-	 * @param  string  $key
-	 * @return string
-	 */
-	protected function transformKey($key)
-	{
-		return str_replace(array('.', '[]', '[', ']'), array('_', '', '.', ''), $key);
-	}
+    /**
+     * Transform key from array to dot syntax.
+     *
+     * @param  string $key
+     * @return string
+     */
+    protected function transformKey($key)
+    {
+        return str_replace(array('.', '[]', '[', ']'), array('_', '', '.', ''), $key);
+    }
 
     /**
      * @param $name
@@ -175,7 +196,7 @@ class Form {
      */
     protected function hasError($name)
     {
-        if($this->current_form_was_submitted)
+        if ($this->current_form_was_submitted)
             return $this->errors->has($name);
         return false;
     }
