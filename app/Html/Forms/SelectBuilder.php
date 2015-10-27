@@ -68,7 +68,7 @@ class SelectBuilder extends FieldBuilder
 
     private function selectField()
     {
-        $result = '<select>';
+        $result = '<select name="'.$this->name.'">';
 
         foreach($this->options as $key => $value) {
             $result .= '<option value="'.$key.'">'.$value.'</option>';

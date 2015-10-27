@@ -24,6 +24,9 @@ use Illuminate\Support\Facades\Facade;
 
 class Area extends Facade {
 
-	protected static function getFacadeAccessor() { return 'area'; }
+	protected static function getFacadeAccessor()
+	{
+		return 'area';
+	}
 
 }

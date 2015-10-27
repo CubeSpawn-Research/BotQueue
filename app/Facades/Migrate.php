@@ -22,8 +22,12 @@ namespace App\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Migrate extends Facade {
+class Migrate extends Facade
+{
 
-	protected static function getFacadeAccessor() { return 'migrate'; }
+    protected static function getFacadeAccessor()
+    {
+        return 'migrate';
+    }
 
 }

@@ -132,13 +132,12 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        App\Providers\AreaServiceProvider::class,
         App\Providers\BladeServiceProvider::class,
         App\Providers\BusServiceProvider::class,
         App\Providers\ConfigServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\MigrationServiceProvider::class,
+        App\Providers\FacadeServiceProvider::class,
         App\Providers\HtmlServiceProvider::class,
         /*
          * Helper service provider
@@ -172,6 +171,7 @@ return [
         'Event' => Illuminate\Support\Facades\Event::class,
         'File' => Illuminate\Support\Facades\File::class,
         'Form' => Illuminate\Html\FormFacade::class,
+        'Gate' => Illuminate\Support\Facades\Gate::class,
         'Hash' => Illuminate\Support\Facades\Hash::class,
         'Html' => Illuminate\Html\HtmlFacade::class,
         'Input' => Illuminate\Support\Facades\Input::class,
@@ -192,8 +192,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
         'Area' => App\Facades\Area::class,
-        'Gate' => Illuminate\Support\Facades\Gate::class,
+        'FileUtils' => App\Facades\FileUtils::class,
         'Migrate' => App\Facades\Migrate::class,
     ],
 

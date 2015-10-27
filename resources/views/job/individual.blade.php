@@ -18,6 +18,7 @@
         !!}
 
     {!! Form::text('quantity')
+        ->defaultValue(0)
         ->label('Quantity')
         ->help('How many copies?')
         !!}

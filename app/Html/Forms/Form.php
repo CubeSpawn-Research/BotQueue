@@ -164,7 +164,7 @@ class Form
 
     private function old($name, $value = null)
     {
-        if ($value != null)
+        if (!is_null($value))
             return $value;
 
         if (isset($this->session)) {

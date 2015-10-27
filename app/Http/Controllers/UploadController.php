@@ -7,6 +7,7 @@ use App\Http\Requests\Upload\FileRequest;
 use App\Http\Requests;
 use App\Http\Requests\Upload\UrlRequest;
 use App\Models\File\LocalFile;
+use FileUtils;
 use Illuminate\Support\Facades\File;
 
 class UploadController extends Controller
@@ -27,11 +28,10 @@ class UploadController extends Controller
 
     public function postUrl(UrlRequest $request)
     {
-        $tmp_file = tempnam(sys_get_temp_dir(), 'BOTQUEUE-');
         $url = $request->get('url');
-        $name = basename(parse_url($url, PHP_URL_PATH));
 
-        copy($url, $tmp_file);
+        $name = basename(parse_url($url, PHP_URL_PATH));
+        $tmp_file = FileUtils::download($url);
 
         $file = LocalFile::make($tmp_file, $name, [
             'source_url' => $url
