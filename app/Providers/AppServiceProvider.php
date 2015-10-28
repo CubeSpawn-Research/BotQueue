@@ -2,6 +2,8 @@
 
 use App\Models\Bot;
 use App\Models\File\LocalFile;
+use App\Models\Job;
+use App\Models\Observers\JobObserver;
 use App\Models\Observers\LocalFileObserver;
 use App\Models\Observers\QueueObserver;
 use App\Models\Queue;
@@ -31,8 +33,9 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Bot::observe(new BotObserver);
-        Queue::observe(new QueueObserver);
+        Job::observe(new JobObserver);
         LocalFile::observe(new LocalFileObserver);
+        Queue::observe(new QueueObserver);
     }
 
     /**

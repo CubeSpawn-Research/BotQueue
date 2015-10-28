@@ -8,7 +8,13 @@
     {!! Form::display('file')
         ->label('File')
         ->value('This should link to the file')
-        ->help('The file that will be printed.')
+        ->help('The file that will be printed')
+        !!}
+
+    {!! Form::text('name')
+        ->label('Name')
+        ->defaultValue($file->name)
+        ->help('The name of the job')
         !!}
 
     {!! Form::select('queue')
@@ -18,15 +24,10 @@
         !!}
 
     {!! Form::text('quantity')
-        ->defaultValue(0)
+        ->defaultValue(1)
         ->label('Quantity')
         ->help('How many copies?')
         !!}
-
-    {!! Form::checkbox('priority')
-        ->label('Is this a priority job?')
-        ->help('Check this box to push this job to the top of the queue')
-        ->checked(false)!!}
 
     {!! Form::submit() !!}
 

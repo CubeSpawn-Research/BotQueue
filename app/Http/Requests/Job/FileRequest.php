@@ -24,8 +24,9 @@ class FileRequest extends Request
     public function rules()
     {
         return [
-            'quantity' => 'numeric|min:0|max:100',
-            'priority' => 'boolean'
+            'name' => 'required',
+            'queue' => 'required',
+            'quantity' => 'required|numeric|min:0|max:100'
         ];
     }
 }

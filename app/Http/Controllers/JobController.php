@@ -6,6 +6,7 @@ use App\Http\Requests\Job\FileRequest;
 use App\Models\File\FileInterface;
 
 use App\Http\Requests;
+use App\Models\Job;
 use Auth;
 
 class JobController extends Controller
@@ -20,6 +21,11 @@ class JobController extends Controller
     public function postCreateFile(FileRequest $request,
                                    FileInterface $file)
     {
-        dd($file);
+        $job = Job::create([
+            'name' => $request->get('name'),
+            'file' => $file
+        ]);
+
+        dd($job);
     }
 }

@@ -40,4 +40,8 @@ abstract class FileInterface extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getNameAttribute() {
+        return pathinfo($this->path, PATHINFO_FILENAME);
+    }
 }
