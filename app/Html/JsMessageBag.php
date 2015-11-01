@@ -26,12 +26,16 @@ class JsMessageBag implements Arrayable, Countable, Jsonable, MessageBagContract
      * Add a message to the bag.
      *
      * @param  string $key
-     * @param  string $message
+     * @param  string $value
      * @return $this
      */
-    public function add($key, $message)
+    public function add($key, $value)
     {
-        $this->data[$key] = $message;
+        if($this->has($key)) {
+            return $this->merge([$key => $value]);
+        } else
+            $this->data[$key] = $value;
+        return $this;
     }
 
     /**
@@ -42,7 +46,8 @@ class JsMessageBag implements Arrayable, Countable, Jsonable, MessageBagContract
      */
     public function merge($messages)
     {
-        // TODO: Implement merge() method.
+        $this->data = array_replace_recursive($this->data, $messages);
+        return $this;
     }
 
     /**

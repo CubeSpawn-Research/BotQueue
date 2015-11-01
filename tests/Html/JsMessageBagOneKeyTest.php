@@ -72,4 +72,16 @@ class JsMessageBagOneKeyTest extends TestCase
 
         $this->assertEquals($expected, $this->bag->toJson());
     }
+
+    /** @test */
+    public function adding_conflicting_key_updates()
+    {
+        $this->bag->add('test', ['c' => 2]);
+
+        $this->assertContainsKey('a', $this->bag->get('test'));
+        $this->assertEquals('b', $this->bag->get('test')['a']);
+
+        $this->assertContainsKey('c', $this->bag->get('test'));
+        $this->assertEquals(2, $this->bag->get('test')['c']);
+    }
 }
