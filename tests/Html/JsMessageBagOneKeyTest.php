@@ -64,4 +64,12 @@ class JsMessageBagOneKeyTest extends TestCase
             ]
         ], $this->bag->toArray());
     }
+    
+    /** @test */
+    public function it_can_become_json()
+    {
+        $expected = '{"test":{"a":"b","c":1}}';
+
+        $this->assertEquals($expected, $this->bag->toJson());
+    }
 }

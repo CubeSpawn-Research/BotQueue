@@ -3,9 +3,12 @@
 
 namespace App\Html;
 
+use Countable;
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Contracts\Support\MessageBag as MessageBagContract;
 
-class JsMessageBag implements MessageBagContract
+class JsMessageBag implements Arrayable, Countable, Jsonable, MessageBagContract
 {
 
     protected $data = [];
@@ -137,5 +140,19 @@ class JsMessageBag implements MessageBagContract
     public function toArray()
     {
         return $this->data;
+    }
+
+    /**
+     * Convert the object to its JSON representation.
+     *
+     * @param  int $options
+     * @return string
+     */
+    public function toJson($options = 0)
+    {
+        if($this->isEmpty())
+            return json_encode($this->toArray(), JSON_FORCE_OBJECT | $options);
+
+        return json_encode($this->toArray(), $options);
     }
 }

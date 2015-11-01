@@ -32,4 +32,16 @@ class JsMessageBagDefaultTest extends TestCase
     {
         $this->assertEmpty($this->bag->keys());
     }
+
+    /** @test */
+    public function it_can_become_an_array()
+    {
+        $this->assertEquals([], $this->bag->toArray());
+    }
+
+    /** @test */
+    public function it_can_become_json()
+    {
+        $this->assertEquals('{}', $this->bag->toJson());
+    }
 }
