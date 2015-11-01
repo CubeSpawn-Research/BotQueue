@@ -12,9 +12,11 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function (mix) {
+    mix.phpUnit();
+
     mix.sass([
         'signin.scss',
         'dragula.scss',
         'botqueue.scss'
-    ], 'public/css')
+    ], 'public/css');
 });

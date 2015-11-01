@@ -1,8 +1,8 @@
 language: php
 php:
+  - "5.6"
   - "5.5"
   - "5.4"
-  - "5.3"
 
 notifications:
   email:
@@ -12,7 +12,7 @@ notifications:
 branches:
   only:
     - master
-    - cakephp
+    - laravel
 
 before_install:
   - sudo apt-get update > /dev/null
@@ -25,8 +25,5 @@ install:
   - composer self-update
   - composer install
   
-before_script:
-  - cp extensions/config-travis.php extensions/config.php
-
 script:
-  - phpunit --bootstrap extensions/global.php tests
+  - phpunit
