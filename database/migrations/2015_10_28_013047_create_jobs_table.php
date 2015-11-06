@@ -15,7 +15,7 @@ class CreateJobsTable extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('queue_id')->nullable();
+            $table->unsignedInteger('queue_id');
             $table->unsignedInteger('file_id');
             $table->string('name');
             $table->string('status')->default('available');

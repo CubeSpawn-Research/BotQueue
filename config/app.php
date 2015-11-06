@@ -136,9 +136,10 @@ return [
         App\Providers\BusServiceProvider::class,
         App\Providers\ConfigServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
         App\Providers\FacadeServiceProvider::class,
         App\Providers\HtmlServiceProvider::class,
+        App\Providers\JsMessageBagProvider::class,
+        App\Providers\RouteServiceProvider::class,
         /*
          * Helper service provider
          */

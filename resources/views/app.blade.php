@@ -25,10 +25,10 @@
     <script language="javascript" type="text/javascript" src="/js/flot-0.7/jquery.flot.js"></script>
     <script language="javascript" type="text/javascript" src="/js/flot-0.7/jquery.flot.selection.js"></script>
     <script language="javascript" type="text/javascript" src="/js/jquery.flot.tooltip.min.js"></script>
-
-    <!-- Backbone -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js" type="text/javascript"></script>
+    <script>
+        window.BotQueue = {!! $js_vars !!};
+    </script>
+    @yield('js')
 
     {{-- @include('google.analytics') --}}
 

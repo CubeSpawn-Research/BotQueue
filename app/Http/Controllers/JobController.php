@@ -11,6 +11,30 @@ use Auth;
 
 class JobController extends Controller
 {
+    public function index() {
+        $this->js_data([
+            'jobs' => [
+                'available' => [
+                    'data' => [],
+                    'total' => 1
+                ],
+                'working' => [
+                    'data' => [],
+                    'total' => 5
+                ],
+                'completed' => [
+                    'data' => [],
+                    'total' => 9
+                ],
+                'failed' => [
+                    'data' => [],
+                    'total' => 13
+                ]
+            ]
+        ]);
+        return view('job.index');
+    }
+
     public function getCreateFile(FileInterface $file)
     {
         $queues = Auth::user()->queues;

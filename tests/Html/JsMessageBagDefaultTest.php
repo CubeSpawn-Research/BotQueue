@@ -1,9 +1,6 @@
 <?php
 
 use App\Html\JsMessageBag;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class JsMessageBagDefaultTest extends TestCase
 {
