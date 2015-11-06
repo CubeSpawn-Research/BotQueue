@@ -12,6 +12,9 @@ namespace App\Models\File;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int id
+ */
 abstract class FileInterface extends Model
 {
     public static function make($tmp_file, $name) {

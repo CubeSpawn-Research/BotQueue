@@ -16,7 +16,7 @@ class LocalFileObserver
      */
     public function creating($file)
     {
-        // The user must be logged in to create a queue
+        // The user must be logged in to create a file
         if(Auth::check()) {
             $file->user()->associate(Auth::user());
             return true;

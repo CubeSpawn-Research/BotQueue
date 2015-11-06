@@ -55,3 +55,7 @@ Route::get('jobs', 'JobController@index');
 
 Route::get('job/create/file/{file}', ['as' => 'job.create.file', 'uses' => 'JobController@getCreateFile']);
 Route::post('job/create/file/{file}', 'JobController@postCreateFile');
+
+Route::group(['prefix' => 'api'], function() {
+    Route::resource('jobs', 'Api\JobController');
+});
