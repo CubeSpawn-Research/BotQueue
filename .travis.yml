@@ -1,4 +1,5 @@
 language: php
+sudo: false # Using the new container based builds
 php:
   - "5.6"
   - "5.5"
@@ -13,15 +14,23 @@ branches:
     - master
     - laravel
 
+addons:
+  apt:
+    packages:
+      php5-mysql
+      php-pear
+      build-essential
+      php5-curl php5-dev
+      libmagic-dev
+      sqlite3
+
 before_install:
   - sudo apt-get update > /dev/null
 
 install:
-  # Install the packages we need
-  - sudo apt-get install -y --force-yes php5-mysql php-pear build-essential php5-curl php5-dev libmagic-dev sqlite3
-
-  # Install composer
+  # Update Composer
   - composer self-update
+  # Instal dependencies
   - composer install
   
 script:
