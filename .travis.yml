@@ -24,9 +24,6 @@ addons:
       libmagic-dev
       sqlite3
 
-before_install:
-  - sudo apt-get update > /dev/null
-
 install:
   # Update Composer
   - composer self-update
