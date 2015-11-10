@@ -3,14 +3,20 @@
 namespace App\Models;
 
 use App\Models\File\FileInterface;
+use App\Models\File\LocalFile;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int id
- * @property FileInterface file
  * @property string name
- * @property int queue_id
  * @property string status
+ *
+ * @property int queue_id
+ * @property Queue queue
+ * @property int file_id
+ * @property FileInterface file
+ * @property int user_id
+ * @property User user
  */
 class Job extends Model
 {
@@ -45,6 +51,11 @@ class Job extends Model
     public function queue()
     {
         return $this->belongsTo(Queue::class);
+    }
+
+    public function file()
+    {
+        return $this->belongsTo(LocalFile::class);
     }
 
     public function user() {

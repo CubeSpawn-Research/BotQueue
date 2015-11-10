@@ -9,6 +9,9 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * @property int id
+ */
 class User extends Model implements AuthorizableContract,
     AuthenticatableContract, CanResetPasswordContract {
 
