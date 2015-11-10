@@ -25,7 +25,7 @@ class FileRequest extends Request
     {
         return [
             'name' => 'required',
-            'queue' => 'required',
+            'queue' => 'required|exists:queues,id',
             'quantity' => 'required|numeric|min:0|max:100'
         ];
     }

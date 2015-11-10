@@ -7,6 +7,7 @@ use App\Models\File\FileInterface;
 
 use App\Http\Requests;
 use App\Models\Job;
+use App\Models\Queue;
 use Auth;
 
 class JobController extends Controller
@@ -47,7 +48,8 @@ class JobController extends Controller
     {
         $job = Job::create([
             'name' => $request->get('name'),
-            'file' => $file
+            'file' => $file,
+            'queue' => Queue::find($request->get('queue'))
         ]);
 
         dd($job);

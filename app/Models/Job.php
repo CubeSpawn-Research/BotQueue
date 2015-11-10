@@ -16,6 +16,7 @@ class Job extends Model
 {
     protected $fillable = [
         'name',
+        'queue',
         'file'
     ];
 
