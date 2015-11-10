@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Job;
+use Illuminate\Database\Eloquent\Collection;
+
 class JobsTest extends AuthTestCase
 {
     protected $user;
@@ -7,8 +10,8 @@ class JobsTest extends AuthTestCase
     /** @test */
     public function it_has_the_least_possible_info()
     {
-        /** @var App\Models\Job $job */
-        $job = factory(App\Models\Job::class)->create();
+        /** @var Job $job */
+        $job = factory(Job::class)->create();
 
         /** @var App\Handlers\Api\Jobs $jobs */
         $jobs = api('jobs');
@@ -18,5 +21,22 @@ class JobsTest extends AuthTestCase
                 'name' => "{$job->name}",
                 'status' => "available"
             ], $jobs->toArray());
+    }
+
+    /** @test */
+    public function it_can_limit_by_status()
+    {
+        factory(Job::class, 3)->create(['status' => 'available']);
+        factory(Job::class, 5)->create(['status' => 'taken']);
+
+        $this->assertCount(8, api('jobs')->get()->data);
+
+        $this->assertCount(3, api('jobs')->status('available')->get());
+
+        $this->assertCount(5, api('jobs')->status('taken')->get());
+
+        $this->assertCount(8, api('jobs')->status(['available', 'taken'])->get());
+
+        $this->assertCount(8, api('jobs')->status('available')->status('taken')->get());
     }
 }
