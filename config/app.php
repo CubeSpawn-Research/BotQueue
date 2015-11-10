@@ -130,6 +130,7 @@ return [
         /*
          * Application Service Providers...
          */
+        App\Providers\ApiServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         App\Providers\BladeServiceProvider::class,
@@ -194,6 +195,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        'Api' => App\Facades\Api::class,
         'Area' => App\Facades\Area::class,
         'FileUtils' => App\Facades\FileUtils::class,
         'Migrate' => App\Facades\Migrate::class,

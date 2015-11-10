@@ -1,6 +1,6 @@
 <?php
 
-class JobsControllerTest extends AuthTestCase
+class JobsTest extends AuthTestCase
 {
     protected $user;
 
@@ -10,11 +10,13 @@ class JobsControllerTest extends AuthTestCase
         /** @var App\Models\Job $job */
         $job = factory(App\Models\Job::class)->create();
 
-        $this->visit('/api/jobs')
-            ->seeJson([
+        /** @var App\Handlers\Api\Jobs $jobs */
+        $jobs = api('jobs');
+
+        $this->assertContainsJson([
                 'id' => "{$job->id}",
                 'name' => "{$job->name}",
                 'status' => "available"
-            ]);
+            ], $jobs->toArray());
     }
 }
