@@ -24,7 +24,24 @@
 </div>
 
     <template id="jobs-template">
-        <h1>@{{ name  }} :: @{{ compute }} :: @{{ allLink }}</h1>
+        <h1>@{{ name  }} :: @{{ range }} :: <a :href="allLink">See All</a></h1>
+        <table v-if="count > 0" class="table table-striped table-bordered table-condensed">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr v-for="job in jobs">
+                    <td>@{{ job.id }}</td>
+                    <td>@{{ job.name }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div v-if="count == 0">
+            No jobs to see here
+        </div>
     </template>
 
 @stop
@@ -41,20 +58,23 @@
             props: ['name', 'type'],
             data: function() {
                 return {
-                    jobs: BotQueue.jobs[this.type].data,
-                    total: BotQueue.jobs[this.type].total
+                    jobs: BotQueue.jobs[this.type].jobs,
+                    count: BotQueue.jobs[this.type].count
                 };
             },
             computed: {
                 start: function() {
-                    return Math.min(this.total, 1);
+                    return Math.min(this.count, 1);
                 },
                 end: function() {
-                    return Math.min(10, this.total);
+                    return Math.min(10, this.count);
                 },
-                compute: function() {
-                    if(this.total == 0) return 'none';
-                    return ''.concat(this.start, '-', this.end, ' of ', this.total);
+                range: function() {
+                    if(this.count == 0) return 'none';
+                    return ''.concat(this.start, '-', this.end, ' of ', this.count);
+                },
+                allLink: function() {
+                    return '/jobs/'+this.type;
                 }
             }
         });

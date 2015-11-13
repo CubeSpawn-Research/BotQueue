@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Api\ApiResult;
 use App\Http\Requests\Job\FileRequest;
 use App\Models\File\FileInterface;
 
@@ -13,23 +14,32 @@ use Auth;
 class JobController extends Controller
 {
     public function index() {
+        /** @var ApiResult $available_jobs */
+        $available_jobs = api('jobs')->status('available')->get();
+        /** @var ApiResult $working_jobs */
+        $working_jobs = api('jobs')->status('working')->get();
+        /** @var ApiResult $completed_jobs */
+        $completed_jobs = api('jobs')->status('completed')->get();
+        /** @var ApiResult $failed_jobs */
+        $failed_jobs = api('jobs')->status('failed')->get();
+
         $this->js_data([
             'jobs' => [
                 'available' => [
-                    'data' => [],
-                    'total' => 1
+                    'jobs' => $available_jobs,
+                    'count' => $available_jobs->count()
                 ],
                 'working' => [
-                    'data' => [],
-                    'total' => 5
+                    'jobs' => $working_jobs,
+                    'count' => $working_jobs->count()
                 ],
                 'completed' => [
-                    'data' => [],
-                    'total' => 9
+                    'jobs' => $completed_jobs,
+                    'count' => $completed_jobs->count()
                 ],
                 'failed' => [
-                    'data' => [],
-                    'total' => 13
+                    'jobs' => $failed_jobs,
+                    'count' => $failed_jobs->count()
                 ]
             ]
         ]);
