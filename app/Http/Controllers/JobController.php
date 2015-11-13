@@ -13,10 +13,9 @@ use Auth;
 
 class JobController extends Controller
 {
-    public function index(JobIndexData $job_data) {
-        $this->js_data([
-            'jobs' => $job_data
-        ]);
+    public function index(JobIndexData $jobs) {
+        js_data(compact('jobs'));
+
         return view('job.index');
     }
 

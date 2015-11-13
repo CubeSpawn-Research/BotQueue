@@ -9,6 +9,13 @@ use Illuminate\Contracts\Support\Jsonable;
 
 abstract class ApiData implements Arrayable, \Countable, \JsonSerializable, Jsonable
 {
+    /**
+     * Return the data for this api
+     *
+     * @return array
+     */
+    public abstract function toArray();
+
     public function toJson($options = 0)
     {
         return json_encode($this->jsonSerialize(), $options);

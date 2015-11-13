@@ -9,13 +9,4 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 abstract class Controller extends BaseController {
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    public function js_data($data) {
-        /** @var JsMessageBag $bag */
-        $bag = app(JsMessageBag::class);
-
-        foreach($data as $key => $value) {
-            $bag->add($key, $value);
-        }
-    }
 }

@@ -29,7 +29,7 @@ class ApiServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        App::bind('api', function() {
+        $this->app->bind('api', function() {
             return new ApiHelper();
         });
     }
