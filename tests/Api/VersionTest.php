@@ -19,23 +19,20 @@ class VersionTest extends TestCase
     /** @test */
     public function it_is_successful()
     {
-        $this->assertTrue($this->result->success);
+        $this->assertTrue($this->result->isSuccessful());
     }
 
     /** @test */
     public function it_has_the_correct_version()
     {
-        $this->assertEquals(['version' => 2], $this->result->data);
+        $this->assertContainsJson(['version' => 2], $this->result);
     }
 
     /** @test */
-    public function it_returns_both_success_and_data()
+    public function it_returns_only_data_for_toArray_function()
     {
         $expected = [
-            'status' => 'success',
-            'data' => [
-                'version' => 2
-            ]
+            'version' => 2
         ];
 
         $this->assertEquals($expected, $this->result->toArray());
