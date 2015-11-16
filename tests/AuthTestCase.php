@@ -1,7 +1,10 @@
 <?php
 
+use App\Models\User;
+
 class AuthTestCase extends TestCase
 {
+    /** @var User $user */
     protected $user;
 
     public function setUp() {

@@ -4,11 +4,16 @@
 namespace App\Models\Observers;
 
 
-use Illuminate\Support\Facades\Auth;
+use App\Models\Job;
+use Auth;
 
 class JobObserver
 {
 
+    /**
+     * @param Job $job
+     * @return bool
+     */
     public function creating($job)
     {
         // The user must be logged in to create a job

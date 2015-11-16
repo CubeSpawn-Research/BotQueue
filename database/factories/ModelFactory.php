@@ -20,6 +20,14 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\Models\Bot::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'model' => $faker->word,
+        'manufacturer' => $faker->word
+    ];
+});
+
 $factory->define(App\Models\Queue::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,

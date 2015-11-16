@@ -1,58 +1,65 @@
 <?php namespace App\Models;
 
+use App\Models\Traits\ConcurrentUpdates;
 use Auth;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int id
+ * @property string name
  */
-class Queue extends Model {
+class Queue extends Model
+{
 
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'queues';
+    use ConcurrentUpdates;
 
-	/**
-	 *  Don't use timestamps
-	 *
-	 * @var boolean
-	 */
-	public $timestamps = false;
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'queues';
 
-	/**
-	 * The attributes that are mass assignable.
-	 *
-	 * @var array
-	 */
-	protected $fillable = [
-		'name',
-		'delay'
-	];
+    /**
+     *  Don't use timestamps
+     *
+     * @var boolean
+     */
+    public $timestamps = false;
 
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-	protected $hidden = [
-		'user_id',
-		'user',
-	];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'delay'
+    ];
 
-	public function user() {
-		return $this->belongsTo('App\Models\User');
-	}
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'user_id',
+        'user',
+    ];
 
-	public function setUserAttribute($value) {
-		$this->attributes['user_id'] = $value->id;
-	}
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function setUserAttribute($value)
+    {
+        $this->attributes['user_id'] = $value->id;
+    }
 
     public function setDelayAttribute($value)
     {
-        if($value == "")
+        if ($value == "")
             $value = 0;
         $this->attributes['delay'] = $value;
     }

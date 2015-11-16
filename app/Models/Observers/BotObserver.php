@@ -26,17 +26,19 @@ use Auth;
 class BotObserver
 {
 
-	/**
-	 * @param Bot $bot
-	 * @return bool
-	 */
-	public function creating($bot)
-	{
-		// The user must be logged in to create a bot
-		if(Auth::check()) {
-			$bot->user()->associate(Auth::user());
-			return true;
-		}
-		return false;
-	}
+    /**
+     * @param Bot $bot
+     * @return bool
+     */
+    public function creating($bot)
+    {
+        // The user must be logged in to create a bot
+        if (!Auth::check())
+            return false;
+
+        $bot->user()->associate(Auth::user());
+        $bot->status = 'offline';
+
+        return true;
+    }
 }

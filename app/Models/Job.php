@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\File\FileInterface;
 use App\Models\File\LocalFile;
+use App\Models\Traits\ConcurrentUpdates;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -17,9 +18,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property FileInterface file
  * @property int user_id
  * @property User user
+ * @property string temperature_data
  */
 class Job extends Model
 {
+    use ConcurrentUpdates;
+
     protected $fillable = [
         'name',
         'queue',

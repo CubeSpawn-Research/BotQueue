@@ -1,5 +1,6 @@
 <?php namespace App\Models;
 
+use App\Models\Traits\ConcurrentUpdates;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -11,11 +12,12 @@ use Illuminate\Support\Facades\Hash;
 
 /**
  * @property int id
+ * @property string username
  */
 class User extends Model implements AuthorizableContract,
     AuthenticatableContract, CanResetPasswordContract {
 
-	use Authorizable, Authenticatable, CanResetPassword;
+	use Authorizable, Authenticatable, CanResetPassword, ConcurrentUpdates;
 
 	/**
 	 * The database table used by the model.
