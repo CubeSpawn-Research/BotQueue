@@ -2,11 +2,13 @@
 
 use App\Models\Traits\ConcurrentUpdates;
 use Auth;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int id
  * @property string name
+ * @property Collection jobs
  */
 class Queue extends Model
 {
@@ -64,9 +66,14 @@ class Queue extends Model
         $this->attributes['delay'] = $value;
     }
 
+    public function jobs()
+    {
+        return $this->hasMany(Job::class);
+    }
+
     public function bots()
     {
-        return $this->belongsToMany('App\Models\Bot')->withTimestamps();
+        return $this->belongsToMany(Bot::class)->withTimestamps();
     }
 
     /**
