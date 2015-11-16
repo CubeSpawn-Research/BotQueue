@@ -72,7 +72,7 @@ class ConcurrentUpdatesTest extends AuthTestCase
         $bot1->status = 'idle';
         $this->assertTrue($bot1->save());
 
-        $bot2->status = 'offline';
+        $bot2->status = 'waiting';
         $bot2->save();
     }
 }

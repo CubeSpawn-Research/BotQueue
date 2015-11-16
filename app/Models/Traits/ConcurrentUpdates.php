@@ -8,6 +8,9 @@ use App\Exceptions\ConcurrentModificationException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 
+/**
+ * @property int version
+ */
 trait ConcurrentUpdates
 {
     /**
@@ -86,5 +89,14 @@ trait ConcurrentUpdates
         $query->where('version', '=', $this->version); // Make this read the old version, not our updated one
 
         return $query;
+    }
+
+    public function getVersionAttribute()
+    {
+        $version = $this->getAttributeFromArray('version');
+        if(is_null($version)) {
+            return 0;
+        }
+        return $version;
     }
 }
