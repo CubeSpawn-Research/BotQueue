@@ -13,6 +13,7 @@ return [
         'version' => App\Handlers\Api\Version::class,
         'jobs' => App\Handlers\Api\Jobs\Jobs::class,
 //        'job/{job}/create' => App\Handlers\Api\Job\Create::class,
+        'queues.jobs' => App\Handlers\Api\Queues\Jobs::class
     ],
 
 ];
