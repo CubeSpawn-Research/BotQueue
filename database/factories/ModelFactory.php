@@ -38,8 +38,6 @@ $factory->define(App\Models\Queue::class, function (Faker\Generator $faker) {
 $factory->define(App\Models\Job::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
-        'file' => factory(App\Models\File\LocalFile::class)->create(),
-        'queue' => factory(App\Models\Queue::class)->create()
     ];
 });
 

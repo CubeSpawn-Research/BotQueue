@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Job;
+use App\Models\Queue;
+use App\Models\File\LocalFile;
 
 class JobsTest extends AuthTestCase
 {
@@ -9,10 +11,13 @@ class JobsTest extends AuthTestCase
     /** @test */
     public function it_has_the_least_possible_info()
     {
-        /** @var Job $job */
-        $job = factory(Job::class)->create();
+        $file = factory(LocalFile::class)->create();
+        $queue = factory(Queue::class)->create();
 
-        /** @var App\Handlers\Api\Jobs $jobs */
+        /** @var Job $job */
+        $job = factory(Job::class)->create(['queue' => $queue, 'file' => $file]);
+
+        /** @var \App\Handlers\Api\Jobs\Jobs $jobs */
         $jobs = api('jobs');
 
         $this->assertContainsJson([

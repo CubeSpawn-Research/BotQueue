@@ -5,16 +5,20 @@ use App\Models\Job;
 use App\Models\User;
 use App\Models\Queue;
 use App\Models\Bot;
+use App\Models\File\LocalFile;
 
 class ConcurrentUpdatesTest extends AuthTestCase
 {
     /** @test */
     public function it_can_not_update_a_job_without_refreshing()
     {
+        $file = factory(LocalFile::class)->create();
+        $queue = factory(Queue::class)->create();
+
         $this->setExpectedException(ConcurrentModificationException::class);
 
         /** @var Job $job1 */
-        $job1 = factory(Job::class)->create();
+        $job1 = factory(Job::class)->create(compact('file', 'queue'));
         /** @var Job $job2 */
         $job2 = Job::find($job1->id);
 

@@ -11,7 +11,7 @@ return [
 
     'api' => [
         'version' => App\Handlers\Api\Version::class,
-        'jobs' => App\Handlers\Api\Jobs::class,
+        'jobs' => App\Handlers\Api\Jobs\Jobs::class,
 //        'job/{job}/create' => App\Handlers\Api\Job\Create::class,
     ],
 

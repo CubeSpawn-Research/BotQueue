@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Queue;
+use App\Models\File\LocalFile;
 
 class QueueRelationTest extends AuthTestCase
 {
@@ -16,7 +17,10 @@ class QueueRelationTest extends AuthTestCase
     /** @test */
     public function the_queue_has_jobs()
     {
-        $jobs = factory(App\Models\Job::class, 5)->create();
+        $file = factory(LocalFile::class)->create();
+        $queue = factory(Queue::class)->create();
+
+        $jobs = factory(App\Models\Job::class, 5)->create(compact('file', 'queue'));
         $this->queue->jobs()->saveMany($jobs);
 
         $this->assertCount(5, $this->queue->jobs);

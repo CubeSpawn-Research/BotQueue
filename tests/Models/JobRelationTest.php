@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use App\Models\Job;
+use App\Models\Queue;
+use App\Models\File\LocalFile;
 
 class JobRelationTest extends AuthTestCase
 {
@@ -12,7 +12,11 @@ class JobRelationTest extends AuthTestCase
     public function setUp()
     {
         parent::setUp();
-        $this->job = factory(App\Models\Job::class)->create();
+
+        $file = factory(LocalFile::class)->create();
+        $queue = factory(Queue::class)->create();
+
+        $this->job = factory(App\Models\Job::class)->create(compact('file', 'queue'));
     }
 
     /** @test */

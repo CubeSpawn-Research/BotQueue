@@ -1,7 +1,9 @@
 <?php
 
 use App\Models\Job;
-use App\Handlers\Api\Jobs As JobsHandler;
+use App\Models\Queue;
+use App\Models\File\LocalFile;
+use App\Handlers\Api\Jobs\Jobs As JobsHandler;
 
 class JobsStatusTest extends AuthTestCase
 {
@@ -9,8 +11,11 @@ class JobsStatusTest extends AuthTestCase
     {
         parent::setUp();
 
-        factory(Job::class, 3)->create(['status' => 'available']);
-        factory(Job::class, 5)->create(['status' => 'taken']);
+        $file = factory(LocalFile::class)->create();
+        $queue = factory(Queue::class)->create();
+
+        factory(Job::class, 3)->create(['queue' => $queue, 'file' => $file, 'status' => 'available']);
+        factory(Job::class, 5)->create(['queue' => $queue, 'file' => $file, 'status' => 'taken']);
     }
 
     /** @test */

@@ -1,9 +1,10 @@
 <?php
 
 
-namespace App\Handlers\Api;
+namespace App\Handlers\Api\Jobs;
 
 
+use App\Handlers\Api\ApiHandler;
 use App\Helpers\Api\ApiResult;
 use App\Models\Job;
 use \Illuminate\Database\Eloquent\Builder;
