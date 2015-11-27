@@ -4,24 +4,24 @@
 
 @section('content')
 
-<div id="jobs">
-    <div class="row">
-        <div class="span6">
-            <jobs-list name="Available" type="available"></jobs-list>
+    <div id="jobs">
+        <div class="row">
+            <div class="span6">
+                <jobs-list name="Available" type="available"></jobs-list>
+            </div>
+            <div class="span6">
+                <jobs-list name="Working" type="working"></jobs-list>
+            </div>
         </div>
-        <div class="span6">
-            <jobs-list name="Working" type="working"></jobs-list>
+        <div class="row">
+            <div class="span6">
+                <jobs-list name="Completed" type="completed"></jobs-list>
+            </div>
+            <div class="span6">
+                <jobs-list name="Failed" type="failed"></jobs-list>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="span6">
-            <jobs-list name="Completed" type="completed"></jobs-list>
-        </div>
-        <div class="span6">
-            <jobs-list name="Failed" type="failed"></jobs-list>
-        </div>
-    </div>
-</div>
 
     <template id="jobs-template">
         <h1>@{{ name  }} :: @{{ range }} :: <a :href="allLink">See All</a></h1>
@@ -33,10 +33,10 @@
             </tr>
             </thead>
             <tbody>
-                <tr v-for="job in jobs">
-                    <td>@{{ job.id }}</td>
-                    <td>@{{ job.name }}</td>
-                </tr>
+            <tr v-for="job in jobs">
+                <td>@{{ job.id }}</td>
+                <td>@{{ job.name }}</td>
+            </tr>
             </tbody>
         </table>
         <div v-if="count == 0">
@@ -52,29 +52,28 @@
 
 @section('end-js')
     <script type="text/javascript">
-        Vue.config.debug = true;
         Vue.component('jobs-list', {
             template: '#jobs-template',
             props: ['name', 'type'],
-            data: function() {
+            data: function () {
                 return {
                     jobs: BotQueue.jobs[this.type].jobs,
                     count: BotQueue.jobs[this.type].count
-                };
+                }
             },
             computed: {
-                start: function() {
+                start: function () {
                     return Math.min(this.count, 1);
                 },
-                end: function() {
+                end: function () {
                     return Math.min(10, this.count);
                 },
-                range: function() {
-                    if(this.count == 0) return 'none';
+                range: function () {
+                    if (this.count == 0) return 'none';
                     return ''.concat(this.start, '-', this.end, ' of ', this.count);
                 },
-                allLink: function() {
-                    return '/jobs/'+this.type;
+                allLink: function () {
+                    return '/jobs/' + this.type;
                 }
             }
         });

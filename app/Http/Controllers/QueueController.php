@@ -10,12 +10,25 @@ use App\Models\Queue;
 use App\Http\Requests;
 use Area;
 use Auth;
+use Illuminate\Database\Eloquent\Collection;
 
 class QueueController extends Controller
 {
     public function __construct()
     {
         Area::is('queues');
+    }
+
+    public function index()
+    {
+        js_data(['queues' => api('queues.jobs')->toArray()]);
+
+        return view('queue.index');
+    }
+
+    public function view(Queue $queue)
+    {
+        return view('queue.view', compact('queue'));
     }
 
     public function getCreate()
@@ -59,17 +72,5 @@ class QueueController extends Controller
         $queue->delete();
 
         return redirect('/');
-    }
-
-    public function index()
-    {
-        $queues = Auth::user()->queues()->paginate(20);
-
-        return view('queue.index', compact('queues'));
-    }
-
-    public function view(Queue $queue)
-    {
-        return view('queue.view', compact('queue'));
     }
 }
