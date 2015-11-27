@@ -15,9 +15,7 @@ class QueueJobsTest extends AuthTestCase
 
         $this->assertEquals(0, Queue::all()->count());
 
-        $this->assertContainsJson([
-            'queues' => []
-        ], $api->toArray());
+        $this->assertEquals([], $api->toArray());
     }
 
     /** @test */
@@ -30,8 +28,8 @@ class QueueJobsTest extends AuthTestCase
         $api = api('queues.jobs');
         $this->assertNotNull($api->get());
         $result = $api->toArray();
- 
-        foreach($queues as $queue) {
+
+        foreach ($queues as $queue) {
             /** @var Queue $queue */
             $this->assertContainsJson([
                 'name' => $queue->name
@@ -53,7 +51,7 @@ class QueueJobsTest extends AuthTestCase
         $this->assertNotNull($api->get());
         $result = $api->toArray();
 
-        $counts = $result['queues'][$queue->id];
+        $counts = $result[$queue->id];
 
         $this->assertEquals($queue->name, $counts->name);
         $this->assertEquals(1, $counts->available);
@@ -77,7 +75,7 @@ class QueueJobsTest extends AuthTestCase
         $this->assertNotNull($api->get());
         $result = $api->toArray();
 
-        $counts = $result['queues'][$queue->id];
+        $counts = $result[$queue->id];
 
         $this->assertEquals($queue->name, $counts->name);
         $this->assertEquals(0, $counts->available);
@@ -101,7 +99,7 @@ class QueueJobsTest extends AuthTestCase
         $this->assertNotNull($api->get());
         $result = $api->toArray();
 
-        $counts = $result['queues'][$queue->id];
+        $counts = $result[$queue->id];
 
         $this->assertEquals($queue->name, $counts->name);
         $this->assertEquals(0, $counts->available);
@@ -125,7 +123,7 @@ class QueueJobsTest extends AuthTestCase
         $this->assertNotNull($api->get());
         $result = $api->toArray();
 
-        $counts = $result['queues'][$queue->id];
+        $counts = $result[$queue->id];
 
         $this->assertEquals($queue->name, $counts->name);
         $this->assertEquals(0, $counts->available);
@@ -152,7 +150,7 @@ class QueueJobsTest extends AuthTestCase
         $this->assertNotNull($api->get());
         $result = $api->toArray();
 
-        $counts = $result['queues'][$queue->id];
+        $counts = $result[$queue->id];
 
         $this->assertEquals($queue->name, $counts->name);
         $this->assertEquals(2, $counts->available);

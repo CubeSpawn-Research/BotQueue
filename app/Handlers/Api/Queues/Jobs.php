@@ -38,7 +38,7 @@ class Jobs extends ApiHandler
     public function get()
     {
         $result = collect($this->query->get())->keyBy('id')->all();
-        return new ApiResult(['queues' => $result]);
+        return new ApiResult($result);
     }
 
     /**
