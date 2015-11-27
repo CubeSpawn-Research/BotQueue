@@ -1,6 +1,10 @@
 <?php
 
 if (! function_exists('api')) {
+    /**
+     * @param $api
+     * @return \App\Helpers\Api\ApiResult
+     */
     function api($api) {
         return Api::handle($api);
     }
