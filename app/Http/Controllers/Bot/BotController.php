@@ -11,20 +11,7 @@ class BotController extends Controller
 {
     public function index()
     {
-        js_data([
-            'bots' => [
-                [
-                    'name' => 'test',
-                    'status' => 'idle',
-                    'last_seen' => 'um'
-                ],
-                [
-                    'name' => 'abc',
-                    'status' => 'offline',
-                    'last_seen' => 'haha'
-                ]
-            ]
-        ]);
+        js_data(['bots' => api('bots')->toArray()]);
 
         return view('bot.index');
     }

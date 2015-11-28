@@ -1,17 +1,18 @@
 <?php
 
 
-namespace App\Handlers\Api\Jobs;
+namespace App\Handlers\Api\Bots;
 
 
 use App\Handlers\Api\ApiHandler;
 use App\Helpers\Api\ApiResult;
-use App\Models\Job;
+use App\Models\Bot;
 
-class Jobs extends ApiHandler
+class Bots extends ApiHandler
 {
-    public function __construct() {
-        $this->query = Job::query();
+    public function __construct()
+    {
+        $this->query = Bot::query();
     }
 
     public function get()
@@ -27,10 +28,5 @@ class Jobs extends ApiHandler
     public function toArray()
     {
         return $this->get()->toArray();
-    }
-
-    public function status($status)
-    {
-        return $this->singleKey('status', $status);
     }
 }

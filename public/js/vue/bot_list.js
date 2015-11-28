@@ -9649,28 +9649,46 @@ module.exports = {
         return {
             options: {
                 idle: {
-                    text: 'bring online',
-                    icon: 'icon-play',
-                    'class': 'btn-success'
+                    text: 'Bring Online',
+                    icon: 'icon-play'
                 },
                 offline: {
-                    text: ' bring offline',
-                    icon: 'icon-stop',
-                    'class': 'btn-inverse'
+                    text: 'Take Offline',
+                    icon: 'icon-stop'
+                },
+                edit: {
+                    text: 'Edit Bot',
+                    icon: 'icon-cog'
+                },
+                'delete': {
+                    text: 'Delete Bot',
+                    icon: 'icon-remove'
                 }
             }
         };
     },
     computed: {
+        'class': function _class() {
+            return ({
+                idle: 'btn-success',
+                working: 'btn-info',
+                slicing: 'btn-info',
+                waiting: 'btn-warning',
+                error: 'btn-danger',
+                offline: 'btn-inverse',
+                retired: 'btn-inverse',
+                maintenance: 'btn-info'
+            })[this.status];
+        },
         transition: function transition() {
             return ({
-                idle: [this.options.offline],
+                idle: [this.options.offline, this.options.edit, this.options['delete']],
                 offline: [this.options.idle]
             })[this.status];
         }
     }
 };
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <div class=\"btn-group bot_status_button\">\n        <a class=\"btn btn-mini btn-bot-status dropdown-toggle\" :class=\"options[status].class\" data-toggle=\"dropdown\" href=\"#\">\n            <span>{{ status }}</span>\n            <span class=\"caret\"></span>\n        </a>\n        <ul class=\"dropdown-menu\">\n            <li v-for=\"option in transition\">\n                <a>\n                    <i :class=\"option.icon\"></i>\n                    {{option.text}}\n                </a>\n            </li>\n        </ul>\n    </div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <div class=\"btn-group bot_status_button\">\n        <a class=\"btn btn-mini btn-bot-status dropdown-toggle\" :class=\"class\" data-toggle=\"dropdown\" href=\"#\">\n            <span>{{ status }}</span>\n            <span class=\"caret\"></span>\n        </a>\n        <ul class=\"dropdown-menu\">\n            <li v-for=\"option in transition\">\n                <a>\n                    <i :class=\"option.icon\"></i>\n                    {{option.text}}\n                </a>\n            </li>\n        </ul>\n    </div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)

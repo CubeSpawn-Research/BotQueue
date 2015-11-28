@@ -1,6 +1,6 @@
 <template id="bq-bot-status">
     <div class="btn-group bot_status_button">
-        <a class="btn btn-mini btn-bot-status dropdown-toggle" :class="options[status].class" data-toggle="dropdown"
+        <a class="btn btn-mini btn-bot-status dropdown-toggle" :class="class" data-toggle="dropdown"
            href="#">
             <span>{{ status }}</span>
             <span class="caret"></span>
@@ -26,23 +26,43 @@
             return {
                 options: {
                     idle: {
-                        text: 'bring online',
-                        icon: 'icon-play',
-                        class: 'btn-success'
+                        text: 'Bring Online',
+                        icon: 'icon-play'
                     },
                     offline: {
-                        text: 'bring offline',
-                        icon: 'icon-stop',
-                        class: 'btn-inverse'
+                        text: 'Take Offline',
+                        icon: 'icon-stop'
+                    },
+                    edit: {
+                        text: 'Edit Bot',
+                        icon: 'icon-cog'
+                    },
+                    delete: {
+                        text: 'Delete Bot',
+                        icon: 'icon-remove'
                     }
                 }
             }
         },
         computed: {
+            class: function () {
+                return {
+                    idle: 'btn-success',
+                    working: 'btn-info',
+                    slicing: 'btn-info',
+                    waiting: 'btn-warning',
+                    error: 'btn-danger',
+                    offline: 'btn-inverse',
+                    retired: 'btn-inverse',
+                    maintenance: 'btn-info'
+                }[this.status];
+            },
             transition: function () {
                 return {
                     idle: [
-                        this.options.offline
+                        this.options.offline,
+                        this.options.edit,
+                        this.options.delete
                     ],
                     offline: [
                         this.options.idle
