@@ -19,4 +19,8 @@ elixir(function (mix) {
         'dragula.scss',
         'botqueue.scss'
     ], 'public/css');
+
+    mix.browserify('queue_list.js',
+        'public/js/vue', 'resources/assets/vue/js'
+    )
 });

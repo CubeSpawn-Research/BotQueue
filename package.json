@@ -2,7 +2,9 @@
   "private": true,
   "devDependencies": {
     "gulp": "~3.9.0",
-    "laravel-elixir": "~3.4.2"
+    "laravel-elixir": "~3.4.2",
+    "vue": "^1.0.10",
+    "vueify": "^6.0.0"
   },
   "dependencies": {
     "dragula": "^3.0.3"
