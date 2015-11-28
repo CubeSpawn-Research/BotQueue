@@ -30,6 +30,8 @@ Route::post('upload/file', 'UploadController@postFile');
 Route::post('upload/url', 'UploadController@postUrl');
 
 // Bot pages
+Route::get('bots', 'Bot\BotController@index');
+
 Route::get('bot/register', ['as' => 'bot:register', 'uses' => 'Bot\EditController@getRegister']);
 Route::post('bot/register', 'Bot\EditController@postRegister');
 

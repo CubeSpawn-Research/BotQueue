@@ -21,6 +21,8 @@ elixir(function (mix) {
     ], 'public/css');
 
     mix.browserify('queue_list.js',
-        'public/js/vue', 'resources/assets/vue/js'
-    )
+        'public/js/vue', 'resources/assets/vue/js');
+
+    mix.browserify('bot_list.js',
+        'public/js/vue', 'resources/assets/vue/js');
 });
