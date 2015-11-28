@@ -14,7 +14,7 @@ class ApiHelper
      */
     public function handle($api) {
         // We need to return an api result
-        $apis = config('api.api');
+        $apis = config('api.endpoints');
         $class = $apis[$api];
         return new $class;
     }

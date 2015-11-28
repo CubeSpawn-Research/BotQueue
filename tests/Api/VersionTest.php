@@ -17,6 +17,12 @@ class VersionTest extends TestCase
     }
 
     /** @test */
+    public function it_has_a_named_route()
+    {
+        $this->assertTrue(Route::has('api.version'));
+    }
+
+    /** @test */
     public function it_is_successful()
     {
         $this->assertTrue($this->result->isSuccessful());

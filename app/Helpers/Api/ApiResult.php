@@ -22,6 +22,12 @@ class ApiResult implements Arrayable, \Countable, Jsonable, \JsonSerializable
         $this->data = $data;
     }
 
+    public function fail()
+    {
+        $this->success = false;
+        return $this;
+    }
+
     /**
      * Get the instance as an array.
      *

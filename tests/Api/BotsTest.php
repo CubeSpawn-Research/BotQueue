@@ -7,6 +7,12 @@ class BotsTest extends AuthTestCase
     protected $user;
 
     /** @test */
+    public function it_has_a_named_route()
+    {
+        $this->assertTrue(Route::has('api.bots'));
+    }
+
+    /** @test */
     public function it_has_the_least_possible_info()
     {
         /** @var Job $bot */

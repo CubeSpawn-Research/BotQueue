@@ -8,6 +8,12 @@ use App\Models\File\LocalFile;
 class QueueJobsTest extends AuthTestCase
 {
     /** @test */
+    public function it_has_a_named_route()
+    {
+        $this->assertTrue(Route::has('api.queues.jobs'));
+    }
+
+    /** @test */
     public function it_can_retrieve_no_queues()
     {
         /** @var Jobs $api */

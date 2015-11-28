@@ -10,6 +10,17 @@ use Route;
 
 class ApiServiceProvider extends ServiceProvider
 {
+
+    /**
+     * ApiServiceProvider constructor.
+     * @param \Illuminate\Contracts\Foundation\Application $app
+     */
+    public function __construct($app) {
+        parent::__construct($app);
+
+        $this->prefix = config('api.route.prefix');
+    }
+
     /**
      * Register the application services.
      *
@@ -17,9 +28,28 @@ class ApiServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Route::any('{prefix}/{any}', function ($any, Request $request) {
-            return $this->handle($any, $request);
-        })->where(['prefix' => config('api.route.prefix'), 'any' => '.*']);
+        foreach(config('api.endpoints') AS $endpoint => $class) {
+            $this->registerEndpoint($endpoint, $class);
+        }
+    }
+
+    private function registerEndpoint($endpoint, $class)
+    {
+        // Get route name
+        // Get route path
+        // Register any path
+        Route::any($this->prefix.'/'.$endpoint,
+            ['as' => 'api.'.$endpoint, function(Request $request) use ($class) {
+                $object = app()->make($class);
+                switch($request->method()) {
+                    case 'GET':
+                        return $object->get();
+                        break;
+                }
+
+                $apiResult = new App\Helpers\Api\ApiResult("That endpoint doesn't seem to exist");
+                return $apiResult->fail();
+        }]);
     }
 
     /**
@@ -32,27 +62,5 @@ class ApiServiceProvider extends ServiceProvider
         $this->app->bind('api', function() {
             return new ApiHelper();
         });
-    }
-
-    public function handle($route, Request $request)
-    {
-        return $request->all();
-        /*
-        Dissect the any part to try to find the api.
-        Decide if the api exists, and if it doesn't, then throw an error
-        This will require splitting out the tags like {bot} before attempting to parse it.
-        We should look out how the route parses that stuff to try to figure out how to match.
-
-        api($api_match)
-
-        Load the class up and see if a method matches.
-        The method can take the request (or the all array)
-        It can also take any bindings that were made for the api.
-        It can also take some filter class that handles filtering on various aspects.
-        I'm still not overly sure how filtering will work. For now, all of these will probably return a query builder.
-        Then the filter will run on that query builder and the results will be returned.
-
-        The results will then be convert to JSON and sent back out.
-        */
     }
 }
