@@ -20,6 +20,9 @@ class VersionTest extends TestCase
     public function it_has_a_named_route()
     {
         $this->assertTrue(Route::has('api.version'));
+
+        $uri = Route::getRoutes()->getByName('api.version')->getUri();
+        $this->assertEquals('api/version', $uri);
     }
 
     /** @test */

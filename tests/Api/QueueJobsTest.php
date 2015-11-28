@@ -11,6 +11,9 @@ class QueueJobsTest extends AuthTestCase
     public function it_has_a_named_route()
     {
         $this->assertTrue(Route::has('api.queues.jobs'));
+
+        $uri = Route::getRoutes()->getByName('api.queues.jobs')->getUri();
+        $this->assertEquals('api/queues/jobs', $uri);
     }
 
     /** @test */

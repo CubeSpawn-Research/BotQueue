@@ -38,7 +38,7 @@ class ApiServiceProvider extends ServiceProvider
         // Get route name
         // Get route path
         // Register any path
-        Route::any($this->prefix.'/'.$endpoint,
+        Route::any($this->prefix.'/'. $this->getPath($endpoint),
             ['as' => 'api.'.$endpoint, function(Request $request) use ($class) {
                 $object = app()->make($class);
                 switch($request->method()) {
@@ -62,5 +62,14 @@ class ApiServiceProvider extends ServiceProvider
         $this->app->bind('api', function() {
             return new ApiHelper();
         });
+    }
+
+    /**
+     * @param $endpoint
+     * @return mixed
+     */
+    private function getPath($endpoint)
+    {
+        return str_replace('.', '/', $endpoint);
     }
 }

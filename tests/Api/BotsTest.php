@@ -10,6 +10,9 @@ class BotsTest extends AuthTestCase
     public function it_has_a_named_route()
     {
         $this->assertTrue(Route::has('api.bots'));
+
+        $uri = Route::getRoutes()->getByName('api.bots')->getUri();
+        $this->assertEquals('api/bots', $uri);
     }
 
     /** @test */
