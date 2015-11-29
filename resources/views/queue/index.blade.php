@@ -37,10 +37,6 @@
     </div>
 @stop
 
-@section('js')
-    <script src="/js/vue.js"></script>
-@stop
-
 @section('end-js')
     <script src="/js/vue/queue_list.js"></script>
 @stop
