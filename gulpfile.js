@@ -20,9 +20,12 @@ elixir(function (mix) {
         'botqueue.scss'
     ], 'public/css');
 
-    mix.browserify('queue_list.js',
+    mix.browserify('bot_list.js',
         'public/js/vue', 'resources/assets/vue/js');
 
-    mix.browserify('bot_list.js',
+    mix.browserify('job_list.js',
+        'public/js/vue', 'resources/assets/vue/js');
+
+    mix.browserify('queue_list.js',
         'public/js/vue', 'resources/assets/vue/js');
 });
