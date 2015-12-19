@@ -2,6 +2,16 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Activity
+ *
+ * @property integer $id
+ * @property integer $user_id
+ * @property string $activity
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property \App\Models\User $user
+ */
 class Activity extends Model {
 
 	/**

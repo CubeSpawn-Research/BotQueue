@@ -6,19 +6,31 @@ use App\Models\File\FileInterface;
 use App\Models\File\LocalFile;
 use App\Models\Traits\ConcurrentUpdates;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 
 /**
- * @property int id
- * @property string name
- * @property string status
+ * App\Models\Job
  *
- * @property int queue_id
- * @property Queue queue
- * @property int file_id
- * @property FileInterface file
- * @property int user_id
- * @property User user
- * @property string temperature_data
+ * @property integer $id
+ * @property integer $user_id
+ * @property integer $queue_id
+ * @property integer $file_id
+ * @property string $name
+ * @property string $status
+ * @property integer $bot_id
+ * @property float $progress
+ * @property string $temperature_data
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property integer $version
+ * @property \App\Models\File\LocalFile $file
+ * @property \App\Models\Queue $queue
+ * @property-read \App\Models\User $user
+ * @property-read \App\Models\Bot $bot
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Job available()
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Job working()
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Job failed()
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Job completed()
  */
 class Job extends Model
 {

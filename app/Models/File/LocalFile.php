@@ -5,6 +5,22 @@ namespace App\Models\File;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
+/**
+ * App\Models\File\LocalFile
+ *
+ * @property integer $id
+ * @property string $path
+ * @property string $type
+ * @property integer $size
+ * @property string $hash
+ * @property integer $user_id
+ * @property integer $parent_id
+ * @property string $source_url
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \App\Models\User $user
+ * @property-read mixed $name
+ */
 class LocalFile extends FileInterface
 {
     protected $fillable = [

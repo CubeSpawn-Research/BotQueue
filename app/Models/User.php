@@ -11,8 +11,27 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Support\Facades\Hash;
 
 /**
+ * App\Models\User
+ *
  * @property int id
  * @property string username
+ * @property integer $id
+ * @property string $username
+ * @property string $email
+ * @property string $password
+ * @property string $dashboard_style
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property string $remember_token
+ * @property integer $last_notification
+ * @property string $thingiverse_token
+ * @property boolean $is_admin
+ * @property integer $version
+ * @property-read mixed $registered
+ * @property-read mixed $last_seen
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Activity[] $activities
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Queue[] $queues
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Bot[] $bots
  */
 class User extends Model implements AuthorizableContract,
     AuthenticatableContract, CanResetPasswordContract {

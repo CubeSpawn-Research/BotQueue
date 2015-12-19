@@ -6,9 +6,20 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * App\Models\Queue
+ *
  * @property int id
  * @property string name
  * @property Collection jobs
+ * @property integer $id
+ * @property integer $user_id
+ * @property string $name
+ * @property integer $delay
+ * @property integer $version
+ * @property \App\Models\User $user
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Job[] $jobs
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Bot[] $bots
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Queue mine()
  */
 class Queue extends Model
 {
