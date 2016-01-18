@@ -2,15 +2,12 @@
 
 use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller {
+class HomeController extends Controller
+{
 
-	public function index()
-	{
-		if(Auth::check()) {
-			return view('home.index');
-		}
-
-		return view('home.welcome');
+    public function index()
+    {
+        return view('index');
 	}
 
 }

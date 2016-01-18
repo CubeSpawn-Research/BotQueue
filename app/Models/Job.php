@@ -64,6 +64,43 @@ class Job extends Model
         $this->attributes['queue_id'] = $queue->id;
     }
 
+    /**
+     * @param Builder $query
+     * @return $this
+     */
+    public static function scopeAvailable($query)
+    {
+        return $query->where('status', 'available');
+    }
+
+    /**
+     * @param Builder $query
+     * @return $this
+     */
+    public static function scopeWorking($query)
+    {
+        return $query->where('status', 'taken');
+    }
+
+    /**
+     * @param Builder $query
+     * @return $this
+     */
+    public static function scopeFailed($query)
+    {
+        return $query->where('status', 'failed');
+    }
+
+    /**
+     * @param Builder $query
+     * @return $this
+     */
+    public static function scopeCompleted($query)
+    {
+        // todo This needs to be ordered by date completed
+        return $query->where('status', 'completed');
+    }
+
     public function queue()
     {
         return $this->belongsTo(Queue::class);
