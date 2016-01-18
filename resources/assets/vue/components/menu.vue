@@ -10,7 +10,7 @@
                             <span class="icon-bar"></span>
                         </button>
                     </div>
-                    <a class="brand" style="margin-left:0" href="/">BotQueue</a>
+                    <a class="brand" style="margin-left:0" v-link="'/'">BotQueue</a>
 
                     <div id="menu-bar" class="nav-collapse collapse">
                         <ul class="nav">

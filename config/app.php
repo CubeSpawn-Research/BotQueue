@@ -101,6 +101,7 @@ return [
     */
 
     'providers' => [
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Dingo\Api\Provider\LaravelServiceProvider::class,
         /*
          * Laravel Framework Service Providers...
