@@ -101,6 +101,7 @@ return [
     */
 
     'providers' => [
+        Dingo\Api\Provider\LaravelServiceProvider::class,
         /*
          * Laravel Framework Service Providers...
          */
@@ -130,7 +131,6 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\ApiServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         App\Providers\BladeServiceProvider::class,

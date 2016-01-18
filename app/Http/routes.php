@@ -11,6 +11,13 @@
 |
 */
 
+$api = app('Dingo\Api\Routing\Router');
+
+$api->version('v2', function($api) {
+    /** @var $api Dingo\Api\Routing\Router */
+    $api->get('version', 'App\Api\V1\MainController@version');
+});
+
 Route::get('/{any}', 'HomeController@index')->where('any', '.*');
 //Route::get('home', 'HomeController@index');
 //
