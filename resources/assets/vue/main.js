@@ -19,8 +19,11 @@ router.map({
         subRoutes: {
             '/': { component: require('./pages/Welcome.vue') },
             '/about': { component: require('./pages/About.vue') },
+
+            'register': { component: require('./pages/Register.vue') },
             '/login': { component: require('./pages/Login.vue') },
             '/logout': { component: require('./pages/Logout.vue') },
+
             '/*any': {
                 component: {
                     template: '404'

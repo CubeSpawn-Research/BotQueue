@@ -13156,12 +13156,26 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, module.exports.template)
   }
 })()}
-},{"./components/menu.vue":17,"babel-runtime/helpers/interop-require-default":1,"vue":13,"vue-hot-reload-api":3}],15:[function(require,module,exports){
+},{"./components/menu.vue":16,"babel-runtime/helpers/interop-require-default":1,"vue":13,"vue-hot-reload-api":3}],15:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
 exports['default'] = {
-    props: ['name'],
+    props: {
+        name: {
+            type: String,
+            required: true
+        },
+        label: {
+            type: String,
+            required: true
+        },
+        type: {
+            type: String,
+            required: true,
+            'default': 'text'
+        }
+    },
     data: function data() {
         return {
             value: '',
@@ -13170,12 +13184,12 @@ exports['default'] = {
     }
 };
 module.exports = exports['default'];
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <div class=\"control-group\" :class=\"{ 'error': error != ''}\">\n\n        <label class=\"control-label\" :for=\"name\">\n            <strong>{{ name | capitalize }}</strong>\n        </label>\n\n        <div class=\"controls\">\n            <input type=\"text\" class=\"input-xlarge\" name=\"{{ name }}\" :id=\"name\" v-model=\"value\">\n            <span v-show=\"error != ''\" class=\"help-inline\">\n                {{ error }}\n            </span>\n        </div>\n    </div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <div class=\"control-group\" :class=\"{ 'error': error != ''}\">\n\n        <label class=\"control-label\" :for=\"name\">\n            <strong>{{ label }}</strong>\n        </label>\n\n        <div class=\"controls\">\n            <input :type=\"type\" class=\"input-xlarge\" name=\"{{ name }}\" :id=\"name\" v-model=\"value\">\n            <span v-show=\"error != ''\" class=\"help-inline\">\n                {{ error }}\n            </span>\n        </div>\n    </div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
-  var id = "/home/jnesselr/PhpstormProjects/BotQueue/resources/assets/vue/components/form/InputText.vue"
+  var id = "/home/jnesselr/PhpstormProjects/BotQueue/resources/assets/vue/components/form/Input.vue"
   if (!module.hot.data) {
     hotAPI.createRecord(id, module.exports)
   } else {
@@ -13183,32 +13197,6 @@ if (module.hot) {(function () {  module.hot.accept()
   }
 })()}
 },{"vue":13,"vue-hot-reload-api":3}],16:[function(require,module,exports){
-'use strict';
-
-exports.__esModule = true;
-exports['default'] = {
-    props: ['name'],
-    data: function data() {
-        return {
-            value: '',
-            error: ''
-        };
-    }
-};
-module.exports = exports['default'];
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <div class=\"control-group\" :class=\"{ 'error': error != ''}\">\n\n        <label class=\"control-label\" :for=\"name\">\n            <strong>{{ name | capitalize }}</strong>\n        </label>\n\n        <div class=\"controls\">\n            <input type=\"password\" class=\"input-xlarge\" name=\"{{ name }}\" :id=\"name\" v-model=\"value\">\n            <span v-show=\"error != ''\" class=\"help-inline\">\n                {{ error }}\n            </span>\n        </div>\n    </div>\n"
-if (module.hot) {(function () {  module.hot.accept()
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), true)
-  if (!hotAPI.compatible) return
-  var id = "/home/jnesselr/PhpstormProjects/BotQueue/resources/assets/vue/components/form/PasswordText.vue"
-  if (!module.hot.data) {
-    hotAPI.createRecord(id, module.exports)
-  } else {
-    hotAPI.update(id, module.exports, module.exports.template)
-  }
-})()}
-},{"vue":13,"vue-hot-reload-api":3}],17:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -13239,7 +13227,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, module.exports.template)
   }
 })()}
-},{"../helpers/AuthHelper.vue":18,"babel-runtime/helpers/interop-require-default":1,"vue":13,"vue-hot-reload-api":3}],18:[function(require,module,exports){
+},{"../helpers/AuthHelper.vue":17,"babel-runtime/helpers/interop-require-default":1,"vue":13,"vue-hot-reload-api":3}],17:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -13282,7 +13270,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, module.exports.template)
   }
 })()}
-},{"vue":13,"vue-hot-reload-api":3}],19:[function(require,module,exports){
+},{"vue":13,"vue-hot-reload-api":3}],18:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -13333,7 +13321,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, module.exports.template)
   }
 })()}
-},{"babel-runtime/helpers/interop-require-default":1,"vue":13,"vue-hot-reload-api":3}],20:[function(require,module,exports){
+},{"babel-runtime/helpers/interop-require-default":1,"vue":13,"vue-hot-reload-api":3}],19:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -13371,8 +13359,11 @@ router.map({
         subRoutes: {
             '/': { component: require('./pages/Welcome.vue') },
             '/about': { component: require('./pages/About.vue') },
+
+            'register': { component: require('./pages/Register.vue') },
             '/login': { component: require('./pages/Login.vue') },
             '/logout': { component: require('./pages/Logout.vue') },
+
             '/*any': {
                 component: {
                     template: '404'
@@ -13387,7 +13378,7 @@ router.start(MyApp, '#app');
 
 _helpersAuthHelperVue2['default'].refreshLogin();
 
-},{"./App.vue":14,"./helpers/AuthHelper.vue":18,"./pages/About.vue":21,"./pages/Login.vue":22,"./pages/Logout.vue":23,"./pages/Welcome.vue":24,"vue":13,"vue-resource":5,"vue-router":12}],21:[function(require,module,exports){
+},{"./App.vue":14,"./helpers/AuthHelper.vue":17,"./pages/About.vue":20,"./pages/Login.vue":21,"./pages/Logout.vue":22,"./pages/Register.vue":23,"./pages/Welcome.vue":24,"vue":13,"vue-resource":5,"vue-router":12}],20:[function(require,module,exports){
 ;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <div class=\"row\">\n        <div class=\"span8\">\n            <h1>About BotQueue</h1>\n            Nice big picture should go here.\n        </div>\n        <div class=\"span4\">\n            <h3>Creator</h3>\n\n            <p>\n                BotQueue was started by <a href=\"mailto:zach@hoektronics.com\">Zach Hoeken</a>. His other work includes\n                co-founding <a href=\"http://www.makerbot.com\">MakerBot Industries</a>, building <a href=\"http://www.thingiverse.com\">Thingiverse.com</a>, designing the <a href=\"http://www.sanguino.cc\">Sanguino</a>,\n                co-founding <a href=\"http://www.nycresistor.com\">NYC Resistor</a> and lately helping startups at <a href=\"http://www.haxlr8r.com\">HAXLR8R</a>.\n            </p>\n\n            <p>\n                The current lead developer is <a href=\"mailto:jnesselr@harding.edu\">Justin Nesselrotte</a>. Check out his <a href=\"http://blog.jnesselr.org/\">blog</a>!\n            </p>\n\n            <h3>Contributors</h3>\n\n            <p>\n                We've received lots of help along the way, and here are some people who have contributed greatly to the\n                BotQueue project directly or indirectly:\n            </p>\n            <ul>\n                <li><a href=\"http://www.joewalnes.com\">Joe Walnes (gcode display plugin)</a></li>\n                <li><a href=\"http://www.tonybuser.com\">Tony Buser (stl viewer plugin)</a></li>\n                <li><a href=\"http://www.slic3r.org\">Alessandro Ranellucci (slic3r)</a></li>\n            </ul>\n            <p>\n                Of course this project also owes a huge debt to the many people who have developed awesome open source 3D\n                printers, electronics, firmware, and all the other things that BotQueue is built on top of. Keep on rocking!\n            </p>\n        </div>\n    </div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
@@ -13400,20 +13391,16 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, module.exports.template)
   }
 })()}
-},{"vue":13,"vue-hot-reload-api":3}],22:[function(require,module,exports){
+},{"vue":13,"vue-hot-reload-api":3}],21:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
 
 exports.__esModule = true;
 
-var _componentsFormInputTextVue = require('../components/form/InputText.vue');
+var _componentsFormInputVue = require('../components/form/Input.vue');
 
-var _componentsFormInputTextVue2 = _interopRequireDefault(_componentsFormInputTextVue);
-
-var _componentsFormPasswordTextVue = require('../components/form/PasswordText.vue');
-
-var _componentsFormPasswordTextVue2 = _interopRequireDefault(_componentsFormPasswordTextVue);
+var _componentsFormInputVue2 = _interopRequireDefault(_componentsFormInputVue);
 
 var _helpersFormHelperVue = require('../helpers/FormHelper.vue');
 
@@ -13423,17 +13410,9 @@ var _helpersAuthHelperVue = require('../helpers/AuthHelper.vue');
 
 var _helpersAuthHelperVue2 = _interopRequireDefault(_helpersAuthHelperVue);
 
-var _vue = require('vue');
-
-var _vue2 = _interopRequireDefault(_vue);
-
 exports['default'] = {
-    data: function data() {
-        return {};
-    },
     components: {
-        'bq-input-text': _componentsFormInputTextVue2['default'],
-        'bq-password-text': _componentsFormPasswordTextVue2['default']
+        'bq-input': _componentsFormInputVue2['default']
     },
     methods: {
         onSubmit: function onSubmit() {
@@ -13453,7 +13432,7 @@ exports['default'] = {
     }
 };
 module.exports = exports['default'];
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <div class=\"row\">\n        <div class=\"signin span6 offset3\">\n            <div class=\"title\">Already a member? Sign in:</div>\n            <form class=\"form-horizontal\" method=\"POST\" @submit.prevent=\"onSubmit\">\n                <fieldset>\n                    <bq-input-text v-ref:username=\"\" name=\"username\"></bq-input-text>\n\n                    <bq-password-text v-ref:password=\"\" name=\"password\"></bq-password-text>\n\n                    <div class=\"form-actions\">\n                        <button type=\"submit\" class=\"btn btn-primary btn-large\">\n                            Sign into your account\n                        </button>\n                    </div>\n                </fieldset>\n            </form>\n        </div>\n    </div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <div class=\"row\">\n        <div class=\"signin span6 offset3\">\n            <div class=\"title\">Not a member? Create a free account:</div>\n            <form class=\"form-horizontal\" method=\"POST\" @submit.prevent=\"onSubmit\">\n                <fieldset>\n                    <bq-input v-ref:username=\"\" name=\"username\" label=\"Username\" type=\"text\">\n                    </bq-input>\n\n                    <bq-input v-ref:password=\"\" name=\"password\" label=\"Password\" type=\"password\">\n                    </bq-input>\n\n                    <div class=\"form-actions\">\n                        <button type=\"submit\" class=\"btn btn-primary btn-large\">\n                            Sign into your account\n                        </button>\n                    </div>\n                </fieldset>\n            </form>\n        </div>\n    </div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -13465,7 +13444,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, module.exports.template)
   }
 })()}
-},{"../components/form/InputText.vue":15,"../components/form/PasswordText.vue":16,"../helpers/AuthHelper.vue":18,"../helpers/FormHelper.vue":19,"babel-runtime/helpers/interop-require-default":1,"vue":13,"vue-hot-reload-api":3}],23:[function(require,module,exports){
+},{"../components/form/Input.vue":15,"../helpers/AuthHelper.vue":17,"../helpers/FormHelper.vue":18,"babel-runtime/helpers/interop-require-default":1,"vue":13,"vue-hot-reload-api":3}],22:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -13494,7 +13473,58 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, module.exports.template)
   }
 })()}
-},{"../helpers/AuthHelper.vue":18,"babel-runtime/helpers/interop-require-default":1,"vue":13,"vue-hot-reload-api":3}],24:[function(require,module,exports){
+},{"../helpers/AuthHelper.vue":17,"babel-runtime/helpers/interop-require-default":1,"vue":13,"vue-hot-reload-api":3}],23:[function(require,module,exports){
+'use strict';
+
+var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
+
+exports.__esModule = true;
+
+var _componentsFormInputVue = require('../components/form/Input.vue');
+
+var _componentsFormInputVue2 = _interopRequireDefault(_componentsFormInputVue);
+
+var _helpersFormHelperVue = require('../helpers/FormHelper.vue');
+
+var _helpersFormHelperVue2 = _interopRequireDefault(_helpersFormHelperVue);
+
+var _helpersAuthHelperVue = require('../helpers/AuthHelper.vue');
+
+var _helpersAuthHelperVue2 = _interopRequireDefault(_helpersAuthHelperVue);
+
+exports['default'] = {
+    components: {
+        'bq-input': _componentsFormInputVue2['default']
+    },
+    methods: {
+        onSubmit: function onSubmit() {
+            var self = this;
+            _helpersFormHelperVue2['default'].submit('/api/register', {
+                username: this.$refs.username,
+                email: this.$refs.email,
+                password: this.$refs.password,
+                password_confirmation: this.$refs.password_confirmation
+            }, function (response) {
+                _helpersAuthHelperVue2['default'].login(response.data.token, response.data.username);
+                self.$route.router.go('/');
+            });
+        }
+    }
+};
+module.exports = exports['default'];
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <div class=\"row\">\n        <div class=\"signin span6 offset3\">\n            <div class=\"title\">Already a member? Sign in:</div>\n            <form class=\"form-horizontal\" method=\"POST\" @submit.prevent=\"onSubmit\">\n                <fieldset>\n                    <bq-input v-ref:username=\"\" name=\"username\" label=\"Username\" type=\"text\">\n                    </bq-input>\n\n                    <bq-input v-ref:email=\"\" name=\"email\" label=\"Email Address\" type=\"email\"></bq-input>\n\n                    <bq-input v-ref:password=\"\" name=\"password\" label=\"Password\" type=\"password\">\n                    </bq-input>\n\n                    <bq-input v-ref:password_confirmation=\"\" name=\"password_confirmation\" label=\"Password Confirmation\" type=\"password\">\n                    </bq-input>\n\n                    <div class=\"form-actions\">\n                        <button type=\"submit\" class=\"btn btn-success btn-large\">\n                            Create your account\n                        </button>\n                    </div>\n                </fieldset>\n            </form>\n        </div>\n    </div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  var id = "/home/jnesselr/PhpstormProjects/BotQueue/resources/assets/vue/pages/Register.vue"
+  if (!module.hot.data) {
+    hotAPI.createRecord(id, module.exports)
+  } else {
+    hotAPI.update(id, module.exports, module.exports.template)
+  }
+})()}
+},{"../components/form/Input.vue":15,"../helpers/AuthHelper.vue":17,"../helpers/FormHelper.vue":18,"babel-runtime/helpers/interop-require-default":1,"vue":13,"vue-hot-reload-api":3}],24:[function(require,module,exports){
 ;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <div class=\"hero-unit\">\n        <h1>BotQueue has arrived!</h1>\n\n        <p>The open source, distributed fabrication software you've been dreaming about. Srsly.</p>\n\n        <p>\n            <img src=\"/img/botqueue.png\" width=\"1013\" height=\"403\" align=\"center\">\n        </p>\n\n        <h3>Okay, so what does that mean?</h3>\n\n        <p>\n            Simple. BotQueue lets you control multiple 3D printers through the Internet and turn them into your own\n            manufacturing center. Think cloud-based computing, but for making things in the real world. Now you can\n            build the robot army you've always dreamed of! Oh yeah, and its 100% open source because that's how I roll.\n        </p>\n\n        <h3>Want to learn more?</h3>\n\n        <p>\n            Check out the <a href=\"http://www.hoektronics.com/2012/09/13/introducing-botqueue-open-distributed-manufacturing/\">blog\n            entry about the launch of BotQueue</a>.\n        </p>\n    </div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
@@ -13507,4 +13537,4 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, module.exports.template)
   }
 })()}
-},{"vue":13,"vue-hot-reload-api":3}]},{},[20]);
+},{"vue":13,"vue-hot-reload-api":3}]},{},[19]);

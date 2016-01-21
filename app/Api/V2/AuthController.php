@@ -4,6 +4,7 @@
 namespace App\Api\V2;
 
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use Dingo\Api\Http\Request;
 use Dingo\Api\Routing\Helpers;
@@ -23,8 +24,9 @@ class AuthController extends Controller
         $this->guard = $guard;
     }
 
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
+        error_log($request);
         $credentials = $request->only('username', 'email', 'password');
 
         $user = User::create($credentials);
