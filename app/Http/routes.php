@@ -18,6 +18,7 @@ $api->version('v2', function($api) {
 
     $api->get('version', 'App\Api\V2\MainController@version');
 
+    $api->post('register', 'App\Api\V2\AuthController@register');
     $api->post('login', 'App\Api\V2\AuthController@login');
 });
 

@@ -25,112 +25,113 @@ use Illuminate\Contracts\Hashing\Hasher;
 
 class LegacyUserProvider implements UserProvider
 {
-	public function __construct(Hasher $hasher, $model)
-	{
-		$this->hasher = $hasher;
-		$this->model = $model;
-	}
+    protected $hasher;
+    protected $model;
 
-	/**
-	 * Retrieve a user by their unique identifier.
-	 *
-	 * @param  mixed $identifier
-	 * @return \Illuminate\Contracts\Auth\Authenticatable|null
-	 */
-	public function retrieveById($identifier)
-	{
-		return $this->createModel()->newQuery()->find($identifier);
-	}
+    public function __construct(Hasher $hasher, $model)
+    {
+        $this->hasher = $hasher;
+        $this->model = $model;
+    }
 
-	/**
-	 * Retrieve a user by by their unique identifier and "remember me" token.
-	 *
-	 * @param  mixed $identifier
-	 * @param  string $token
-	 * @return \Illuminate\Contracts\Auth\Authenticatable|null
-	 */
-	public function retrieveByToken($identifier, $token)
-	{
-		$model = $this->createModel();
+    /**
+     * Retrieve a user by their unique identifier.
+     *
+     * @param  mixed $identifier
+     * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     */
+    public function retrieveById($identifier)
+    {
+        return $this->createModel()->newQuery()->find($identifier);
+    }
 
-		return $model->newQuery()
-			->where($model->getKeyName(), $identifier)
-			->where($model->getRememberTokenName(), $token)
-			->first();
-	}
+    /**
+     * Retrieve a user by by their unique identifier and "remember me" token.
+     *
+     * @param  mixed $identifier
+     * @param  string $token
+     * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     */
+    public function retrieveByToken($identifier, $token)
+    {
+        $model = $this->createModel();
 
-	/**
-	 * Update the "remember me" token for the given user in storage.
-	 *
-	 * @param  \Illuminate\Contracts\Auth\Authenticatable $user
-	 * @param  string $token
-	 * @return void
-	 */
-	public function updateRememberToken(Authenticatable $user, $token)
-	{
-		$user->setRememberToken($token);
+        return $model->newQuery()
+            ->where($model->getKeyName(), $identifier)
+            ->where($model->getRememberTokenName(), $token)
+            ->first();
+    }
 
-		$user->save();
-	}
+    /**
+     * Update the "remember me" token for the given user in storage.
+     *
+     * @param  \Illuminate\Contracts\Auth\Authenticatable $user
+     * @param  string $token
+     * @return void
+     */
+    public function updateRememberToken(Authenticatable $user, $token)
+    {
+        $user->setRememberToken($token);
 
-	/**
-	 * Retrieve a user by the given credentials.
-	 *
-	 * @param  array $credentials
-	 * @return \Illuminate\Contracts\Auth\Authenticatable|null
-	 */
-	public function retrieveByCredentials(array $credentials)
-	{
-		$query = $this->createModel()->newQuery();
+        $user->save();
+    }
 
-		foreach ($credentials as $key => $value) {
-			if(!str_contains($key, 'password')) $query->where($key, $value);
-		}
+    /**
+     * Retrieve a user by the given credentials.
+     *
+     * @param  array $credentials
+     * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     */
+    public function retrieveByCredentials(array $credentials)
+    {
+        $query = $this->createModel()->newQuery();
 
-		return $query->first();
+        foreach ($credentials as $key => $value) {
+            if (!str_contains($key, 'password')) $query->where($key, $value);
+        }
 
-	}
+        return $query->first();
 
-	/**
-	 * Validate a user against the given credentials.
-	 *
-	 * @param  \Illuminate\Contracts\Auth\Authenticatable $user
-	 * @param  array $credentials
-	 * @return bool
-	 */
-	public function validateCredentials(Authenticatable $user, array $credentials)
-	{
-		$plain = $credentials['password'];
+    }
 
-		if($this->isLegacyPassword($user, $plain)) {
-			// Update the old password to the new one
-			$this->updateLegacyPassword($user, $plain);
-			return true;
-		}
-		else
-		{
-			return $this->hasher->check($plain, $user->getAuthPassword());
-		}
-	}
+    /**
+     * Validate a user against the given credentials.
+     *
+     * @param  \Illuminate\Contracts\Auth\Authenticatable $user
+     * @param  array $credentials
+     * @return bool
+     */
+    public function validateCredentials(Authenticatable $user, array $credentials)
+    {
+        $plain = $credentials['password'];
 
-	/**
-	 * @return \App\Models\User
-	 */
-	private function createModel()
-	{
-		$class = '\\'.ltrim($this->model, '\\');
+        if ($this->isLegacyPassword($user, $plain)) {
+            // Update the old password to the new one
+            $this->updateLegacyPassword($user, $plain);
+            return true;
+        } else {
+            return $this->hasher->check($plain, $user->getAuthPassword());
+        }
+    }
 
-		return new $class;
-	}
+    /**
+     * @return \App\Models\User
+     */
+    private function createModel()
+    {
+        $class = '\\' . ltrim($this->model, '\\');
 
-	private function isLegacyPassword(Authenticatable $user, $plain)
-	{
-		return sha1($plain) === $user->getAuthPassword();
-	}
+        return new $class;
+    }
 
-	private function updateLegacyPassword($user, $plain)
-	{
-		$user->password = $this->hasher->make($plain);
-		$user->save();
-	}
+    private function isLegacyPassword(Authenticatable $user, $plain)
+    {
+        return sha1($plain) === $user->getAuthPassword();
+    }
+
+    private function updateLegacyPassword($user, $plain)
+    {
+        $user->password = $this->hasher->make($plain);
+        $user->save();
+    }
 }

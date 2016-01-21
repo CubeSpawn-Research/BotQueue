@@ -101,8 +101,6 @@ return [
     */
 
     'providers' => [
-        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
-        Dingo\Api\Provider\LaravelServiceProvider::class,
         /*
          * Laravel Framework Service Providers...
          */
@@ -142,6 +140,8 @@ return [
         App\Providers\HtmlServiceProvider::class,
         App\Providers\JsMessageBagProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        Dingo\Api\Provider\LaravelServiceProvider::class,
         /*
          * Helper service provider
          */
@@ -199,6 +199,7 @@ return [
         'Api' => App\Facades\Api::class,
         'Area' => App\Facades\Area::class,
         'FileUtils' => App\Facades\FileUtils::class,
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'Migrate' => App\Facades\Migrate::class,
     ],
 

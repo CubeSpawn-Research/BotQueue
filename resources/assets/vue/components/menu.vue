@@ -33,12 +33,25 @@
                         </ul>
                         <ul class="nav pull-right">
                             <li class="divider-vertical"></li>
-                            <li>
+                            <li v-if="user.authenticated" class="dropdown">
+                                <a href="#" class="dropdown-toggle"
+                                   data-toggle="dropdown">Hello, {{ user.username }}
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a v-link="'/preferences'">Preferences</a></li>
+                                    <li class="divider"></li>
+                                    <li><a v-link="'/logout'">Log Out</a></li>
+                                </ul>
+                            </li>
+                            <li v-if="!user.authenticated">
                                 <a v-link="'/login'" style="padding-left: 17px; background: transparent url('/img/lock_icon.png') no-repeat 0 center;">
                                     Log in
                                 </a>
                             </li>
-                            <li><a v-link="'/register'">Sign up</a></li>
+                            <li v-if="!user.authenticated">
+                                <a v-link="'/register'">Sign up</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -46,3 +59,15 @@
         </div>
     </section>
 </template>
+
+<script>
+    import Auth from '../helpers/AuthHelper.vue'
+
+    export default {
+        data() {
+            return {
+                user: Auth.user
+            }
+        }
+    }
+</script>

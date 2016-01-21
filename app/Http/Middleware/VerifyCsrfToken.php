@@ -15,8 +15,10 @@ class VerifyCsrfToken extends BaseVerifier
      */
     public function handle($request, Closure $next)
     {
-        if (!starts_with($request->getRequestUri(), '/api'))
-            return parent::handle($request, $next);
+        /**
+         * We should not need to handle CSRF because
+         * we're using JWT tokens for auth.
+         */
         return $next($request);
     }
 
