@@ -28,11 +28,6 @@ Route::get('/{any}', 'HomeController@index')->where('any', '.*');
 //Route::get('register', 'AuthController@getLoginAndRegister');
 //Route::post('register', 'AuthController@postRegister');
 //
-//Route::get('login', 'AuthController@getLoginAndRegister');
-//Route::post('login', 'AuthController@postLogin');
-//
-//Route::get('logout', 'AuthController@logout');
-//
 //// Upload pages
 //Route::get('upload', 'UploadController@getIndex');
 //Route::post('upload/file', 'UploadController@postFile');
