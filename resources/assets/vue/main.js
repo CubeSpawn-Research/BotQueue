@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
+import VueBQ from './BQ/index'
 
 Vue.config.debug = true;
 
 Vue.use(VueResource);
-
+Vue.use(VueBQ);
 Vue.use(VueRouter);
 
 var router = new VueRouter({

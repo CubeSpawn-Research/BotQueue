@@ -14316,7 +14316,217 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, module.exports.template)
   }
 })()}
-},{"./components/menu.vue":45,"babel-runtime/helpers/interop-require-default":2,"vue":42,"vue-hot-reload-api":16}],44:[function(require,module,exports){
+},{"./components/menu.vue":49,"babel-runtime/helpers/interop-require-default":2,"vue":42,"vue-hot-reload-api":16}],44:[function(require,module,exports){
+'use strict';
+
+function BQ() {
+    return {};
+}
+
+BQ.Form = require('./Form');
+
+module.exports = BQ;
+
+},{"./Form":45}],45:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _vue = require('vue');
+
+var _vue2 = _interopRequireDefault(_vue);
+
+exports['default'] = {
+    submit: function submit(uri, data, callback, error_callback) {
+        // Go through the data grabbing the value
+        var json = {};
+        for (var key in data) {
+            if (data.hasOwnProperty(key)) {
+                json[key] = data[key].value;
+            }
+        }
+
+        _vue2['default'].http.post(uri, json).then(callback, function (response) {
+            console.log(response);
+            // Clear errors
+
+            Object.keys(data).forEach(function (key) {
+                data[key].error = '';
+            });
+
+            if (response.status == 422) {
+                // Form input was invalid, so show errors
+
+                var errors = response.data.errors;
+                Object.keys(errors).forEach(function (key) {
+                    if (data.hasOwnProperty(key)) {
+                        data[key].error = errors[key][0];
+                    }
+                });
+            } else {
+                if (error_callback !== undefined) error_callback(response);
+            }
+        });
+    }
+};
+module.exports = exports['default'];
+
+},{"vue":42}],46:[function(require,module,exports){
+'use strict';
+
+function install(Vue) {
+    var _ = require('./util');
+
+    Vue.BQ = require('./BQ');
+
+    Object.defineProperties(Vue.prototype, {
+        $bq: {
+            get: function get() {
+                return _.options(Vue.BQ, this, this.$options.bq);
+            }
+        }
+    });
+}
+
+if (window.Vue) {
+    Vue.use(install);
+}
+
+module.exports = install;
+
+},{"./BQ":44,"./util":47}],47:[function(require,module,exports){
+/**
+ * Utility functions.
+ */
+
+'use strict';
+
+var _ = exports,
+    array = [],
+    console = window.console;
+
+_.warn = function (msg) {
+    if (console && _.warning && (!_.config.silent || _.config.debug)) {
+        console.warn('[VueResource warn]: ' + msg);
+    }
+};
+
+_.error = function (msg) {
+    if (console) {
+        console.error(msg);
+    }
+};
+
+_.trim = function (str) {
+    return str.replace(/^\s*|\s*$/g, '');
+};
+
+_.toLower = function (str) {
+    return str ? str.toLowerCase() : '';
+};
+
+_.isArray = Array.isArray;
+
+_.isString = function (val) {
+    return typeof val === 'string';
+};
+
+_.isFunction = function (val) {
+    return typeof val === 'function';
+};
+
+_.isObject = function (obj) {
+    return obj !== null && typeof obj === 'object';
+};
+
+_.isPlainObject = function (obj) {
+    return _.isObject(obj) && Object.getPrototypeOf(obj) == Object.prototype;
+};
+
+_.options = function (fn, obj, options) {
+
+    options = options || {};
+
+    if (_.isFunction(options)) {
+        options = options.call(obj);
+    }
+
+    return _.merge(fn.bind({ $vm: obj, $options: options }), fn, { $options: options });
+};
+
+_.each = function (obj, iterator) {
+
+    var i, key;
+
+    if (typeof obj.length == 'number') {
+        for (i = 0; i < obj.length; i++) {
+            iterator.call(obj[i], obj[i], i);
+        }
+    } else if (_.isObject(obj)) {
+        for (key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                iterator.call(obj[key], obj[key], key);
+            }
+        }
+    }
+
+    return obj;
+};
+
+_.defaults = function (target, source) {
+
+    for (var key in source) {
+        if (target[key] === undefined) {
+            target[key] = source[key];
+        }
+    }
+
+    return target;
+};
+
+_.extend = function (target) {
+
+    var args = array.slice.call(arguments, 1);
+
+    args.forEach(function (arg) {
+        merge(target, arg);
+    });
+
+    return target;
+};
+
+_.merge = function (target) {
+
+    var args = array.slice.call(arguments, 1);
+
+    args.forEach(function (arg) {
+        merge(target, arg, true);
+    });
+
+    return target;
+};
+
+function merge(target, source, deep) {
+    for (var key in source) {
+        if (deep && (_.isPlainObject(source[key]) || _.isArray(source[key]))) {
+            if (_.isPlainObject(source[key]) && !_.isPlainObject(target[key])) {
+                target[key] = {};
+            }
+            if (_.isArray(source[key]) && !_.isArray(target[key])) {
+                target[key] = [];
+            }
+            merge(target[key], source[key], deep);
+        } else if (source[key] !== undefined) {
+            target[key] = source[key];
+        }
+    }
+}
+
+},{}],48:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -14356,7 +14566,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, module.exports.template)
   }
 })()}
-},{"vue":42,"vue-hot-reload-api":16}],45:[function(require,module,exports){
+},{"vue":42,"vue-hot-reload-api":16}],49:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -14387,7 +14597,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, module.exports.template)
   }
 })()}
-},{"../helpers/AuthHelper.vue":46,"babel-runtime/helpers/interop-require-default":2,"vue":42,"vue-hot-reload-api":16}],46:[function(require,module,exports){
+},{"../helpers/AuthHelper.vue":50,"babel-runtime/helpers/interop-require-default":2,"vue":42,"vue-hot-reload-api":16}],50:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -14433,59 +14643,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, module.exports.template)
   }
 })()}
-},{"vue":42,"vue-hot-reload-api":16}],47:[function(require,module,exports){
-'use strict';
-
-var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
-
-exports.__esModule = true;
-
-var _vue = require('vue');
-
-var _vue2 = _interopRequireDefault(_vue);
-
-exports['default'] = {
-    submit: function submit(uri, data, callback, error_callback) {
-        // Go through the data grabbing the value
-        var json = {};
-        for (var key in data) {
-            if (data.hasOwnProperty(key)) json[key] = data[key].value;
-        }
-
-        _vue2['default'].http.post(uri, json).then(callback, function (response) {
-            console.log(response);
-            if (response.status == 422) {
-                // Form input was invalid, so show errors
-
-                var errors = response.data.errors;
-                for (var key in data) {
-                    if (data.hasOwnProperty(key)) {
-                        if (errors.hasOwnProperty(key)) {
-                            data[key].error = errors[key][0];
-                        } else {
-                            data[key].error = '';
-                        }
-                    }
-                }
-            } else {
-                if (error_callback !== undefined) error_callback(response);
-            }
-        });
-    }
-};
-module.exports = exports['default'];
-if (module.hot) {(function () {  module.hot.accept()
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), true)
-  if (!hotAPI.compatible) return
-  var id = "/home/jnesselr/PhpstormProjects/BotQueue/resources/assets/vue/helpers/FormHelper.vue"
-  if (!module.hot.data) {
-    hotAPI.createRecord(id, module.exports)
-  } else {
-    hotAPI.update(id, module.exports, module.exports.template)
-  }
-})()}
-},{"babel-runtime/helpers/interop-require-default":2,"vue":42,"vue-hot-reload-api":16}],48:[function(require,module,exports){
+},{"vue":42,"vue-hot-reload-api":16}],51:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -14502,6 +14660,10 @@ var _vueResource = require('vue-resource');
 
 var _vueResource2 = _interopRequireDefault(_vueResource);
 
+var _BQIndex = require('./BQ/index');
+
+var _BQIndex2 = _interopRequireDefault(_BQIndex);
+
 var _helpersAuthHelperVue = require('./helpers/AuthHelper.vue');
 
 var _helpersAuthHelperVue2 = _interopRequireDefault(_helpersAuthHelperVue);
@@ -14509,7 +14671,7 @@ var _helpersAuthHelperVue2 = _interopRequireDefault(_helpersAuthHelperVue);
 _vue2['default'].config.debug = true;
 
 _vue2['default'].use(_vueResource2['default']);
-
+_vue2['default'].use(_BQIndex2['default']);
 _vue2['default'].use(_vueRouter2['default']);
 
 var router = new _vueRouter2['default']({
@@ -14549,7 +14711,7 @@ router.start(MyApp, '#app');
 _helpersAuthHelperVue2['default'].refreshLogin();
 _vue2['default'].http.headers.common['Authorization'] = _helpersAuthHelperVue2['default'].getAuthHeader();
 
-},{"./App.vue":43,"./helpers/AuthHelper.vue":46,"./pages/Auth/Login.vue":49,"./pages/Auth/Logout.vue":50,"./pages/Auth/Register.vue":51,"./pages/Home/About.vue":52,"./pages/Home/Welcome.vue":53,"./pages/Queue/Index.vue":54,"./pages/Queue/View.vue":55,"vue":42,"vue-resource":30,"vue-router":41}],49:[function(require,module,exports){
+},{"./App.vue":43,"./BQ/index":46,"./helpers/AuthHelper.vue":50,"./pages/Auth/Login.vue":52,"./pages/Auth/Logout.vue":53,"./pages/Auth/Register.vue":54,"./pages/Home/About.vue":55,"./pages/Home/Welcome.vue":56,"./pages/Queue/Index.vue":57,"./pages/Queue/View.vue":58,"vue":42,"vue-resource":30,"vue-router":41}],52:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -14559,10 +14721,6 @@ exports.__esModule = true;
 var _componentsFormInputVue = require('../../components/form/Input.vue');
 
 var _componentsFormInputVue2 = _interopRequireDefault(_componentsFormInputVue);
-
-var _helpersFormHelperVue = require('../../helpers/FormHelper.vue');
-
-var _helpersFormHelperVue2 = _interopRequireDefault(_helpersFormHelperVue);
 
 var _helpersAuthHelperVue = require('../../helpers/AuthHelper.vue');
 
@@ -14575,7 +14733,7 @@ exports['default'] = {
     methods: {
         onSubmit: function onSubmit() {
             var self = this;
-            _helpersFormHelperVue2['default'].submit('/api/login', {
+            this.$bq.Form.submit('/api/login', {
                 username: this.$refs.username,
                 password: this.$refs.password
             }, function (response) {
@@ -14602,7 +14760,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, module.exports.template)
   }
 })()}
-},{"../../components/form/Input.vue":44,"../../helpers/AuthHelper.vue":46,"../../helpers/FormHelper.vue":47,"babel-runtime/helpers/interop-require-default":2,"vue":42,"vue-hot-reload-api":16}],50:[function(require,module,exports){
+},{"../../components/form/Input.vue":48,"../../helpers/AuthHelper.vue":50,"babel-runtime/helpers/interop-require-default":2,"vue":42,"vue-hot-reload-api":16}],53:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -14631,7 +14789,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, module.exports.template)
   }
 })()}
-},{"../../helpers/AuthHelper.vue":46,"babel-runtime/helpers/interop-require-default":2,"vue":42,"vue-hot-reload-api":16}],51:[function(require,module,exports){
+},{"../../helpers/AuthHelper.vue":50,"babel-runtime/helpers/interop-require-default":2,"vue":42,"vue-hot-reload-api":16}],54:[function(require,module,exports){
 'use strict';
 
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
@@ -14641,10 +14799,6 @@ exports.__esModule = true;
 var _componentsFormInputVue = require('../../components/form/Input.vue');
 
 var _componentsFormInputVue2 = _interopRequireDefault(_componentsFormInputVue);
-
-var _helpersFormHelperVue = require('../../helpers/FormHelper.vue');
-
-var _helpersFormHelperVue2 = _interopRequireDefault(_helpersFormHelperVue);
 
 var _helpersAuthHelperVue = require('../../helpers/AuthHelper.vue');
 
@@ -14657,7 +14811,7 @@ exports['default'] = {
     methods: {
         onSubmit: function onSubmit() {
             var self = this;
-            _helpersFormHelperVue2['default'].submit('/api/register', {
+            this.$bq.Form.submit('/api/register', {
                 username: this.$refs.username,
                 email: this.$refs.email,
                 password: this.$refs.password,
@@ -14682,7 +14836,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, module.exports.template)
   }
 })()}
-},{"../../components/form/Input.vue":44,"../../helpers/AuthHelper.vue":46,"../../helpers/FormHelper.vue":47,"babel-runtime/helpers/interop-require-default":2,"vue":42,"vue-hot-reload-api":16}],52:[function(require,module,exports){
+},{"../../components/form/Input.vue":48,"../../helpers/AuthHelper.vue":50,"babel-runtime/helpers/interop-require-default":2,"vue":42,"vue-hot-reload-api":16}],55:[function(require,module,exports){
 ;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <div class=\"row\">\n        <div class=\"span8\">\n            <h1>About BotQueue</h1>\n            Nice big picture should go here.\n        </div>\n        <div class=\"span4\">\n            <h3>Creator</h3>\n\n            <p>\n                BotQueue was started by <a href=\"mailto:zach@hoektronics.com\">Zach Hoeken</a>. His other work includes\n                co-founding <a href=\"http://www.makerbot.com\">MakerBot Industries</a>, building <a href=\"http://www.thingiverse.com\">Thingiverse.com</a>, designing the <a href=\"http://www.sanguino.cc\">Sanguino</a>,\n                co-founding <a href=\"http://www.nycresistor.com\">NYC Resistor</a> and lately helping startups at <a href=\"http://www.haxlr8r.com\">HAXLR8R</a>.\n            </p>\n\n            <p>\n                The current lead developer is <a href=\"mailto:jnesselr@harding.edu\">Justin Nesselrotte</a>. Check out his <a href=\"http://blog.jnesselr.org/\">blog</a>!\n            </p>\n\n            <h3>Contributors</h3>\n\n            <p>\n                We've received lots of help along the way, and here are some people who have contributed greatly to the\n                BotQueue project directly or indirectly:\n            </p>\n            <ul>\n                <li><a href=\"http://www.joewalnes.com\">Joe Walnes (gcode display plugin)</a></li>\n                <li><a href=\"http://www.tonybuser.com\">Tony Buser (stl viewer plugin)</a></li>\n                <li><a href=\"http://www.slic3r.org\">Alessandro Ranellucci (slic3r)</a></li>\n            </ul>\n            <p>\n                Of course this project also owes a huge debt to the many people who have developed awesome open source 3D\n                printers, electronics, firmware, and all the other things that BotQueue is built on top of. Keep on rocking!\n            </p>\n        </div>\n    </div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
@@ -14695,7 +14849,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, module.exports.template)
   }
 })()}
-},{"vue":42,"vue-hot-reload-api":16}],53:[function(require,module,exports){
+},{"vue":42,"vue-hot-reload-api":16}],56:[function(require,module,exports){
 ;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n    <div class=\"hero-unit\">\n        <h1>BotQueue has arrived!</h1>\n\n        <p>The open source, distributed fabrication software you've been dreaming about. Srsly.</p>\n\n        <p>\n            <img src=\"/img/botqueue.png\" width=\"1013\" height=\"403\" align=\"center\">\n        </p>\n\n        <h3>Okay, so what does that mean?</h3>\n\n        <p>\n            Simple. BotQueue lets you control multiple 3D printers through the Internet and turn them into your own\n            manufacturing center. Think cloud-based computing, but for making things in the real world. Now you can\n            build the robot army you've always dreamed of! Oh yeah, and its 100% open source because that's how I roll.\n        </p>\n\n        <h3>Want to learn more?</h3>\n\n        <p>\n            Check out the <a href=\"http://www.hoektronics.com/2012/09/13/introducing-botqueue-open-distributed-manufacturing/\">blog\n            entry about the launch of BotQueue</a>.\n        </p>\n    </div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
@@ -14708,7 +14862,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, module.exports.template)
   }
 })()}
-},{"vue":42,"vue-hot-reload-api":16}],54:[function(require,module,exports){
+},{"vue":42,"vue-hot-reload-api":16}],57:[function(require,module,exports){
 'use strict';
 
 var _Object$keys = require('babel-runtime/core-js/object/keys')['default'];
@@ -14757,7 +14911,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, module.exports.template)
   }
 })()}
-},{"babel-runtime/core-js/object/keys":1,"vue":42,"vue-hot-reload-api":16}],55:[function(require,module,exports){
+},{"babel-runtime/core-js/object/keys":1,"vue":42,"vue-hot-reload-api":16}],58:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -14799,6 +14953,6 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update(id, module.exports, module.exports.template)
   }
 })()}
-},{"vue":42,"vue-hot-reload-api":16}]},{},[48]);
+},{"vue":42,"vue-hot-reload-api":16}]},{},[51]);
 
 //# sourceMappingURL=build.js.map

@@ -41,7 +41,6 @@
 
 <script>
     import BQInput from '../../components/form/Input.vue'
-    import FormHelper from '../../helpers/FormHelper.vue'
     import Auth from '../../helpers/AuthHelper.vue'
 
     export default {
@@ -51,7 +50,7 @@
         methods: {
             onSubmit() {
                 var self = this;
-                FormHelper.submit('/api/register', {
+                this.$bq.Form.submit('/api/register', {
                     username: this.$refs.username,
                     email: this.$refs.email,
                     password: this.$refs.password,
