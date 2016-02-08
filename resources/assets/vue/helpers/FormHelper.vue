@@ -12,6 +12,7 @@
 
             Vue.http.post(uri, json)
                     .then(callback, function (response) {
+                        console.log(response);
                         if (response.status == 422) {
                             // Form input was invalid, so show errors
 

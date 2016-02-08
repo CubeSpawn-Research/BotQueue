@@ -1,5 +1,5 @@
 <script>
-    import Auth from '../helpers/AuthHelper.vue'
+    import Auth from '../../helpers/AuthHelper.vue'
 
     export default {
         ready() {

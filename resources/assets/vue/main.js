@@ -17,12 +17,18 @@ router.map({
     '/': {
         component: require('./App.vue'),
         subRoutes: {
-            '/': { component: require('./pages/Welcome.vue') },
-            '/about': { component: require('./pages/About.vue') },
+            '/': { component: require('./pages/Home/Welcome.vue') },
+            '/about': { component: require('./pages/Home/About.vue') },
 
-            'register': { component: require('./pages/Register.vue') },
-            '/login': { component: require('./pages/Login.vue') },
-            '/logout': { component: require('./pages/Logout.vue') },
+            'register': { component: require('./pages/Auth/Register.vue') },
+            '/login': { component: require('./pages/Auth/Login.vue') },
+            '/logout': { component: require('./pages/Auth/Logout.vue') },
+
+            '/queues': { component: require('./pages/Queue/Index.vue') },
+            '/queue/:id': {
+                name: 'queue',
+                component: require('./pages/Queue/View.vue')
+            },
 
             '/*any': {
                 component: {
@@ -37,4 +43,6 @@ var MyApp = Vue.extend({});
 router.start(MyApp, '#app');
 
 import Auth from './helpers/AuthHelper.vue'
+
 Auth.refreshLogin();
+Vue.http.headers.common['Authorization'] = Auth.getAuthHeader();

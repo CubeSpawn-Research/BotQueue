@@ -40,9 +40,9 @@
 </template>
 
 <script>
-    import BQInput from '../components/form/Input.vue'
-    import FormHelper from '../helpers/FormHelper.vue'
-    import Auth from '../helpers/AuthHelper.vue'
+    import BQInput from '../../components/form/Input.vue'
+    import FormHelper from '../../helpers/FormHelper.vue'
+    import Auth from '../../helpers/AuthHelper.vue'
 
     export default {
         components: {

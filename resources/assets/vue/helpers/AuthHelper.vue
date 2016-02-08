@@ -24,6 +24,9 @@
                 this.user.username = '';
                 this.user.authenticated = false;
             }
+        },
+        getAuthHeader() {
+            return 'Bearer ' + localStorage.getItem('BQ/token');
         }
     }
 </script>

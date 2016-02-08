@@ -24,15 +24,6 @@ class Jobs extends ApiHandler
             ->selectRaw("($jobsQuery AND jobs.status = 'completed') as completed")
             ->selectRaw("($jobsQuery) as total")
         ;
-        /**
-         * SELECT  q.id,
-        (SELECT COUNT(*) FROM jobs j WHERE q.id = j.queue_id AND j.status = 'available') as available,
-        (SELECT COUNT(*) FROM jobs j WHERE q.id = j.queue_id AND j.status = 'taken') as taken,
-        (SELECT COUNT(*) FROM jobs j WHERE q.id = j.queue_id AND j.status = 'failed') as failed,
-        (SELECT COUNT(*) FROM jobs j WHERE q.id = j.queue_id AND j.status = 'complete') as complete,
-        (SELECT COUNT(*) FROM jobs j WHERE q.id = j.queue_id) as total
-        FROM queues q
-         */
     }
 
     public function get()

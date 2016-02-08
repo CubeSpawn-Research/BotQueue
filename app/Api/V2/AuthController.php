@@ -6,11 +6,9 @@ namespace App\Api\V2;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
-use Dingo\Api\Http\Request;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Routing\Controller;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
@@ -26,7 +24,6 @@ class AuthController extends Controller
 
     public function register(RegisterRequest $request)
     {
-        error_log($request);
         $credentials = $request->only('username', 'email', 'password');
 
         $user = User::create($credentials);
