@@ -11,19 +11,15 @@ use Illuminate\Database\Eloquent\Model;
  * @property int id
  * @property string name
  * @property Collection jobs
- * @property integer $id
  * @property integer $user_id
- * @property string $name
  * @property integer $delay
  * @property integer $version
  * @property \App\Models\User $user
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Job[] $jobs
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Bot[] $bots
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Queue mine()
  */
 class Queue extends Model
 {
-
     use ConcurrentUpdates;
 
     /**
@@ -48,16 +44,6 @@ class Queue extends Model
     protected $fillable = [
         'name',
         'delay'
-    ];
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'user_id',
-        'user',
     ];
 
     public function user()

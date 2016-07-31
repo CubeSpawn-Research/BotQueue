@@ -37,21 +37,29 @@
     export default {
         data() {
             return {
-                queues: {}
+                queues: this.$bq.Api.queues()
             }
-        },
-        ready() {
-            var self = this;
-            this.$http.get('api/queues').then(function(response) {
-                self.queues = response.data;
-             });
         },
         computed: {
             total: function () {
                 var self = this;
+
+                var emptyQueue = {
+                    'available': 0,
+                    'taken': 0,
+                    'completed': 0,
+                    'failed': 0,
+                    'total': 0
+                };
+
+                if(self.queues === null) {
+                    return emptyQueue;
+                }
+
                 var values = Object.keys(self.queues).map(function (key) {
                     return self.queues[key]
                 });
+
                 return values.reduce(function (previous, current) {
                     return {
                         'available': previous.available + parseInt(current.available),
@@ -60,7 +68,7 @@
                         'failed': previous.failed + parseInt(current.failed),
                         'total': previous.total + parseInt(current.total)
                     }
-                }, {'available': 0, 'taken': 0, 'completed': 0, 'failed': 0, 'total': 0});
+                }, emptyQueue);
             }
         }
     }

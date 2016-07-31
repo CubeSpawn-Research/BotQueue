@@ -48,7 +48,7 @@
         },
         ready() {
             var self = this;
-            var resource = this.$resource('/api/queue/:id');
+            var resource = this.$resource('/api/queue/{id}');
 
             // get item
             resource.get({id: this.$route.params.id}).then(function (response) {
