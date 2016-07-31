@@ -14,6 +14,8 @@ return [
     */
 
     'debug' => env('APP_DEBUG', false),
+
+    'env' => env('APP_ENV', 'production'),
     /*
     |--------------------------------------------------------------------------
     | Application URL
@@ -110,7 +112,6 @@ return [
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Cache\CacheServiceProvider::class,
         Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
-        Illuminate\Routing\ControllerServiceProvider::class,
         Illuminate\Cookie\CookieServiceProvider::class,
         Illuminate\Database\DatabaseServiceProvider::class,
         Illuminate\Encryption\EncryptionServiceProvider::class,
@@ -133,15 +134,11 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         App\Providers\BladeServiceProvider::class,
-        App\Providers\BusServiceProvider::class,
-        App\Providers\ConfigServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\FacadeServiceProvider::class,
         App\Providers\HtmlServiceProvider::class,
         App\Providers\JsMessageBagProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
-        Dingo\Api\Provider\LaravelServiceProvider::class,
         /*
          * Helper service provider
          */
@@ -199,7 +196,6 @@ return [
         'Api' => App\Facades\Api::class,
         'Area' => App\Facades\Area::class,
         'FileUtils' => App\Facades\FileUtils::class,
-        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'Migrate' => App\Facades\Migrate::class,
     ],
 

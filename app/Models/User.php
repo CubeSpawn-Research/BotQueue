@@ -15,8 +15,6 @@ use Illuminate\Support\Facades\Hash;
  *
  * @property int id
  * @property string username
- * @property integer $id
- * @property string $username
  * @property string $email
  * @property string $password
  * @property string $dashboard_style

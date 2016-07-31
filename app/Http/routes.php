@@ -11,26 +11,6 @@
 |
 */
 
-$api = app('Dingo\Api\Routing\Router');
-
-$api->version('v2', function ($api) {
-    /** @var $api Dingo\Api\Routing\Router */
-
-    $api->get('version', 'App\Api\V2\MainController@version');
-
-    $api->post('register', 'App\Api\V2\AuthController@register');
-    $api->post('login', 'App\Api\V2\AuthController@login');
-
-    $api->group(['middleware' => 'api.auth'], function($api) {
-        /** @var $api Dingo\Api\Routing\Router */
-
-        $api->get('queues', 'App\Api\V2\QueueController@index');
-        $api->get('queue/{queue}', 'App\Api\V2\QueueController@view');
-    });
-});
-
-Route::get('/{any}', 'HomeController@index')->where('any', '.*');
-
 //// Upload pages
 //Route::get('upload', 'UploadController@getIndex');
 //Route::post('upload/file', 'UploadController@postFile');

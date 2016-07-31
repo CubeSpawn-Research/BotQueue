@@ -15,7 +15,6 @@
     <script src="/js/jquery-ui-1.10.3/ui/minified/jquery-ui.min.js"></script>
 </head>
 <body id="app">
-    <router-view></router-view>
     <script src="/bootstrap/2.3.0/js/bootstrap.js"></script>
     <script src="/js/build.js"></script>
 </body>
