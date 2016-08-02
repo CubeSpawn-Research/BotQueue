@@ -41,7 +41,7 @@ class LegacyUserProvider implements UserProvider
      */
     public function retrieveById($identifier)
     {
-        return User::get($identifier);
+        return User::find($identifier);
     }
 
     /**
@@ -54,7 +54,7 @@ class LegacyUserProvider implements UserProvider
     public function retrieveByToken($identifier, $token)
     {
         return User::query()
-            ->where('username', $identifier)
+            ->where('id', $identifier)
             ->where('remember_token', $token)
             ->first();
     }
