@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row-fluid">
-        <div class="signin span6">
+        <div class="signin offset3 span6">
             <div class="title">Not a member? Create a free account:</div>
             {!! Form::open('register') !!}
 
