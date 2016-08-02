@@ -6,7 +6,7 @@ namespace App\Html\Forms;
 
 use ArrayAccess;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Html\HtmlBuilder;
+use Collective\Html\HtmlBuilder;
 
 class SelectBuilder extends FieldBuilder
 {

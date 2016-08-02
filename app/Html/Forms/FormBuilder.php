@@ -20,7 +20,7 @@
 namespace App\Html\Forms;
 
 
-use Illuminate\Html\HtmlBuilder;
+use Collective\Html\HtmlBuilder;
 use Illuminate\Session\Store;
 
 class FormBuilder

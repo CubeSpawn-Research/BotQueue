@@ -4,7 +4,7 @@
 namespace App\Html\Forms;
 
 
-use Illuminate\Html\HtmlBuilder;
+use Collective\Html\HtmlBuilder;
 
 class DisplayFieldBuilder extends FieldBuilder
 {

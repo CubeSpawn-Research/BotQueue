@@ -1,25 +1,17 @@
-<?php namespace App\Http\Middleware;
+<?php
 
-use Closure;
+namespace App\Http\Middleware;
+
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 
 class VerifyCsrfToken extends BaseVerifier
 {
-
     /**
-     * Handle an incoming request.
+     * The URIs that should be excluded from CSRF verification.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
-     * @return mixed
+     * @var array
      */
-    public function handle($request, Closure $next)
-    {
-        /**
-         * We should not need to handle CSRF because
-         * we're using JWT tokens for auth.
-         */
-        return $next($request);
-    }
-
+    protected $except = [
+        //
+    ];
 }

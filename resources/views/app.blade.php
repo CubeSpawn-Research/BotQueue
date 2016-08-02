@@ -16,6 +16,7 @@
     <!-- Le styles -->
     <link href="/bootstrap/2.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="/bootstrap/2.3.0/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
     @yield('css')
 
     <!-- Le jquery -->
@@ -25,9 +26,6 @@
     <script language="javascript" type="text/javascript" src="/js/flot-0.7/jquery.flot.js"></script>
     <script language="javascript" type="text/javascript" src="/js/flot-0.7/jquery.flot.selection.js"></script>
     <script language="javascript" type="text/javascript" src="/js/jquery.flot.tooltip.min.js"></script>
-    <script>
-        window.BotQueue = {!! $js_vars !!};
-    </script>
     @yield('js')
 
     {{-- @include('google.analytics') --}}

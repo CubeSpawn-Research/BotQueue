@@ -20,8 +20,7 @@
 namespace App\Html\Forms;
 
 
-use Illuminate\Html\HtmlBuilder;
-use Illuminate\Support\Facades\Validator;
+use Collective\Html\HtmlBuilder;
 
 class FieldBuilder
 {

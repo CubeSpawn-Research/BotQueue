@@ -20,16 +20,11 @@
 namespace App\Providers;
 
 use App\Html\Forms\Form;
-use Illuminate\Support\ServiceProvider as IlluminateHtmlServiceProvider;
+use Collective\Html\HtmlServiceProvider as CollectiveServiceProvider;
 
-class HtmlServiceProvider extends IlluminateHtmlServiceProvider
+class HtmlServiceProvider extends CollectiveServiceProvider
 {
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register()
+    public function registerFormBuilder()
     {
         $this->app->singleton('form', function ($app) {
             $form = new Form($app['html'], $app['url'], $app['session.store']);

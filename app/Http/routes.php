@@ -11,6 +11,11 @@
 |
 */
 
+Route::get('/', 'HomeController@index');
+
+// Registration and login
+Route::auth();
+
 //// Upload pages
 //Route::get('upload', 'UploadController@getIndex');
 //Route::post('upload/file', 'UploadController@postFile');

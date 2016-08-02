@@ -19,6 +19,7 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Contracts\Hashing\Hasher;
@@ -26,12 +27,10 @@ use Illuminate\Contracts\Hashing\Hasher;
 class LegacyUserProvider implements UserProvider
 {
     protected $hasher;
-    protected $model;
 
-    public function __construct(Hasher $hasher, $model)
+    public function __construct(Hasher $hasher)
     {
         $this->hasher = $hasher;
-        $this->model = $model;
     }
 
     /**
@@ -42,7 +41,7 @@ class LegacyUserProvider implements UserProvider
      */
     public function retrieveById($identifier)
     {
-        return $this->createModel()->newQuery()->find($identifier);
+        return User::get($identifier);
     }
 
     /**
@@ -54,11 +53,9 @@ class LegacyUserProvider implements UserProvider
      */
     public function retrieveByToken($identifier, $token)
     {
-        $model = $this->createModel();
-
-        return $model->newQuery()
-            ->where($model->getKeyName(), $identifier)
-            ->where($model->getRememberTokenName(), $token)
+        return User::query()
+            ->where('username', $identifier)
+            ->where('remember_token', $token)
             ->first();
     }
 
@@ -84,7 +81,7 @@ class LegacyUserProvider implements UserProvider
      */
     public function retrieveByCredentials(array $credentials)
     {
-        $query = $this->createModel()->newQuery();
+        $query = User::query();
 
         foreach ($credentials as $key => $value) {
             if (!str_contains($key, 'password')) $query->where($key, $value);
@@ -114,16 +111,6 @@ class LegacyUserProvider implements UserProvider
         }
     }
 
-    /**
-     * @return \App\Models\User
-     */
-    private function createModel()
-    {
-        $class = '\\' . ltrim($this->model, '\\');
-
-        return new $class;
-    }
-
     private function isLegacyPassword(Authenticatable $user, $plain)
     {
         return sha1($plain) === $user->getAuthPassword();
@@ -131,6 +118,7 @@ class LegacyUserProvider implements UserProvider
 
     private function updateLegacyPassword($user, $plain)
     {
+        /** @var \App\Models\User password */
         $user->password = $this->hasher->make($plain);
         $user->save();
     }

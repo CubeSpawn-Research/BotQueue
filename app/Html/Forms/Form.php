@@ -19,7 +19,7 @@
 
 namespace App\Html\Forms;
 
-use Illuminate\Html\HtmlBuilder;
+use Collective\Html\HtmlBuilder;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Session\Store;
 use Illuminate\Support\Traits\Macroable;
@@ -168,8 +168,9 @@ class Form
             return $value;
 
         if (isset($this->session)) {
-            if ($this->current_form_was_submitted || $name == '_form_key')
+            if ($this->current_form_was_submitted || $name == '_form_key') {
                 return $this->session->getOldInput($this->transformKey($name));
+            }
         }
 
         if (!is_null($this->model)) {

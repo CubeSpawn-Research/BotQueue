@@ -43,10 +43,7 @@ class AuthServiceProvider extends ServiceProvider
 	public function register()
 	{
 		Auth::provider('password-upgrader', function($app) {
-			$model = $app['config']['auth.model'];
-
-			return new LegacyUserProvider($app['hash'], $model);
-			//
+			return new LegacyUserProvider($app['hash']);
 		});
 	}
 
