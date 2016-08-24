@@ -52,8 +52,8 @@ class CreateUsersTable extends Migration {
 			$table->string('dashboard_style')->default('large_thumbnails');
 			$table->string('thingiverse_token', 40);
 			$table->boolean('is_admin');
-			$table->dateTime('created_at');
-			$table->dateTime('updated_at');
+			$table->rememberToken();
+			$table->timestamps();
 		});
 	}
 
