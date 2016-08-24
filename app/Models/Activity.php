@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $activity
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property \App\Models\User $user
+ * @property \App\User $user
  */
 class Activity extends Model {
 
@@ -43,7 +43,7 @@ class Activity extends Model {
 	];
 
 	public function user() {
-		return $this->belongsTo('App\Models\User');
+		return $this->belongsTo('App\User');
 	}
 
 	public function setUserAttribute($value) {

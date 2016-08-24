@@ -1,9 +1,13 @@
 <?php
 
-use App\Models\User;
+use App\User;
+
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class AuthTestCase extends TestCase
 {
+    use DatabaseMigrations;
+
     /** @var User $user */
     protected $user;
 
@@ -16,7 +20,7 @@ class AuthTestCase extends TestCase
             $this->artisan('migrate:rollback');
         });
 
-        $this->user = factory(App\Models\User::class)->create();
+        $this->user = factory(App\User::class)->create();
         $this->actingAs($this->user);
     }
 }

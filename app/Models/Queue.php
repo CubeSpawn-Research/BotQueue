@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $user_id
  * @property integer $delay
  * @property integer $version
- * @property \App\Models\User $user
+ * @property \App\User $user
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Bot[] $bots
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Queue mine()
  */
@@ -48,7 +48,7 @@ class Queue extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\User');
     }
 
     public function setUserAttribute($value)

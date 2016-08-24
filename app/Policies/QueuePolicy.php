@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Queue;
-use App\Models\User;
+use App\User;
 
 class QueuePolicy
 {

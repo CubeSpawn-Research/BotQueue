@@ -19,7 +19,7 @@
 
 namespace App\Providers;
 
-use App\Models\User;
+use App\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Contracts\Hashing\Hasher;
@@ -118,7 +118,7 @@ class LegacyUserProvider implements UserProvider
 
     private function updateLegacyPassword($user, $plain)
     {
-        /** @var \App\Models\User password */
+        /** @var \App\User password */
         $user->password = $this->hasher->make($plain);
         $user->save();
     }

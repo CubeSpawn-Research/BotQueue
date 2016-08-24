@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  * @property string $source_url
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property-read \App\Models\User $user
+ * @property-read \App\User $user
  * @property-read mixed $name
  */
 class LocalFile extends FileInterface

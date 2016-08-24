@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\File\FileInterface;
 use App\Models\File\LocalFile;
 use App\Models\Traits\ConcurrentUpdates;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
 
@@ -25,7 +26,7 @@ use Illuminate\Database\Query\Builder;
  * @property integer $version
  * @property \App\Models\File\LocalFile $file
  * @property \App\Models\Queue $queue
- * @property-read \App\Models\User $user
+ * @property-read \App\User $user
  * @property-read \App\Models\Bot $bot
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Job available()
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Job working()

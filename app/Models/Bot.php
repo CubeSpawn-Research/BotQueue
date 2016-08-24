@@ -25,7 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property integer $version
- * @property-read \App\Models\User $user
+ * @property-read \App\User $user
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Queue[] $queues
  */
 class Bot extends Model
@@ -52,7 +52,7 @@ class Bot extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\User');
     }
 
     public function queues()

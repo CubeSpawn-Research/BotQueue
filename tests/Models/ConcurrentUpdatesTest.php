@@ -2,7 +2,7 @@
 
 use App\Exceptions\ConcurrentModificationException;
 use App\Models\Job;
-use App\Models\User;
+use App\User;
 use App\Models\Queue;
 use App\Models\Bot;
 use App\Models\File\LocalFile;
