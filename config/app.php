@@ -176,6 +176,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\FacadeServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
     ],
@@ -225,6 +226,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        'FileUtils' => App\Facades\FileUtils::class,
+        'Migrate' => App\Facades\Migrate::class,
     ],
 
 ];

@@ -14,10 +14,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 class QueueController extends Controller
 {
-    public function __construct()
-    {
-        Area::is('queues');
-    }
 
     public function index()
     {

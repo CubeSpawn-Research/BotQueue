@@ -15,10 +15,6 @@ class FacadeServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        App::bind('area', function () {
-            return new AreaHelper;
-        });
-
         App::bind('migrate', function () {
             return new MigrationHelper;
         });

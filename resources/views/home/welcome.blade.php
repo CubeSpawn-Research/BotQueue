@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-    <div class="hero-unit">
+    <div class="jumbotron">
         <h1>BotQueue has arrived!</h1>
 
         <p>The open source, distributed fabrication software you've been dreaming about. Srsly.</p>
@@ -21,8 +21,7 @@
         <h3>Want to learn more?</h3>
 
         <p>
-            Check out the <a
-                    href="http://www.hoektronics.com/2012/09/13/introducing-botqueue-open-distributed-manufacturing/">blog
+            Check out the <a href="http://www.hoektronics.com/2012/09/13/introducing-botqueue-open-distributed-manufacturing/">blog
                 entry about the launch of BotQueue</a>.
         </p>
     </div>

@@ -2,10 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>BotQueue</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Zach Hoeken / Justin Nesselrotte">
+
+    <title>BotQueue</title>
+
     <link rel="icon" href="favicon.gif" type="image/gif">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -14,61 +17,46 @@
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="/bootstrap/2.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/bootstrap/2.3.0/css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="/css/app.css" rel="stylesheet">
-    @yield('css')
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-    <!-- Le jquery -->
-    <script src="/js/jquery-1.11.0.min.js"></script>
-    <script src="/js/jquery-ui-1.10.3/ui/minified/jquery-ui.min.js"></script>
-    <script language="javascript" type="text/javascript" src="/js/jquery.imagesloaded.min.js"></script>
-    <script language="javascript" type="text/javascript" src="/js/flot-0.7/jquery.flot.js"></script>
-    <script language="javascript" type="text/javascript" src="/js/flot-0.7/jquery.flot.selection.js"></script>
-    <script language="javascript" type="text/javascript" src="/js/jquery.flot.tooltip.min.js"></script>
-    @yield('js')
+    @yield('css')
 
     {{-- @include('google.analytics') --}}
 
 </head>
-<body class="preview" data-spy="scroll" data-target=".subnav" data-offset="50">
-<div class="container">
+<body>
 
-    @include('menubar')
+@include('menubar')
+<div class="container" role="main">
 
-    <section id="content" style="margin-top:60px">
-        @ifSection('title')
-            <div class="page-header">
-                <h1>@yield('title')</h1>
-            </div>
-        @endif
-
-        <div class="row">
-            <div class="span12">
-                @yield('content')
-            </div>
+    <div class="row">
+        <div class="col-md-12">
+            @yield('content')
         </div>
+    </div>
 
-        <br/><br/>
-
-        <div class="alert alert-info">
+    <div class="row">
+        <div class="col-md-12 alert alert-info">
             <strong>Hey You!</strong> If you run into any problems, please <a
                     href="https://github.com/Hoektronics/BotQueue/issues/new">report a bug</a>. Make sure to include the
             <strong>bumblebee/info.log</strong> file if it is client-related.
         </div>
-
-    </section>
+    </div>
 
     <footer>
         <div class="row">
-            <div class="span6">
+            <div class="col-md-6">
                 <h3>Connect</h3>
                 <a href="http://www.hoektronics.com">Blog</a><br/>
                 <a href="https://twitter.com/hoeken">Twitter</a><br/>
                 <a href="irc://irc.freenode.net/botqueue">Freenode #BotQueue</a><br/>
                 <a href="https://groups.google.com/d/forum/botqueue">Google Group</a><br/>
             </div>
-            <div class="span6">
+            <div class="col-md-6">
                 <h3>Info</h3>
                 Made by Zach Hoeken and Justin Nesselrotte. (<a href="/about">about</a>)<br/>
                 Software licensed under the <a href="http://www.gnu.org/copyleft/gpl.html">GPL v3.0</a>. Code at <a
@@ -83,7 +71,10 @@
 
 </div>
 
-<script src="/bootstrap/2.3.0/js/bootstrap.js"></script>
-@yield('end-js')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
 </body>
 </html>
