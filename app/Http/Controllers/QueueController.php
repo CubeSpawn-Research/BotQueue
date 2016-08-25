@@ -39,7 +39,7 @@ class QueueController extends Controller
         $queue->user()->associate($request->user());
         $queue->save();
 
-        return redirect()->route('queue', [$queue]);
+        return redirect()->action('QueueController@view', [$queue]);
     }
 
     public function getEdit(Queue $queue)
@@ -54,7 +54,7 @@ class QueueController extends Controller
         $fields = $request->only('name', 'delay');
         $queue->update($fields);
 
-        return redirect()->route('queue', [$queue]);
+        return redirect()->action('QueueController@view', [$queue]);
     }
 
     public function getDelete(Queue $queue)
