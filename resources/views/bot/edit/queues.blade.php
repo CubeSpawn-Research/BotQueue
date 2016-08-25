@@ -29,7 +29,7 @@
                                     <h3 style="margin-top: 10px;"><span
                                                 class="label label-default">{{ $queue->name }}</span></h3>
                                     <div class="controls">
-                                        <input id="queue_{{ $queue->id }}" type="hidden" name="queues[]"
+                                        <input id="queue_{{ $queue->id }}" type="hidden" name="ignored[]"
                                                value="{{ $queue->id }}">
                                     </div>
                                 </div>

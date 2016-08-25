@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', 'HomeController@index');
 
 Auth::routes();
@@ -18,22 +20,27 @@ Auth::routes();
 // Bot pages
 Route::get('bots', 'Bot\BotController@index');
 
-Route::get('bot/register', ['as' => 'bot:register', 'uses' => 'Bot\EditController@getRegister']);
+Route::get('bot/register', 'Bot\EditController@getRegister');
 Route::post('bot/register', 'Bot\EditController@postRegister');
 
-Route::get('bot/{bot}/edit/queues', ['as' => 'bot:edit:queues', 'uses' => 'Bot\EditController@getQueues']);
+Route::get('bot/{bot}', 'Bot\BotController@view');
+
+Route::get('bot/{bot}/delete', 'Bot\EditController@getDelete');
+Route::post('bot/{bot}/delete', 'Bot\EditController@postDelete');
+
+Route::get('bot/{bot}/edit/queues', 'Bot\EditController@getQueues');
 Route::post('bot/{bot}/edit/queues', 'Bot\EditController@postQueues');
 
 // Queue pages
 Route::get('queues', 'QueueController@index');
 
-Route::get('queue/create', ['as' => 'queue:create', 'uses' => 'QueueController@getCreate']);
+Route::get('queue/create', 'QueueController@getCreate');
 Route::post('queue/create', 'QueueController@postCreate');
 
-Route::get('queue/{queue}/edit', ['as' => 'queue:edit', 'uses' => 'QueueController@getEdit']);
+Route::get('queue/{queue}', 'QueueController@view');
+
+Route::get('queue/{queue}/edit', 'QueueController@getEdit');
 Route::post('queue/{queue}/edit', 'QueueController@postEdit');
 
-Route::get('queue/{queue}/delete', ['as' => 'queue:delete', 'uses' => 'QueueController@getDelete']);
+Route::get('queue/{queue}/delete', 'QueueController@getDelete');
 Route::post('queue/{queue}/delete', 'QueueController@postDelete');
-
-Route::get('queue/{queue}', ['as' => 'queue', 'uses' => 'QueueController@view']);

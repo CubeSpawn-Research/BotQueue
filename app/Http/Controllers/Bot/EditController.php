@@ -1,12 +1,11 @@
 <?php namespace App\Http\Controllers\Bot;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\Bot\QueueRequest;
 use App\Http\Requests\Bot\RegisterRequest;
 use App\Models\Bot;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class EditController extends Controller
 {
@@ -22,7 +21,19 @@ class EditController extends Controller
 
         $bot = Bot::create($fields);
 
-        return redirect()->route('bot:edit:queues', [$bot]);
+        return redirect()->action('Bot\EditController@getQueues', [$bot]);
+    }
+
+    public function getDelete(Bot $bot)
+    {
+        return view('bot.edit.delete', compact('bot'));
+    }
+
+    public function postDelete(Bot $bot)
+    {
+        $bot->delete();
+
+        return redirect('/bots');
     }
 
     public function getQueues(Bot $bot)
@@ -39,6 +50,6 @@ class EditController extends Controller
 
         $bot->queues()->sync($queues);
 
-        return redirect('/bots');
+        return redirect()->action('Bot\BotController@view', [$bot]);
     }
 }

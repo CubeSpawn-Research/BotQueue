@@ -13,4 +13,8 @@ class BotController extends Controller
 
         return view('bot.index', ['bots' => $myBots]);
     }
+
+    public function view(Bot $bot) {
+        return view('bot.view', compact('bot'));
+    }
 }
