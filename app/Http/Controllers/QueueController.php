@@ -7,19 +7,18 @@ use App\Http\Requests\Queue\DeleteRequest;
 use App\Http\Requests\Queue\EditRequest;
 use App\Models\Queue;
 
-use App\Http\Requests;
-use Area;
-use Auth;
-use Illuminate\Database\Eloquent\Collection;
-
 class QueueController extends Controller
 {
 
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        js_data(['queues' => api('queues.jobs')->toArray()]);
+        $myQueues = Queue::mine()->get();
 
-        return view('queue.index');
+        return view('queue.index', ['queues' => $myQueues]);
     }
 
     public function view(Queue $queue)
@@ -36,7 +35,9 @@ class QueueController extends Controller
     {
         $fields = $request->only('name', 'delay');
 
-        $queue = Queue::create($fields);
+        $queue = new Queue($fields);
+        $queue->user()->associate($request->user());
+        $queue->save();
 
         return redirect()->route('queue', [$queue]);
     }
@@ -67,6 +68,6 @@ class QueueController extends Controller
     {
         $queue->delete();
 
-        return redirect('/');
+        return redirect('/queues');
     }
 }

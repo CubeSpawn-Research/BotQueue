@@ -1,42 +1,34 @@
 @extends('app')
 
-@section('title', Auth::user()->username . "'s Queues");
-
 @section('content')
-    <div id="queues-list">
-        <table class="table table-striped table-bordered table-condensed">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Available</th>
-                <th>Working</th>
-                <th>Completed</th>
-                <th>Failed</th>
-                <th>Total</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr v-for="queue in queues">
-                    <td>@{{ queue.name }}</td>
-                    <td><span class="label">@{{ queue.available }}</span></td>
-                    <td><span class="label label-info">@{{ queue.taken }}</span></td>
-                    <td><span class="label label-success">@{{ queue.completed }}</span></td>
-                    <td><span class="label label-important">@{{ queue.failed }}</span></td>
-                    <td><span class="label label-inverse">@{{ queue.total }}</span></td>
-                </tr>
-                <tr>
-                    <th>Total</th>
-                    <th><span class="label">@{{ total.available }}</span></th>
-                    <th><span class="label label-info">@{{ total.taken }}</span></th>
-                    <th><span class="label label-success">@{{ total.completed }}</span></th>
-                    <th><span class="label label-important">@{{ total.failed }}</span></th>
-                    <th><span class="label label-inverse">@{{ total.total }}</span></th>
-                </tr>
-            </tbody>
-        </table>
+    <div class="row">
+        <h1 class="col-md-3">Queue List</h1>
+        <div class="col-md-2 col-md-offset-7">
+            <a href="{{ url('/queue/create') }}" class="btn btn-lg btn-primary">Create New Queue</a>
+        </div>
     </div>
-@stop
 
-@section('end-js')
-    <script src="/js/vue/queue_list.js"></script>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                <th>Queue Name</th>
+                <th>Delay</th>
+                </thead>
+                <tbody>
+                @foreach($queues as $queue)
+                    <tr>
+                        <td><a href="{{ url('queue', [$queue]) }}">{{ $queue->name }}</a></td>
+
+                        @if($queue->delay == 0)
+                            <td>None</td>
+                        @else
+                            <td>{{ $queue->delay }} seconds</td>
+                        @endif
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 @stop

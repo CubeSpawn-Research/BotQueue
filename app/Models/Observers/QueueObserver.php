@@ -25,18 +25,4 @@ use Auth;
 
 class QueueObserver
 {
-
-	/**
-	 * @param Queue $queue
-	 * @return bool
-	 */
-	public function creating($queue)
-	{
-		// The user must be logged in to create a queue
-		if(Auth::check()) {
-			$queue->user()->associate(Auth::user());
-			return true;
-		}
-		return false;
-	}
 }

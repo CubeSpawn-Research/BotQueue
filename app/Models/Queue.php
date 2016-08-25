@@ -1,9 +1,9 @@
 <?php namespace App\Models;
 
 use App\Models\Traits\ConcurrentUpdates;
-use Auth;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * App\Models\Queue

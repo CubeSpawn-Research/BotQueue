@@ -49,15 +49,15 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-12 alert alert-info">
-            <strong>Hey You!</strong> If you run into any problems, please <a
-                    href="https://github.com/Hoektronics/BotQueue/issues/new">report a bug</a>. Make sure to include the
-            <strong>bumblebee/info.log</strong> file if it is client-related.
+    <footer style="margin-top: 6em">
+        <div class="row">
+            <div class="col-md-12 alert alert-info">
+                <strong>Hey You!</strong> If you run into any problems, please <a
+                        href="https://github.com/Hoektronics/BotQueue/issues/new">report a bug</a>. Make sure to include the
+                <strong>bumblebee/info.log</strong> file if it is client-related.
+            </div>
         </div>
-    </div>
 
-    <footer>
         <div class="row">
             <div class="col-md-6">
                 <h3>Connect</h3>

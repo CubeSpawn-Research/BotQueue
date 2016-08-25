@@ -8,11 +8,12 @@ use App\Models\Job;
 use App\Models\Observers\JobObserver;
 use App\Models\Observers\LocalFileObserver;
 use App\Models\Observers\QueueObserver;
-use App\Models\Queue;
-use Illuminate\Support\ServiceProvider;
+use App\Models\Observers\UserObserver;
 use App\Models\Observers\BotObserver;
-use Validator;
-
+use App\Models\Queue;
+use App\User;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
 
@@ -38,6 +39,7 @@ class AppServiceProvider extends ServiceProvider
         Job::observe(new JobObserver);
         LocalFile::observe(new LocalFileObserver);
         Queue::observe(new QueueObserver);
+        User::observe(new UserObserver);
     }
 
     /**
