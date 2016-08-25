@@ -13,7 +13,7 @@ class ConcurrentUpdatesTest extends AuthTestCase
     public function it_can_not_update_a_job_without_refreshing()
     {
         $file = factory(LocalFile::class)->create();
-        $queue = factory(Queue::class)->create();
+        $queue = factory(Queue::class)->create(['user' => $this->user]);
 
         $this->setExpectedException(ConcurrentModificationException::class);
 
@@ -52,7 +52,7 @@ class ConcurrentUpdatesTest extends AuthTestCase
         $this->setExpectedException(ConcurrentModificationException::class);
 
         /** @var Queue $queue1 */
-        $queue1 = factory(Queue::class)->create();
+        $queue1 = factory(Queue::class)->create(['user' => $this->user]);
         /** @var Queue $queue2 */
         $queue2 = Queue::find($queue1->id);
 

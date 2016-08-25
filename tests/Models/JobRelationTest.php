@@ -14,7 +14,7 @@ class JobRelationTest extends AuthTestCase
         parent::setUp();
 
         $file = factory(LocalFile::class)->create();
-        $queue = factory(Queue::class)->create();
+        $queue = factory(Queue::class)->create(['user' => $this->user]);
 
         $this->job = factory(App\Models\Job::class)->create(compact('file', 'queue'));
     }
