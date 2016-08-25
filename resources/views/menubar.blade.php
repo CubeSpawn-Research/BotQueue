@@ -12,15 +12,6 @@
 
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="{{ url('/') }}">Dashboard</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actions<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ url('/upload') }}">Create Job</a></li>
-                        <li><a href="/bot/register">Register Bot</a></li>
-                        <li><a href="/queue/create">Create Queue</a></li>
-                    </ul>
-                </li>
                 <li><a href="{{ url('/bots') }}">Bots</a></li>
                 <li><a href="{{ url('/queues') }}">Queues</a></li>
                 <li><a href="{{ url('/jobs') }}">Jobs</a></li>
