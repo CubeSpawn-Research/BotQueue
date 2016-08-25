@@ -7,6 +7,9 @@
     <meta name="description" content="">
     <meta name="author" content="Zach Hoeken / Justin Nesselrotte">
 
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>BotQueue</title>
 
     <link rel="icon" href="favicon.gif" type="image/gif">
@@ -24,6 +27,13 @@
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
     @yield('css')
+
+    <!-- Scripts -->
+    <script>
+        window.Laravel = <?php echo json_encode([
+                'csrfToken' => csrf_token(),
+        ]); ?>
+    </script>
 
     {{-- @include('google.analytics') --}}
 
