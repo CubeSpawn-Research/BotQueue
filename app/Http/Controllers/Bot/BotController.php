@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers\Bot;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use App\Models\Bot;
 use App\Http\Controllers\Controller;
 
 class BotController extends Controller
 {
     public function index()
     {
-        js_data(['bots' => api('bots')->toArray()]);
+        $myBots = Bot::mine()->get();
 
-        return view('bot.index');
+        return view('bot.index', ['bots' => $myBots]);
     }
 }

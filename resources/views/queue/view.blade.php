@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <h1 class="col-md-3">{{ $queue->name }}</h1>
+        <h1 class="col-md-6">{{ $queue->name }}</h1>
 
         @can('modify', $queue)
             <div class="pull-right">

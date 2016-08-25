@@ -1,26 +1,37 @@
 @extends('app')
 
-@section('title', 'Bots')
-
 @section('content')
-        <table id="bots-list" class="table table-striped table-bordered table-condensed">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Status</th>
-                <th>Last Seen</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="bot in bots">
-                <td>@{{ bot.name }}</td>
-                <td><bq-bot-status :status="bot.status"></bq-bot-status></td>
-                <td></td>
-            </tr>
-            </tbody>
-        </table>
-@stop
+    <div class="row">
+        <h1 class="col-md-6">Bots</h1>
+        <div class="pull-right">
+            <a href="{{ url('/bot/register') }}" class="btn btn-lg btn-primary">Register New Bot</a>
+        </div>
+    </div>
 
-@section('end-js')
-    <script src="/js/vue/bot_list.js"></script>
+    <div class="row">
+        @if($bots->count() > 0)
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Last Seen</th>
+                    </thead>
+                    <tbody>
+                    @foreach($bots as $bot)
+                        <tr>
+                            <td><a href="{{ url('bot', [$bot]) }}">{{ $bot->name }}</a></td>
+                            <td>{{ $bot->status }}</td>
+                            <td>Never</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @else
+            <div class="jumbotron">
+                <p>You currently have no bots. Get started by registering a new bot by using the link above :)</p>
+            </div>
+        @endif
+    </div>
 @stop

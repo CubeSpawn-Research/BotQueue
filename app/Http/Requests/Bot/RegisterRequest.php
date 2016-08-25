@@ -23,8 +23,7 @@ class RegisterRequest extends Request {
 	{
 		return [
 			'name' => 'required',
-			'manufacturer' => 'required',
-			'model' => 'required'
+            'type' => 'in:reprap,makerbot,dummy'
 		];
 	}
 

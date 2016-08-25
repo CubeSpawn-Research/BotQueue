@@ -18,7 +18,7 @@ class EditController extends Controller
 
     public function postRegister(RegisterRequest $request)
     {
-        $fields = $request->only('name', 'manufacturer', 'model');
+        $fields = $request->only('name', 'type');
 
         $bot = Bot::create($fields);
 
@@ -30,7 +30,7 @@ class EditController extends Controller
         $queues = $bot->queues;
         $ignored = Auth::user()->queues->diff($queues);
 
-        return view('bot.edit.queues', compact('queues', 'ignored'));
+        return view('bot.edit.queues', compact('bot', 'queues', 'ignored'));
     }
 
     public function postQueues(Bot $bot, QueueRequest $request)
@@ -39,6 +39,6 @@ class EditController extends Controller
 
         $bot->queues()->sync($queues);
 
-        return redirect('/');
+        return redirect('/bots');
     }
 }

@@ -3,24 +3,63 @@
 @section('title', 'Register a new Bot')
 
 @section('content')
-	{!! Form::open() !!}
 
-	{!! Form::text('name')
-		->label('Bot Name')
-		->help('What should humans call your bot?')
-	!!}
+    @extends('app')
 
-	{!! Form::text('manufacturer')
-		->label('Manufacturer')
-		->help('Which company (or person) built your bot?')
-	!!}
+@section('content')
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Login</div>
+                    <div class="panel-body">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/bot/register') }}">
+                            {{ csrf_field() }}
 
-	{!! Form::text('model')
-		->label('Model')
-		->help('What is the model or name of your bot design?')
-	!!}
+                            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                                <label for="name" class="col-md-4 control-label">Name</label>
 
-	{!! Form::submit('Create your bot') !!}
+                                <div class="col-md-6">
+                                    <input id="name" type="text" class="form-control" name="name"
+                                           value="{{ old('name') }}">
 
-	{!! Form::close() !!}
+                                    @if ($errors->has('name'))
+                                        <span class="help-block">
+                                                                    <strong>{{ $errors->first('name') }}</strong>
+                                                                </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('type') ? ' has-error' : '' }}">
+                                <label for="type" class="col-md-4 control-label">Type</label>
+
+                                <div class="col-md-6">
+                                    <select id="type" name="type" class="form-control">
+                                        <option value="reprap">Rep-Rap based printer (G-Code)</option>
+                                        <option value="makerbot">MakerBot based printer (s3g/x3g)</option>
+                                        <option value="dummy">Simulated Printer</option>
+                                    </select>
+
+                                    @if ($errors->has('type'))
+                                        <span class="help-block">
+                                                                    <strong>{{ $errors->first('type') }}</strong>
+                                                                </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-8 col-md-offset-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        Register Bot
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @stop

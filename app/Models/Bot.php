@@ -2,19 +2,16 @@
 
 use App\Models\Traits\ConcurrentUpdates;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * App\Models\Bot
  *
  * @property string status
  * @property int id
- * @property integer $id
  * @property integer $user_id
  * @property integer $oauth_token_id
  * @property string $name
- * @property string $model
- * @property string $manufacturer
- * @property string $status
  * @property integer $job_id
  * @property string $error_text
  * @property integer $slice_config_id
@@ -31,7 +28,7 @@ use Illuminate\Database\Eloquent\Model;
 class Bot extends Model
 {
 
-	use ConcurrentUpdates;
+    use ConcurrentUpdates;
 
     /**
      * The database table used by the model.
@@ -42,8 +39,7 @@ class Bot extends Model
 
     protected $fillable = [
         'name',
-        'model',
-        'manufacturer',
+        'type',
         'status',
         'error_text',
         'driver_name',
@@ -60,4 +56,12 @@ class Bot extends Model
         return $this->belongsToMany('App\Models\Queue')->withTimestamps();
     }
 
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeMine($query)
+    {
+        return $query->where('user_id', Auth::user()->id);
+    }
 }

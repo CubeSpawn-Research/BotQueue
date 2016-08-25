@@ -15,6 +15,15 @@ Route::get('/', 'HomeController@index');
 
 Auth::routes();
 
+// Bot pages
+Route::get('bots', 'Bot\BotController@index');
+
+Route::get('bot/register', ['as' => 'bot:register', 'uses' => 'Bot\EditController@getRegister']);
+Route::post('bot/register', 'Bot\EditController@postRegister');
+
+Route::get('bot/{bot}/edit/queues', ['as' => 'bot:edit:queues', 'uses' => 'Bot\EditController@getQueues']);
+Route::post('bot/{bot}/edit/queues', 'Bot\EditController@postQueues');
+
 // Queue pages
 Route::get('queues', 'QueueController@index');
 

@@ -491,12 +491,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "45939c61df532608c67a92733b7cd1e64455abc1"
+                "reference": "70896e0c5534e0ecf1cae165397211f6e03e50ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/45939c61df532608c67a92733b7cd1e64455abc1",
-                "reference": "45939c61df532608c67a92733b7cd1e64455abc1",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/70896e0c5534e0ecf1cae165397211f6e03e50ae",
+                "reference": "70896e0c5534e0ecf1cae165397211f6e03e50ae",
                 "shasum": ""
             },
             "require": {
@@ -505,6 +505,7 @@
             },
             "require-dev": {
                 "phpunit/phpunit": "^5.4.6",
+                "phpunit/phpunit-mock-objects": "!=3.2.4",
                 "symfony/console": "2.*"
             },
             "suggest": {
@@ -554,7 +555,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2016-07-20 13:35:22"
+            "time": "2016-08-24 17:23:58"
         },
         {
             "name": "doctrine/inflector",
@@ -828,12 +829,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "7598906ad8921fc9c3c3b0b28efefc294e1dd501"
+                "reference": "2213ca11f6fa849ca7c96308934cc6881ab434e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/7598906ad8921fc9c3c3b0b28efefc294e1dd501",
-                "reference": "7598906ad8921fc9c3c3b0b28efefc294e1dd501",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/2213ca11f6fa849ca7c96308934cc6881ab434e8",
+                "reference": "2213ca11f6fa849ca7c96308934cc6881ab434e8",
                 "shasum": ""
             },
             "require": {
@@ -947,7 +948,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2016-08-24 08:33:24"
+            "time": "2016-08-24 23:23:29"
         },
         {
             "name": "league/flysystem",
@@ -3243,12 +3244,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "db55f4b7c1c54ca6553acd0223ff52b5254895dc"
+                "reference": "8f444748e174e49d5bd2bd7a9bebbf44edbb55fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/db55f4b7c1c54ca6553acd0223ff52b5254895dc",
-                "reference": "db55f4b7c1c54ca6553acd0223ff52b5254895dc",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/8f444748e174e49d5bd2bd7a9bebbf44edbb55fb",
+                "reference": "8f444748e174e49d5bd2bd7a9bebbf44edbb55fb",
                 "shasum": ""
             },
             "require": {
@@ -3294,7 +3295,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2016-08-24 07:28:55"
+            "time": "2016-08-24 16:58:26"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",

@@ -1,7 +1,5 @@
 @extends('app')
 
-@section('title', 'Register a New Queue')
-
 @section('content')
     <div class="container">
         <div class="row">

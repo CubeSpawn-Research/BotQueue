@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="row">
-        <h1 class="col-md-3">Queue List</h1>
-        <div class="col-md-2 col-md-offset-7">
+        <h1 class="col-md-6">Queues</h1>
+        <div class="pull-right">
             <a href="{{ url('/queue/create') }}" class="btn btn-lg btn-primary">Create New Queue</a>
         </div>
     </div>
@@ -12,7 +12,7 @@
         <div class="col-md-12">
             <table class="table">
                 <thead>
-                <th>Queue Name</th>
+                <th>Name</th>
                 <th>Delay</th>
                 </thead>
                 <tbody>
